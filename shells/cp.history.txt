@@ -1,0 +1,79 @@
+root@ip-172-31-39-48:~# history
+    1  apt-get update && apt-get upgrade -y
+    2  apt-get install -y vim
+    3  apt install curl apt-transport-https vim git wget gnupg2 software-properties-common lsb-release ca-certificates uidmap -y
+    4  swapoff -a
+    5  modprobe overlay
+    6  modprobe br_netfilter
+    7  root@cp:˜# cat << EOF | tee /etc/sysctl.d/kubernetes.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+    8  clear
+    9  cat << EOF | tee /etc/sysctl.d/kubernetes.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+   10  cat /etc/sysctl.d/kubernetes.conf
+   11  sysctl --system
+   12  sudo mkdir -p /etc/apt/keyrings
+   13  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   14  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   15  cat /etc/apt/sources.list.d/docker.list
+   16  clear
+   17  apt-get update && apt-get install containerd.io -y
+   18  containerd config default | tee /etc/containerd/config.toml
+   19  sed -e 's/SystemdCgroup = false/SystemdCgroup = true/g' -i /etc/containerd/config.toml
+   20  systemctl restart containerd
+   21  vim /etc/apt/sources.list.d/kubernetes.list
+   22  cat /etc/apt/sources.list.d/kubernetes.list
+   23  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+   24  apt-get update
+   25  apt-get install -y kubeadm=1.25.1-00 kubelet=1.25.1-00 kubectl=1.25.1-00
+   26  apt-mark hold kubelet kubeadm kubectl
+   27  wget https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
+   28  less calico.yaml
+   29  hostname -i
+   30  ip addr show
+   31  vim /etc/hosts
+   32  cat /etc/hosts
+   33  vim kubeadm-config.yaml
+   34  cat kubeadm-config.yaml
+   35  clear
+   36  cat kubeadm-config.yaml
+   37  pwd
+   38  kubeadm init --config=kubeadm-config.yaml --upload-certs | tee kubeadm-init.out
+   39  ls
+   40  clear
+   41  cat kubeadm-init.out
+   42  clear
+   43  history
+
+
+
+
+   =============
+       5  mkdir -p $HOME/.kube
+       6  pwd
+       7  ls
+       8  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+       9  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+      10  less .kube/config
+      11  sudo cp /root/calico.yaml .
+      12  kubectl apply -f calico.yaml
+      13  sudo apt-get install bash-completion -y
+      14  exit
+      15  clear
+      16  history
+
+
+         17  echo "source <(kubectl completion bash)" >> $HOME/.bashrc
+         18  kubectl help
+         19  history
+         20  kubectl help create
+         21  sudo kubeadm config print init-defaults
+         22  history
