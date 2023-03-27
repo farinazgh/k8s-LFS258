@@ -1,19 +1,19 @@
-# k8s-LFS258
-my Certified Kubernetes Administrator (CKA) journey
+## k8s-LFS258
+
 Why do we need to disable swap?
 
 
 
-curl 
-apt-transport-https 
-vim 
-git 
-wget 
-gnupg2 
-software-properties-common 
-lsb-release 
-ca-certificates 
-uidmap
+* curl 
+* apt-transport-https 
+* vim 
+* git 
+* wget 
+* gnupg2 
+* software-properties-common 
+* lsb-release 
+* ca-certificates 
+* uidmap
 
 Deciding which pod network to use for Container Networking Interface (CNI) should take into account the expected
 demands on the cluster. There can be only one pod network per cluster, although the CNI-Genie project is trying to

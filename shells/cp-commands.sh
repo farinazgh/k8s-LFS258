@@ -79,3 +79,8 @@ echo "source <(kubectl completion bash)" >> $HOME/.bashrc
 
 kubectl help create
 sudo kubeadm config print init-defaults
+
+sudo kubeadm token list
+
+# ====== to add worker
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/ˆ.* //'
