@@ -42,7 +42,6 @@ kubeadm join --token fxdchp.evoo6n2tlzftp3pu k8scp:6443 --discovery-token-ca-cer
 
 
 
-#cp:~# kubeadm join --token fxdchp.evoo6n2tlzftp3pu k8scp:6443 --discovery-token-ca-cert-hash sha256:ecba8e90c90594a6a2d8972129d9b19a2f9a9bd6af30c293d025a7ea84e3571e
 #[preflight] Running pre-flight checks
 #        [WARNING SystemVerification]: missing optional cgroups: blkio
 #[preflight] Reading configuration from the cluster...
