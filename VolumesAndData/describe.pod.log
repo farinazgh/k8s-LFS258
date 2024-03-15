@@ -1,0 +1,60 @@
+$ kubectl describe pod nginx-nfs-68686f6d59-zc5sx
+Name:             nginx-nfs-68686f6d59-zc5sx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             docker-desktop/192.168.65.3
+Start Time:       Thu, 14 Mar 2024 15:56:08 +0100
+Labels:           pod-template-hash=68686f6d59
+                  run=nginx
+Annotations:      <none>
+Status:           Running
+IP:               10.1.0.14
+IPs:
+  IP:           10.1.0.14
+Controlled By:  ReplicaSet/nginx-nfs-68686f6d59
+Containers:
+  nginx:
+    Container ID:   docker://7d1ff11c83c172d6b05cc9db7152e4017045d1b04ac6b4aa4ae2e20442d7f8d9
+    Image:          nginx
+    Image ID:       docker-pullable://nginx@sha256:6db391d1c0cfb30588ba0bf72ea999404f2764febf0f1f196acd5867ac7efa7e
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 14 Mar 2024 15:56:24 +0100
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /opt from nfs-vol (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-rzh68 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  nfs-vol:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  pvc-one
+    ReadOnly:   false
+  kube-api-access-rzh68:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  5m33s  default-scheduler  Successfully assigned default/nginx-nfs-68686f6d59-zc5sx to docker-desktop
+  Normal  Pulling    5m32s  kubelet            Pulling image "nginx"
+  Normal  Pulled     5m19s  kubelet            Successfully pulled image "nginx" in 13.201s (13.201s including waiting)
+  Normal  Created    5m17s  kubelet            Created container nginx
+  Normal  Started    5m17s  kubelet            Started container nginx

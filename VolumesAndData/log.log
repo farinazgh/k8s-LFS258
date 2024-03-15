@@ -1,0 +1,23 @@
+df -T
+
+Filesystem     Type     1K-blocks    Used Available Use% Mounted on
+overlay        overlay 1055762868 3199676 998859720   1% /
+tmpfs          tmpfs        65536       0     65536   0% /dev
+tmpfs          tmpfs      3983948       0   3983948   0% /sys/fs/cgroup
+/dev/sdd       ext4    1055762868 3199676 998859720   1% /etc/cars
+shm            tmpfs        65536       0     65536   0% /dev/shm
+tmpfs          tmpfs      7865496      12   7865484   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs          tmpfs      3983948       0   3983948   0% /proc/acpi
+tmpfs          tmpfs      3983948       0   3983948   0% /sys/firmware
+
+
+# df -T
+Filesystem     Type     1K-blocks    Used Available Use% Mounted on
+overlay        overlay 1055762868 3199720 998859676   1% /
+tmpfs          tmpfs        65536       0     65536   0% /dev
+tmpfs          tmpfs      3983948       0   3983948   0% /sys/fs/cgroup
+/dev/sdd       ext4    1055762868 3199720 998859676   1% /opt
+shm            tmpfs        65536       0     65536   0% /dev/shm
+tmpfs          tmpfs      7865496      12   7865484   1% /run/secrets/kubernetes.io/serviceaccount
+tmpfs          tmpfs      3983948       0   3983948   0% /proc/acpi
+tmpfs          tmpfs      3983948       0   3983948   0% /sys/firmware
