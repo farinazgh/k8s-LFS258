@@ -77,3 +77,21 @@ EOF
          20  kubectl help create
          21  sudo kubeadm config print init-defaults
          22  history
+
+
+             1  clear
+             2  sudo -i
+             3  mkdir -p $HOME/.kube
+             4  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+             5  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+             6  less .kube/config
+             7  kubectl --version
+             8  kubectl -version
+             9  kubectl -v
+            10  kubectl version
+            11  kubectl get ns
+            12  clear
+            13  kubectl get all
+            14  kubectl get pods
+            15  clear
+            16  history
