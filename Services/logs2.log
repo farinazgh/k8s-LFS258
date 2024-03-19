@@ -1,0 +1,82 @@
+ubuntu@ip-172-31-44-159:~$ kubectl describe node ip-172-31-44-159
+Name:               ip-172-31-44-159
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=ip-172-31-44-159
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 17 Mar 2024 14:32:14 +0000
+Taints:             node.kubernetes.io/not-ready:NoExecute
+                    node-role.kubernetes.io/control-plane:NoSchedule
+                    node.kubernetes.io/not-ready:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  ip-172-31-44-159
+  AcquireTime:     <unset>
+  RenewTime:       Sun, 17 Mar 2024 14:38:56 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Sun, 17 Mar 2024 14:37:24 +0000   Sun, 17 Mar 2024 14:32:13 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Sun, 17 Mar 2024 14:37:24 +0000   Sun, 17 Mar 2024 14:32:13 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Sun, 17 Mar 2024 14:37:24 +0000   Sun, 17 Mar 2024 14:32:13 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            False   Sun, 17 Mar 2024 14:37:24 +0000   Sun, 17 Mar 2024 14:32:13 +0000   KubeletNotReady              container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized
+Addresses:
+  InternalIP:  172.31.44.159
+  Hostname:    ip-172-31-44-159
+Capacity:
+  cpu:                2
+  ephemeral-storage:  9974088Ki
+  hugepages-2Mi:      0
+  memory:             8120336Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  9192119486
+  hugepages-2Mi:      0
+  memory:             8017936Ki
+  pods:               110
+System Info:
+  Machine ID:                 225e80f9ea8449228e88373791cf4ce4
+  System UUID:                ec2cec33-c5ac-9493-be44-5520d9d6f290
+  Boot ID:                    e4f74385-9ac4-4a76-87fd-84ed16d37ca7
+  Kernel Version:             6.5.0-1014-aws
+  OS Image:                   Ubuntu 22.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.28
+  Kubelet Version:            v1.28.8
+  Kube-Proxy Version:         v1.28.8
+Non-terminated Pods:          (5 in total)
+  Namespace                   Name                                        CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                        ------------  ----------  ---------------  -------------  ---
+  kube-system                 etcd-ip-172-31-44-159                       100m (5%)     0 (0%)      100Mi (1%)       0 (0%)         6m48s
+  kube-system                 kube-apiserver-ip-172-31-44-159             250m (12%)    0 (0%)      0 (0%)           0 (0%)         6m48s
+  kube-system                 kube-controller-manager-ip-172-31-44-159    200m (10%)    0 (0%)      0 (0%)           0 (0%)         6m48s
+  kube-system                 kube-proxy-lnp4g                            0 (0%)        0 (0%)      0 (0%)           0 (0%)         6m44s
+  kube-system                 kube-scheduler-ip-172-31-44-159             100m (5%)     0 (0%)      0 (0%)           0 (0%)         6m48s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                650m (32%)  0 (0%)
+  memory             100Mi (1%)  0 (0%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type     Reason                   Age    From             Message
+  ----     ------                   ----   ----             -------
+  Normal   Starting                 6m43s  kube-proxy
+  Normal   Starting                 6m48s  kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      6m48s  kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeAllocatableEnforced  6m48s  kubelet          Updated Node Allocatable limit across pods
+  Normal   NodeHasSufficientMemory  6m48s  kubelet          Node ip-172-31-44-159 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    6m48s  kubelet          Node ip-172-31-44-159 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     6m48s  kubelet          Node ip-172-31-44-159 status is now: NodeHasSufficientPID
+  Normal   RegisteredNode           6m45s  node-controller  Node ip-172-31-44-159 event: Registered Node ip-172-31-44-159 in Controller

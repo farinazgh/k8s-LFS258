@@ -1,0 +1,3540 @@
+kind: PodList
+apiVersion: v1
+metadata:
+  resourceVersion: '17586'
+items:
+  - metadata:
+      name: calico-kube-controllers-68cdf756d9-sdj2v
+      generateName: calico-kube-controllers-68cdf756d9-
+      namespace: kube-system
+      uid: 2c3dd37c-29f2-4356-9499-71138e58cd6b
+      resourceVersion: '13564'
+      creationTimestamp: '2024-03-18T15:27:02Z'
+      labels:
+        k8s-app: calico-kube-controllers
+        pod-template-hash: 68cdf756d9
+      annotations:
+        cni.projectcalico.org/containerID: 647f038aa8754ad335cdf757a3199601c36119aa6a59eacc32b7ed1723309d07
+        cni.projectcalico.org/podIP: 192.168.10.18/32
+        cni.projectcalico.org/podIPs: 192.168.10.18/32
+      ownerReferences:
+        - apiVersion: apps/v1
+          kind: ReplicaSet
+          name: calico-kube-controllers-68cdf756d9
+          uid: 6f02d6ef-9a06-4a1c-a3c6-bf4cc8942665
+          controller: true
+          blockOwnerDeletion: true
+      managedFields:
+        - manager: kube-controller-manager
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:27:02Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:generateName: {}
+              f:labels:
+                ".": {}
+                f:k8s-app: {}
+                f:pod-template-hash: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"6f02d6ef-9a06-4a1c-a3c6-bf4cc8942665"}: {}
+            f:spec:
+              f:containers:
+                k:{"name":"calico-kube-controllers"}:
+                  ".": {}
+                  f:env:
+                    ".": {}
+                    k:{"name":"DATASTORE_TYPE"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ENABLED_CONTROLLERS"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:exec:
+                      ".": {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    ".": {}
+                    f:exec:
+                      ".": {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:nodeSelector: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+        - manager: kube-scheduler
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:27:02Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+          subresource: status
+        - manager: calico
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:32:05Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:cni.projectcalico.org/containerID: {}
+                f:cni.projectcalico.org/podIP: {}
+                f:cni.projectcalico.org/podIPs: {}
+          subresource: status
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:32:06Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"192.168.10.18"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: kube-api-access-t6qxv
+          projected:
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+            defaultMode: 420
+      containers:
+        - name: calico-kube-controllers
+          image: docker.io/calico/kube-controllers:v3.27.2
+          env:
+            - name: ENABLED_CONTROLLERS
+              value: node
+            - name: DATASTORE_TYPE
+              value: kubernetes
+          resources: {}
+          volumeMounts:
+            - name: kube-api-access-t6qxv
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          livenessProbe:
+            exec:
+              command:
+                - "/usr/bin/check-status"
+                - "-l"
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - "/usr/bin/check-status"
+                - "-r"
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: calico-kube-controllers
+      serviceAccount: calico-kube-controllers
+      nodeName: ip-172-31-40-74
+      securityContext: {}
+      schedulerName: default-scheduler
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+      priorityClassName: system-cluster-critical
+      priority: 2000000000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:24Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:32:06Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:32:06Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:24Z'
+      hostIP: 172.31.40.74
+      podIP: 192.168.10.18
+      podIPs:
+        - ip: 192.168.10.18
+      startTime: '2024-03-18T15:27:24Z'
+      containerStatuses:
+        - name: calico-kube-controllers
+          state:
+            running:
+              startedAt: '2024-03-19T15:32:05Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:47:18Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://16eef51be4e73df7ba96d2c9b8e907994fa2c762bfee2866b80a07e582991c2c
+          ready: true
+          restartCount: 4
+          image: docker.io/calico/kube-controllers:v3.27.2
+          imageID: docker.io/calico/kube-controllers@sha256:d8a7bd92a38119c69ffce5152ffbdd59393be836bb66d572767ba1c3d21d97fa
+          containerID: containerd://53cf4d172c0257e93d729cf184a98790d73992214b875d706323b9c1ffd842b8
+          started: true
+      qosClass: BestEffort
+  - metadata:
+      name: calico-node-m25dv
+      generateName: calico-node-
+      namespace: kube-system
+      uid: 382a24e5-68ab-4d3d-9fc2-4b341f64e824
+      resourceVersion: '13481'
+      creationTimestamp: '2024-03-18T15:27:02Z'
+      labels:
+        controller-revision-hash: 588966dd55
+        k8s-app: calico-node
+        pod-template-generation: '1'
+      ownerReferences:
+        - apiVersion: apps/v1
+          kind: DaemonSet
+          name: calico-node
+          uid: 84027b4a-853d-435f-808c-5c0407b4d6c1
+          controller: true
+          blockOwnerDeletion: true
+      managedFields:
+        - manager: kube-controller-manager
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:27:02Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:generateName: {}
+              f:labels:
+                ".": {}
+                f:controller-revision-hash: {}
+                f:k8s-app: {}
+                f:pod-template-generation: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"84027b4a-853d-435f-808c-5c0407b4d6c1"}: {}
+            f:spec:
+              f:affinity:
+                ".": {}
+                f:nodeAffinity:
+                  ".": {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"calico-node"}:
+                  ".": {}
+                  f:env:
+                    ".": {}
+                    k:{"name":"CALICO_DISABLE_FILE_LOGGING"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"CALICO_IPV4POOL_IPIP"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"CALICO_IPV4POOL_VXLAN"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"CALICO_IPV6POOL_VXLAN"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"CALICO_NETWORKING_BACKEND"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"CLUSTER_TYPE"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"DATASTORE_TYPE"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"FELIX_DEFAULTENDPOINTTOHOSTACTION"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"FELIX_HEALTHENABLED"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"FELIX_IPINIPMTU"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"FELIX_IPV6SUPPORT"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"FELIX_VXLANMTU"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"FELIX_WIREGUARDMTU"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"IP"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"NODENAME"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:fieldRef: {}
+                    k:{"name":"WAIT_FOR_DATASTORE"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:lifecycle:
+                    ".": {}
+                    f:preStop:
+                      ".": {}
+                      f:exec:
+                        ".": {}
+                        f:command: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:exec:
+                      ".": {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    ".": {}
+                    f:exec:
+                      ".": {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    ".": {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                  f:securityContext:
+                    ".": {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/host/etc/cni/net.d"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/lib/modules"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/run/xtables.lock"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/sys/fs/bpf"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/calico"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/log/calico/cni"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/var/run/calico"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/nodeagent"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostNetwork: {}
+              f:initContainers:
+                ".": {}
+                k:{"name":"install-cni"}:
+                  ".": {}
+                  f:command: {}
+                  f:env:
+                    ".": {}
+                    k:{"name":"CNI_CONF_NAME"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"CNI_MTU"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"CNI_NETWORK_CONFIG"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"KUBERNETES_NODE_NAME"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:fieldRef: {}
+                    k:{"name":"SLEEP"}:
+                      ".": {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    ".": {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/host/etc/cni/net.d"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/host/opt/cni/bin"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"mount-bpffs"}:
+                  ".": {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    ".": {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/nodeproc"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/sys/fs"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:mountPropagation: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/calico"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:mountPropagation: {}
+                      f:name: {}
+                k:{"name":"upgrade-ipam"}:
+                  ".": {}
+                  f:command: {}
+                  f:env:
+                    ".": {}
+                    k:{"name":"CALICO_NETWORKING_BACKEND"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:configMapKeyRef: {}
+                    k:{"name":"KUBERNETES_NODE_NAME"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:fieldRef: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    ".": {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/host/opt/cni/bin"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/cni/networks"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:nodeSelector: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"bpffs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"cni-bin-dir"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"cni-log-dir"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"cni-net-dir"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"host-local-net-dir"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"lib-modules"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"nodeproc"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"policysync"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"sys-fs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"var-lib-calico"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"var-run-calico"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"xtables-lock"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:31:50Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:initContainerStatuses: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"172.31.40.74"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: lib-modules
+          hostPath:
+            path: "/lib/modules"
+            type: ''
+        - name: var-run-calico
+          hostPath:
+            path: "/var/run/calico"
+            type: ''
+        - name: var-lib-calico
+          hostPath:
+            path: "/var/lib/calico"
+            type: ''
+        - name: xtables-lock
+          hostPath:
+            path: "/run/xtables.lock"
+            type: FileOrCreate
+        - name: sys-fs
+          hostPath:
+            path: "/sys/fs/"
+            type: DirectoryOrCreate
+        - name: bpffs
+          hostPath:
+            path: "/sys/fs/bpf"
+            type: Directory
+        - name: nodeproc
+          hostPath:
+            path: "/proc"
+            type: ''
+        - name: cni-bin-dir
+          hostPath:
+            path: "/opt/cni/bin"
+            type: ''
+        - name: cni-net-dir
+          hostPath:
+            path: "/etc/cni/net.d"
+            type: ''
+        - name: cni-log-dir
+          hostPath:
+            path: "/var/log/calico/cni"
+            type: ''
+        - name: host-local-net-dir
+          hostPath:
+            path: "/var/lib/cni/networks"
+            type: ''
+        - name: policysync
+          hostPath:
+            path: "/var/run/nodeagent"
+            type: DirectoryOrCreate
+        - name: kube-api-access-bnfs2
+          projected:
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+            defaultMode: 420
+      initContainers:
+        - name: upgrade-ipam
+          image: docker.io/calico/cni:v3.27.2
+          command:
+            - "/opt/cni/bin/calico-ipam"
+            - "-upgrade"
+          envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+          env:
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CALICO_NETWORKING_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: calico_backend
+          resources: {}
+          volumeMounts:
+            - name: host-local-net-dir
+              mountPath: "/var/lib/cni/networks"
+            - name: cni-bin-dir
+              mountPath: "/host/opt/cni/bin"
+            - name: kube-api-access-bnfs2
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+        - name: install-cni
+          image: docker.io/calico/cni:v3.27.2
+          command:
+            - "/opt/cni/bin/install"
+          envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+          env:
+            - name: CNI_CONF_NAME
+              value: 10-calico.conflist
+            - name: CNI_NETWORK_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: cni_network_config
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CNI_MTU
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: veth_mtu
+            - name: SLEEP
+              value: 'false'
+          resources: {}
+          volumeMounts:
+            - name: cni-bin-dir
+              mountPath: "/host/opt/cni/bin"
+            - name: cni-net-dir
+              mountPath: "/host/etc/cni/net.d"
+            - name: kube-api-access-bnfs2
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+        - name: mount-bpffs
+          image: docker.io/calico/node:v3.27.2
+          command:
+            - calico-node
+            - "-init"
+            - "-best-effort"
+          resources: {}
+          volumeMounts:
+            - name: sys-fs
+              mountPath: "/sys/fs"
+              mountPropagation: Bidirectional
+            - name: var-run-calico
+              mountPath: "/var/run/calico"
+              mountPropagation: Bidirectional
+            - name: nodeproc
+              readOnly: true
+              mountPath: "/nodeproc"
+            - name: kube-api-access-bnfs2
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+      containers:
+        - name: calico-node
+          image: docker.io/calico/node:v3.27.2
+          envFrom:
+            - configMapRef:
+                name: kubernetes-services-endpoint
+                optional: true
+          env:
+            - name: DATASTORE_TYPE
+              value: kubernetes
+            - name: WAIT_FOR_DATASTORE
+              value: 'true'
+            - name: NODENAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: CALICO_NETWORKING_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: calico_backend
+            - name: CLUSTER_TYPE
+              value: k8s,bgp
+            - name: IP
+              value: autodetect
+            - name: CALICO_IPV4POOL_IPIP
+              value: Always
+            - name: CALICO_IPV4POOL_VXLAN
+              value: Never
+            - name: CALICO_IPV6POOL_VXLAN
+              value: Never
+            - name: FELIX_IPINIPMTU
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: veth_mtu
+            - name: FELIX_VXLANMTU
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: veth_mtu
+            - name: FELIX_WIREGUARDMTU
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: veth_mtu
+            - name: CALICO_DISABLE_FILE_LOGGING
+              value: 'true'
+            - name: FELIX_DEFAULTENDPOINTTOHOSTACTION
+              value: ACCEPT
+            - name: FELIX_IPV6SUPPORT
+              value: 'false'
+            - name: FELIX_HEALTHENABLED
+              value: 'true'
+          resources:
+            requests:
+              cpu: 250m
+          volumeMounts:
+            - name: cni-net-dir
+              mountPath: "/host/etc/cni/net.d"
+            - name: lib-modules
+              readOnly: true
+              mountPath: "/lib/modules"
+            - name: xtables-lock
+              mountPath: "/run/xtables.lock"
+            - name: var-run-calico
+              mountPath: "/var/run/calico"
+            - name: var-lib-calico
+              mountPath: "/var/lib/calico"
+            - name: policysync
+              mountPath: "/var/run/nodeagent"
+            - name: bpffs
+              mountPath: "/sys/fs/bpf"
+            - name: cni-log-dir
+              readOnly: true
+              mountPath: "/var/log/calico/cni"
+            - name: kube-api-access-bnfs2
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          livenessProbe:
+            exec:
+              command:
+                - "/bin/calico-node"
+                - "-felix-live"
+                - "-bird-live"
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - "/bin/calico-node"
+                - "-felix-ready"
+                - "-bird-ready"
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - "/bin/calico-node"
+                  - "-shutdown"
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 0
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: calico-node
+      serviceAccount: calico-node
+      nodeName: ip-172-31-40-74
+      hostNetwork: true
+      securityContext: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchFields:
+                  - key: metadata.name
+                    operator: In
+                    values:
+                      - ip-172-31-40-74
+      schedulerName: default-scheduler
+      tolerations:
+        - operator: Exists
+          effect: NoSchedule
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - operator: Exists
+          effect: NoExecute
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/memory-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/pid-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/unschedulable
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/network-unavailable
+          operator: Exists
+          effect: NoSchedule
+      priorityClassName: system-node-critical
+      priority: 2000001000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:26Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:50Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:50Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:02Z'
+      hostIP: 172.31.40.74
+      podIP: 172.31.40.74
+      podIPs:
+        - ip: 172.31.40.74
+      startTime: '2024-03-18T15:27:02Z'
+      initContainerStatuses:
+        - name: upgrade-ipam
+          state:
+            terminated:
+              exitCode: 0
+              reason: Completed
+              startedAt: '2024-03-19T15:31:34Z'
+              finishedAt: '2024-03-19T15:31:34Z'
+              containerID: containerd://a58a3d3e95d580f6c9c5088212375b55f2a829bffec3dd55bfa30917ea0570e2
+          lastState: {}
+          ready: true
+          restartCount: 0
+          image: docker.io/calico/cni:v3.27.2
+          imageID: docker.io/calico/cni@sha256:d17e907f27956d82e978f4aee8c21f876230955f3fba51da621c7c49e71f2ece
+          containerID: containerd://a58a3d3e95d580f6c9c5088212375b55f2a829bffec3dd55bfa30917ea0570e2
+          started: false
+        - name: install-cni
+          state:
+            terminated:
+              exitCode: 0
+              reason: Completed
+              startedAt: '2024-03-19T15:31:35Z'
+              finishedAt: '2024-03-19T15:31:38Z'
+              containerID: containerd://c44e59f07ea14c67e620d8bed8ee00364f2f0032f744713ca189d9ea03ee75d3
+          lastState: {}
+          ready: true
+          restartCount: 0
+          image: docker.io/calico/cni:v3.27.2
+          imageID: docker.io/calico/cni@sha256:d17e907f27956d82e978f4aee8c21f876230955f3fba51da621c7c49e71f2ece
+          containerID: containerd://c44e59f07ea14c67e620d8bed8ee00364f2f0032f744713ca189d9ea03ee75d3
+          started: false
+        - name: mount-bpffs
+          state:
+            terminated:
+              exitCode: 0
+              reason: Completed
+              startedAt: '2024-03-19T15:31:39Z'
+              finishedAt: '2024-03-19T15:31:40Z'
+              containerID: containerd://687a4baf4bc5e2d0ca74736f021a4827cb2b12a05c8e9ed1c2787050b6dba96c
+          lastState: {}
+          ready: true
+          restartCount: 0
+          image: docker.io/calico/node:v3.27.2
+          imageID: docker.io/calico/node@sha256:0d00b1f4235652b370f3897803d7c8ef5a7059a081ab8d69ae02b7ca0cb0193b
+          containerID: containerd://687a4baf4bc5e2d0ca74736f021a4827cb2b12a05c8e9ed1c2787050b6dba96c
+          started: false
+      containerStatuses:
+        - name: calico-node
+          state:
+            running:
+              startedAt: '2024-03-19T15:31:40Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:46:52Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://d4cefc9aa93b1b96262019ba8a5ad9c6a85df0b4b3e8ddcd3dd59683694d9a95
+          ready: true
+          restartCount: 4
+          image: docker.io/calico/node:v3.27.2
+          imageID: docker.io/calico/node@sha256:0d00b1f4235652b370f3897803d7c8ef5a7059a081ab8d69ae02b7ca0cb0193b
+          containerID: containerd://4c09d3aaab731fe61d6ef2e3a93c1d22333d4e5b80a80dd7b83c86644aac2f7c
+          started: true
+      qosClass: Burstable
+  - metadata:
+      name: coredns-5dd5756b68-ftqjl
+      generateName: coredns-5dd5756b68-
+      namespace: kube-system
+      uid: 76ad5278-fb0a-4e93-9450-b251bcd69ebe
+      resourceVersion: '13559'
+      creationTimestamp: '2024-03-18T15:14:01Z'
+      labels:
+        k8s-app: kube-dns
+        pod-template-hash: 5dd5756b68
+      annotations:
+        cni.projectcalico.org/containerID: 4a6a986e2f1e732014633464a75e291a1766bfe3ea732d91c6726bfaef3e6c8e
+        cni.projectcalico.org/podIP: 192.168.10.17/32
+        cni.projectcalico.org/podIPs: 192.168.10.17/32
+      ownerReferences:
+        - apiVersion: apps/v1
+          kind: ReplicaSet
+          name: coredns-5dd5756b68
+          uid: 4fdd7534-7f29-4ff3-8d31-5e8b50e63817
+          controller: true
+          blockOwnerDeletion: true
+      managedFields:
+        - manager: kube-controller-manager
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:14:01Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:generateName: {}
+              f:labels:
+                ".": {}
+                f:k8s-app: {}
+                f:pod-template-hash: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"4fdd7534-7f29-4ff3-8d31-5e8b50e63817"}: {}
+            f:spec:
+              f:affinity:
+                ".": {}
+                f:podAntiAffinity:
+                  ".": {}
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"coredns"}:
+                  ".": {}
+                  f:args: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    ".": {}
+                    k:{"containerPort":53,"protocol":"TCP"}:
+                      ".": {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":53,"protocol":"UDP"}:
+                      ".": {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":9153,"protocol":"TCP"}:
+                      ".": {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    ".": {}
+                    f:limits:
+                      ".": {}
+                      f:memory: {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    ".": {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      ".": {}
+                      f:add: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/etc/coredns"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:nodeSelector: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"config-volume"}:
+                  ".": {}
+                  f:configMap:
+                    ".": {}
+                    f:defaultMode: {}
+                    f:items: {}
+                    f:name: {}
+                  f:name: {}
+        - manager: kube-scheduler
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:14:01Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+          subresource: status
+        - manager: calico
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:32:05Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:cni.projectcalico.org/containerID: {}
+                f:cni.projectcalico.org/podIP: {}
+                f:cni.projectcalico.org/podIPs: {}
+          subresource: status
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:32:06Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"192.168.10.17"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: coredns
+            items:
+              - key: Corefile
+                path: Corefile
+            defaultMode: 420
+        - name: kube-api-access-wtt7x
+          projected:
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+            defaultMode: 420
+      containers:
+        - name: coredns
+          image: registry.k8s.io/coredns/coredns:v1.10.1
+          args:
+            - "-conf"
+            - "/etc/coredns/Corefile"
+          ports:
+            - name: dns
+              containerPort: 53
+              protocol: UDP
+            - name: dns-tcp
+              containerPort: 53
+              protocol: TCP
+            - name: metrics
+              containerPort: 9153
+              protocol: TCP
+          resources:
+            limits:
+              memory: 170Mi
+            requests:
+              cpu: 100m
+              memory: 70Mi
+          volumeMounts:
+            - name: config-volume
+              readOnly: true
+              mountPath: "/etc/coredns"
+            - name: kube-api-access-wtt7x
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          livenessProbe:
+            httpGet:
+              path: "/health"
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/ready"
+              port: 8181
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - all
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: Default
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: coredns
+      serviceAccount: coredns
+      nodeName: ip-172-31-40-74
+      securityContext: {}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: k8s-app
+                      operator: In
+                      values:
+                        - kube-dns
+                topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+      priorityClassName: system-cluster-critical
+      priority: 2000000000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:24Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:32:06Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:32:06Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:24Z'
+      hostIP: 172.31.40.74
+      podIP: 192.168.10.17
+      podIPs:
+        - ip: 192.168.10.17
+      startTime: '2024-03-18T15:27:24Z'
+      containerStatuses:
+        - name: coredns
+          state:
+            running:
+              startedAt: '2024-03-19T15:32:05Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:47:18Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://c813c9a5eda474b709d472d19841cd11374add5fc0c065e96229eba1a5470fb8
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/coredns/coredns:v1.10.1
+          imageID: registry.k8s.io/coredns/coredns@sha256:a0ead06651cf580044aeb0a0feba63591858fb2e43ade8c9dea45a6a89ae7e5e
+          containerID: containerd://83c6e1d69d2dd6e0d64e5c9bb836c714f283f55139e29b9fdf01cfe6c466db41
+          started: true
+      qosClass: Burstable
+  - metadata:
+      name: coredns-5dd5756b68-mqdtt
+      generateName: coredns-5dd5756b68-
+      namespace: kube-system
+      uid: aafe92ad-c198-4d42-bec9-d836aa614786
+      resourceVersion: '13552'
+      creationTimestamp: '2024-03-18T15:14:01Z'
+      labels:
+        k8s-app: kube-dns
+        pod-template-hash: 5dd5756b68
+      annotations:
+        cni.projectcalico.org/containerID: 7f223cd9b36e58ffd970af0f65f3f3677d609f3bb46b75aa3f071c96ac042746
+        cni.projectcalico.org/podIP: 192.168.10.16/32
+        cni.projectcalico.org/podIPs: 192.168.10.16/32
+      ownerReferences:
+        - apiVersion: apps/v1
+          kind: ReplicaSet
+          name: coredns-5dd5756b68
+          uid: 4fdd7534-7f29-4ff3-8d31-5e8b50e63817
+          controller: true
+          blockOwnerDeletion: true
+      managedFields:
+        - manager: kube-controller-manager
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:14:01Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:generateName: {}
+              f:labels:
+                ".": {}
+                f:k8s-app: {}
+                f:pod-template-hash: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"4fdd7534-7f29-4ff3-8d31-5e8b50e63817"}: {}
+            f:spec:
+              f:affinity:
+                ".": {}
+                f:podAntiAffinity:
+                  ".": {}
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"coredns"}:
+                  ".": {}
+                  f:args: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    ".": {}
+                    k:{"containerPort":53,"protocol":"TCP"}:
+                      ".": {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":53,"protocol":"UDP"}:
+                      ".": {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":9153,"protocol":"TCP"}:
+                      ".": {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    ".": {}
+                    f:limits:
+                      ".": {}
+                      f:memory: {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    ".": {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      ".": {}
+                      f:add: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/etc/coredns"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:nodeSelector: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"config-volume"}:
+                  ".": {}
+                  f:configMap:
+                    ".": {}
+                    f:defaultMode: {}
+                    f:items: {}
+                    f:name: {}
+                  f:name: {}
+        - manager: kube-scheduler
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:14:01Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:message: {}
+                  f:reason: {}
+                  f:status: {}
+                  f:type: {}
+          subresource: status
+        - manager: calico
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:32:05Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:cni.projectcalico.org/containerID: {}
+                f:cni.projectcalico.org/podIP: {}
+                f:cni.projectcalico.org/podIPs: {}
+          subresource: status
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:32:06Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"192.168.10.16"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: coredns
+            items:
+              - key: Corefile
+                path: Corefile
+            defaultMode: 420
+        - name: kube-api-access-f4k5l
+          projected:
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+            defaultMode: 420
+      containers:
+        - name: coredns
+          image: registry.k8s.io/coredns/coredns:v1.10.1
+          args:
+            - "-conf"
+            - "/etc/coredns/Corefile"
+          ports:
+            - name: dns
+              containerPort: 53
+              protocol: UDP
+            - name: dns-tcp
+              containerPort: 53
+              protocol: TCP
+            - name: metrics
+              containerPort: 9153
+              protocol: TCP
+          resources:
+            limits:
+              memory: 170Mi
+            requests:
+              cpu: 100m
+              memory: 70Mi
+          volumeMounts:
+            - name: config-volume
+              readOnly: true
+              mountPath: "/etc/coredns"
+            - name: kube-api-access-f4k5l
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          livenessProbe:
+            httpGet:
+              path: "/health"
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/ready"
+              port: 8181
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+              drop:
+                - all
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: Default
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: coredns
+      serviceAccount: coredns
+      nodeName: ip-172-31-40-74
+      securityContext: {}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: k8s-app
+                      operator: In
+                      values:
+                        - kube-dns
+                topologyKey: kubernetes.io/hostname
+      schedulerName: default-scheduler
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+          tolerationSeconds: 300
+      priorityClassName: system-cluster-critical
+      priority: 2000000000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:24Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:32:06Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:32:06Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:27:24Z'
+      hostIP: 172.31.40.74
+      podIP: 192.168.10.16
+      podIPs:
+        - ip: 192.168.10.16
+      startTime: '2024-03-18T15:27:24Z'
+      containerStatuses:
+        - name: coredns
+          state:
+            running:
+              startedAt: '2024-03-19T15:32:05Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:47:17Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://ad4ca067e84d1e1f651d98438c26840e1848f019579ad680f6b7c4894c2154fd
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/coredns/coredns:v1.10.1
+          imageID: registry.k8s.io/coredns/coredns@sha256:a0ead06651cf580044aeb0a0feba63591858fb2e43ade8c9dea45a6a89ae7e5e
+          containerID: containerd://c0ab07c614521de7183a70192095aa766768e1aa340a5bd5528cebdd46beadae
+          started: true
+      qosClass: Burstable
+  - metadata:
+      name: etcd-ip-172-31-40-74
+      namespace: kube-system
+      uid: 0a69acb6-fb4d-4a3a-88c3-2d17923cbd51
+      resourceVersion: '13477'
+      creationTimestamp: '2024-03-18T15:13:57Z'
+      labels:
+        component: etcd
+        tier: control-plane
+      annotations:
+        kubeadm.kubernetes.io/etcd.advertise-client-urls: https://172.31.40.74:2379
+        kubernetes.io/config.hash: ee7348d0c7ad7c2abb04dc08e00446e9
+        kubernetes.io/config.mirror: ee7348d0c7ad7c2abb04dc08e00446e9
+        kubernetes.io/config.seen: '2024-03-18T15:13:57.289087203Z'
+        kubernetes.io/config.source: file
+      ownerReferences:
+        - apiVersion: v1
+          kind: Node
+          name: ip-172-31-40-74
+          uid: 3d4c9de0-4782-4681-bed9-96924aa6bf30
+          controller: true
+      managedFields:
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:13:57Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:kubeadm.kubernetes.io/etcd.advertise-client-urls: {}
+                f:kubernetes.io/config.hash: {}
+                f:kubernetes.io/config.mirror: {}
+                f:kubernetes.io/config.seen: {}
+                f:kubernetes.io/config.source: {}
+              f:labels:
+                ".": {}
+                f:component: {}
+                f:tier: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"3d4c9de0-4782-4681-bed9-96924aa6bf30"}: {}
+            f:spec:
+              f:containers:
+                k:{"name":"etcd"}:
+                  ".": {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:resources:
+                    ".": {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:startupProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/etc/kubernetes/pki/etcd"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/etcd"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostNetwork: {}
+              f:nodeName: {}
+              f:priority: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                ".": {}
+                f:seccompProfile:
+                  ".": {}
+                  f:type: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"etcd-certs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"etcd-data"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:31:46Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"172.31.40.74"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: etcd-certs
+          hostPath:
+            path: "/etc/kubernetes/pki/etcd"
+            type: DirectoryOrCreate
+        - name: etcd-data
+          hostPath:
+            path: "/var/lib/etcd"
+            type: DirectoryOrCreate
+      containers:
+        - name: etcd
+          image: registry.k8s.io/etcd:3.5.12-0
+          command:
+            - etcd
+            - "--advertise-client-urls=https://172.31.40.74:2379"
+            - "--cert-file=/etc/kubernetes/pki/etcd/server.crt"
+            - "--client-cert-auth=true"
+            - "--data-dir=/var/lib/etcd"
+            - "--experimental-initial-corrupt-check=true"
+            - "--experimental-watch-progress-notify-interval=5s"
+            - "--initial-advertise-peer-urls=https://172.31.40.74:2380"
+            - "--initial-cluster=ip-172-31-40-74=https://172.31.40.74:2380"
+            - "--key-file=/etc/kubernetes/pki/etcd/server.key"
+            - "--listen-client-urls=https://127.0.0.1:2379,https://172.31.40.74:2379"
+            - "--listen-metrics-urls=http://127.0.0.1:2381"
+            - "--listen-peer-urls=https://172.31.40.74:2380"
+            - "--name=ip-172-31-40-74"
+            - "--peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt"
+            - "--peer-client-cert-auth=true"
+            - "--peer-key-file=/etc/kubernetes/pki/etcd/peer.key"
+            - "--peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt"
+            - "--snapshot-count=10000"
+            - "--trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: etcd-data
+              mountPath: "/var/lib/etcd"
+            - name: etcd-certs
+              mountPath: "/etc/kubernetes/pki/etcd"
+          livenessProbe:
+            httpGet:
+              path: "/health?exclude=NOSPACE&serializable=true"
+              port: 2381
+              host: 127.0.0.1
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 8
+          startupProbe:
+            httpGet:
+              path: "/health?serializable=false"
+              port: 2381
+              host: 127.0.0.1
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 24
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeName: ip-172-31-40-74
+      hostNetwork: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      schedulerName: default-scheduler
+      tolerations:
+        - operator: Exists
+          effect: NoExecute
+      priorityClassName: system-node-critical
+      priority: 2000001000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:46Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:46Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+      hostIP: 172.31.40.74
+      podIP: 172.31.40.74
+      podIPs:
+        - ip: 172.31.40.74
+      startTime: '2024-03-19T15:31:26Z'
+      containerStatuses:
+        - name: etcd
+          state:
+            running:
+              startedAt: '2024-03-19T15:31:27Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:46:38Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://048990b496d76bed25461a86321a478e9dc02cd8e3a4837b02619e93ab4226b3
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/etcd:3.5.12-0
+          imageID: registry.k8s.io/etcd@sha256:44a8e24dcbba3470ee1fee21d5e88d128c936e9b55d4bc51fbef8086f8ed123b
+          containerID: containerd://02c499f96565eb5e140319971c619284903fdfafb516e09693d2e25745068ce7
+          started: true
+      qosClass: Burstable
+  - metadata:
+      name: kube-apiserver-ip-172-31-40-74
+      namespace: kube-system
+      uid: aa98676d-c5d0-46eb-a94e-cf677bd68506
+      resourceVersion: '13462'
+      creationTimestamp: '2024-03-18T15:13:56Z'
+      labels:
+        component: kube-apiserver
+        tier: control-plane
+      annotations:
+        kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: 172.31.40.74:6443
+        kubernetes.io/config.hash: 276e6ff10c9935194157dca4fd755525
+        kubernetes.io/config.mirror: 276e6ff10c9935194157dca4fd755525
+        kubernetes.io/config.seen: '2024-03-18T15:13:49.633339731Z'
+        kubernetes.io/config.source: file
+      ownerReferences:
+        - apiVersion: v1
+          kind: Node
+          name: ip-172-31-40-74
+          uid: 3d4c9de0-4782-4681-bed9-96924aa6bf30
+          controller: true
+      managedFields:
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:13:56Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: {}
+                f:kubernetes.io/config.hash: {}
+                f:kubernetes.io/config.mirror: {}
+                f:kubernetes.io/config.seen: {}
+                f:kubernetes.io/config.source: {}
+              f:labels:
+                ".": {}
+                f:component: {}
+                f:tier: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"3d4c9de0-4782-4681-bed9-96924aa6bf30"}: {}
+            f:spec:
+              f:containers:
+                k:{"name":"kube-apiserver"}:
+                  ".": {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    ".": {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                  f:startupProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/etc/ca-certificates"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/kubernetes/pki"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/ssl/certs"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/usr/local/share/ca-certificates"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/usr/share/ca-certificates"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostNetwork: {}
+              f:nodeName: {}
+              f:priority: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                ".": {}
+                f:seccompProfile:
+                  ".": {}
+                  f:type: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"ca-certs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"etc-ca-certificates"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"k8s-certs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"usr-local-share-ca-certificates"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"usr-share-ca-certificates"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:31:40Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"172.31.40.74"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: ca-certs
+          hostPath:
+            path: "/etc/ssl/certs"
+            type: DirectoryOrCreate
+        - name: etc-ca-certificates
+          hostPath:
+            path: "/etc/ca-certificates"
+            type: DirectoryOrCreate
+        - name: k8s-certs
+          hostPath:
+            path: "/etc/kubernetes/pki"
+            type: DirectoryOrCreate
+        - name: usr-local-share-ca-certificates
+          hostPath:
+            path: "/usr/local/share/ca-certificates"
+            type: DirectoryOrCreate
+        - name: usr-share-ca-certificates
+          hostPath:
+            path: "/usr/share/ca-certificates"
+            type: DirectoryOrCreate
+      containers:
+        - name: kube-apiserver
+          image: registry.k8s.io/kube-apiserver:v1.28.8
+          command:
+            - kube-apiserver
+            - "--advertise-address=172.31.40.74"
+            - "--allow-privileged=true"
+            - "--authorization-mode=Node,RBAC"
+            - "--client-ca-file=/etc/kubernetes/pki/ca.crt"
+            - "--enable-admission-plugins=NodeRestriction"
+            - "--enable-bootstrap-token-auth=true"
+            - "--etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt"
+            - "--etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt"
+            - "--etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key"
+            - "--etcd-servers=https://127.0.0.1:2379"
+            - "--kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt"
+            - "--kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key"
+            - "--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname"
+            - "--proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt"
+            - "--proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key"
+            - "--requestheader-allowed-names=front-proxy-client"
+            - "--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt"
+            - "--requestheader-extra-headers-prefix=X-Remote-Extra-"
+            - "--requestheader-group-headers=X-Remote-Group"
+            - "--requestheader-username-headers=X-Remote-User"
+            - "--secure-port=6443"
+            - "--service-account-issuer=https://kubernetes.default.svc.cluster.local"
+            - "--service-account-key-file=/etc/kubernetes/pki/sa.pub"
+            - "--service-account-signing-key-file=/etc/kubernetes/pki/sa.key"
+            - "--service-cluster-ip-range=10.96.0.0/12"
+            - "--tls-cert-file=/etc/kubernetes/pki/apiserver.crt"
+            - "--tls-private-key-file=/etc/kubernetes/pki/apiserver.key"
+          resources:
+            requests:
+              cpu: 250m
+          volumeMounts:
+            - name: ca-certs
+              readOnly: true
+              mountPath: "/etc/ssl/certs"
+            - name: etc-ca-certificates
+              readOnly: true
+              mountPath: "/etc/ca-certificates"
+            - name: k8s-certs
+              readOnly: true
+              mountPath: "/etc/kubernetes/pki"
+            - name: usr-local-share-ca-certificates
+              readOnly: true
+              mountPath: "/usr/local/share/ca-certificates"
+            - name: usr-share-ca-certificates
+              readOnly: true
+              mountPath: "/usr/share/ca-certificates"
+          livenessProbe:
+            httpGet:
+              path: "/livez"
+              port: 6443
+              host: 172.31.40.74
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 8
+          readinessProbe:
+            httpGet:
+              path: "/readyz"
+              port: 6443
+              host: 172.31.40.74
+              scheme: HTTPS
+            timeoutSeconds: 15
+            periodSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: "/livez"
+              port: 6443
+              host: 172.31.40.74
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 24
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeName: ip-172-31-40-74
+      hostNetwork: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      schedulerName: default-scheduler
+      tolerations:
+        - operator: Exists
+          effect: NoExecute
+      priorityClassName: system-node-critical
+      priority: 2000001000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:40Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:40Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+      hostIP: 172.31.40.74
+      podIP: 172.31.40.74
+      podIPs:
+        - ip: 172.31.40.74
+      startTime: '2024-03-19T15:31:26Z'
+      containerStatuses:
+        - name: kube-apiserver
+          state:
+            running:
+              startedAt: '2024-03-19T15:31:27Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:46:37Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://8803c53dc3ed3ff82a02050ed83a604672a8265c3b51b21836f3c981e64a1949
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/kube-apiserver:v1.28.8
+          imageID: registry.k8s.io/kube-apiserver@sha256:7e7f3c806333528451a1e0bfdf17da0341adaea7d50a703db9c2005c474a97b9
+          containerID: containerd://02eead08008b63c6b66355c2ef632461d943b5b117e346ac2f13bd3dc6166c2e
+          started: true
+      qosClass: Burstable
+  - metadata:
+      name: kube-controller-manager-ip-172-31-40-74
+      namespace: kube-system
+      uid: 1776b77e-9fbb-42df-af3b-312eb9ddc816
+      resourceVersion: '13471'
+      creationTimestamp: '2024-03-18T15:13:56Z'
+      labels:
+        component: kube-controller-manager
+        tier: control-plane
+      annotations:
+        kubernetes.io/config.hash: 573c3e8f4aa57997fbc4c8bf6b0ca06a
+        kubernetes.io/config.mirror: 573c3e8f4aa57997fbc4c8bf6b0ca06a
+        kubernetes.io/config.seen: '2024-03-18T15:13:49.633342106Z'
+        kubernetes.io/config.source: file
+      ownerReferences:
+        - apiVersion: v1
+          kind: Node
+          name: ip-172-31-40-74
+          uid: 3d4c9de0-4782-4681-bed9-96924aa6bf30
+          controller: true
+      managedFields:
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:13:56Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:kubernetes.io/config.hash: {}
+                f:kubernetes.io/config.mirror: {}
+                f:kubernetes.io/config.seen: {}
+                f:kubernetes.io/config.source: {}
+              f:labels:
+                ".": {}
+                f:component: {}
+                f:tier: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"3d4c9de0-4782-4681-bed9-96924aa6bf30"}: {}
+            f:spec:
+              f:containers:
+                k:{"name":"kube-controller-manager"}:
+                  ".": {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:resources:
+                    ".": {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                  f:startupProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/etc/ca-certificates"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/kubernetes/controller-manager.conf"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/kubernetes/pki"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/ssl/certs"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/usr/libexec/kubernetes/kubelet-plugins/volume/exec"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/usr/local/share/ca-certificates"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/usr/share/ca-certificates"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostNetwork: {}
+              f:nodeName: {}
+              f:priority: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                ".": {}
+                f:seccompProfile:
+                  ".": {}
+                  f:type: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"ca-certs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"etc-ca-certificates"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"flexvolume-dir"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"k8s-certs"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"kubeconfig"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"usr-local-share-ca-certificates"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"usr-share-ca-certificates"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:31:41Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"172.31.40.74"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: ca-certs
+          hostPath:
+            path: "/etc/ssl/certs"
+            type: DirectoryOrCreate
+        - name: etc-ca-certificates
+          hostPath:
+            path: "/etc/ca-certificates"
+            type: DirectoryOrCreate
+        - name: flexvolume-dir
+          hostPath:
+            path: "/usr/libexec/kubernetes/kubelet-plugins/volume/exec"
+            type: DirectoryOrCreate
+        - name: k8s-certs
+          hostPath:
+            path: "/etc/kubernetes/pki"
+            type: DirectoryOrCreate
+        - name: kubeconfig
+          hostPath:
+            path: "/etc/kubernetes/controller-manager.conf"
+            type: FileOrCreate
+        - name: usr-local-share-ca-certificates
+          hostPath:
+            path: "/usr/local/share/ca-certificates"
+            type: DirectoryOrCreate
+        - name: usr-share-ca-certificates
+          hostPath:
+            path: "/usr/share/ca-certificates"
+            type: DirectoryOrCreate
+      containers:
+        - name: kube-controller-manager
+          image: registry.k8s.io/kube-controller-manager:v1.28.8
+          command:
+            - kube-controller-manager
+            - "--authentication-kubeconfig=/etc/kubernetes/controller-manager.conf"
+            - "--authorization-kubeconfig=/etc/kubernetes/controller-manager.conf"
+            - "--bind-address=127.0.0.1"
+            - "--client-ca-file=/etc/kubernetes/pki/ca.crt"
+            - "--cluster-name=kubernetes"
+            - "--cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt"
+            - "--cluster-signing-key-file=/etc/kubernetes/pki/ca.key"
+            - "--controllers=*,bootstrapsigner,tokencleaner"
+            - "--kubeconfig=/etc/kubernetes/controller-manager.conf"
+            - "--leader-elect=true"
+            - "--requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt"
+            - "--root-ca-file=/etc/kubernetes/pki/ca.crt"
+            - "--service-account-private-key-file=/etc/kubernetes/pki/sa.key"
+            - "--use-service-account-credentials=true"
+          resources:
+            requests:
+              cpu: 200m
+          volumeMounts:
+            - name: ca-certs
+              readOnly: true
+              mountPath: "/etc/ssl/certs"
+            - name: etc-ca-certificates
+              readOnly: true
+              mountPath: "/etc/ca-certificates"
+            - name: flexvolume-dir
+              mountPath: "/usr/libexec/kubernetes/kubelet-plugins/volume/exec"
+            - name: k8s-certs
+              readOnly: true
+              mountPath: "/etc/kubernetes/pki"
+            - name: kubeconfig
+              readOnly: true
+              mountPath: "/etc/kubernetes/controller-manager.conf"
+            - name: usr-local-share-ca-certificates
+              readOnly: true
+              mountPath: "/usr/local/share/ca-certificates"
+            - name: usr-share-ca-certificates
+              readOnly: true
+              mountPath: "/usr/share/ca-certificates"
+          livenessProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10257
+              host: 127.0.0.1
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 8
+          startupProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10257
+              host: 127.0.0.1
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 24
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeName: ip-172-31-40-74
+      hostNetwork: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      schedulerName: default-scheduler
+      tolerations:
+        - operator: Exists
+          effect: NoExecute
+      priorityClassName: system-node-critical
+      priority: 2000001000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:41Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:41Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+      hostIP: 172.31.40.74
+      podIP: 172.31.40.74
+      podIPs:
+        - ip: 172.31.40.74
+      startTime: '2024-03-19T15:31:26Z'
+      containerStatuses:
+        - name: kube-controller-manager
+          state:
+            running:
+              startedAt: '2024-03-19T15:31:27Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:46:38Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://5643ec878303d65fb1332e84314b0e53f638798276a1a725e6122ebab4c78180
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/kube-controller-manager:v1.28.8
+          imageID: registry.k8s.io/kube-controller-manager@sha256:f3d0e8da9d1532e081e719a985e89a0cfe1a29d127773ad8e2c2fee1dd10fd00
+          containerID: containerd://bb9abd8f544232663499a570ceb85077d4c13b156f0e27c9dea02c387e118b3c
+          started: true
+      qosClass: Burstable
+  - metadata:
+      name: kube-proxy-cjl4p
+      generateName: kube-proxy-
+      namespace: kube-system
+      uid: caaee7af-89c1-41c1-a7b9-36972685aec5
+      resourceVersion: '13390'
+      creationTimestamp: '2024-03-18T15:14:01Z'
+      labels:
+        controller-revision-hash: 67cb99b4b
+        k8s-app: kube-proxy
+        pod-template-generation: '1'
+      ownerReferences:
+        - apiVersion: apps/v1
+          kind: DaemonSet
+          name: kube-proxy
+          uid: 6c537821-a268-408f-82e2-f4cda56efd74
+          controller: true
+          blockOwnerDeletion: true
+      managedFields:
+        - manager: kube-controller-manager
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:14:01Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:generateName: {}
+              f:labels:
+                ".": {}
+                f:controller-revision-hash: {}
+                f:k8s-app: {}
+                f:pod-template-generation: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"6c537821-a268-408f-82e2-f4cda56efd74"}: {}
+            f:spec:
+              f:affinity:
+                ".": {}
+                f:nodeAffinity:
+                  ".": {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"kube-proxy"}:
+                  ".": {}
+                  f:command: {}
+                  f:env:
+                    ".": {}
+                    k:{"name":"NODE_NAME"}:
+                      ".": {}
+                      f:name: {}
+                      f:valueFrom:
+                        ".": {}
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    ".": {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/lib/modules"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/run/xtables.lock"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/kube-proxy"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostNetwork: {}
+              f:nodeSelector: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"kube-proxy"}:
+                  ".": {}
+                  f:configMap:
+                    ".": {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"lib-modules"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"xtables-lock"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:31:35Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"172.31.40.74"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: kube-proxy
+          configMap:
+            name: kube-proxy
+            defaultMode: 420
+        - name: xtables-lock
+          hostPath:
+            path: "/run/xtables.lock"
+            type: FileOrCreate
+        - name: lib-modules
+          hostPath:
+            path: "/lib/modules"
+            type: ''
+        - name: kube-api-access-44mlv
+          projected:
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - downwardAPI:
+                  items:
+                    - path: namespace
+                      fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+            defaultMode: 420
+      containers:
+        - name: kube-proxy
+          image: registry.k8s.io/kube-proxy:v1.28.8
+          command:
+            - "/usr/local/bin/kube-proxy"
+            - "--config=/var/lib/kube-proxy/config.conf"
+            - "--hostname-override=$(NODE_NAME)"
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+          resources: {}
+          volumeMounts:
+            - name: kube-proxy
+              mountPath: "/var/lib/kube-proxy"
+            - name: xtables-lock
+              mountPath: "/run/xtables.lock"
+            - name: lib-modules
+              readOnly: true
+              mountPath: "/lib/modules"
+            - name: kube-api-access-44mlv
+              readOnly: true
+              mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: kube-proxy
+      serviceAccount: kube-proxy
+      nodeName: ip-172-31-40-74
+      hostNetwork: true
+      securityContext: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchFields:
+                  - key: metadata.name
+                    operator: In
+                    values:
+                      - ip-172-31-40-74
+      schedulerName: default-scheduler
+      tolerations:
+        - operator: Exists
+        - key: node.kubernetes.io/not-ready
+          operator: Exists
+          effect: NoExecute
+        - key: node.kubernetes.io/unreachable
+          operator: Exists
+          effect: NoExecute
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/memory-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/pid-pressure
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/unschedulable
+          operator: Exists
+          effect: NoSchedule
+        - key: node.kubernetes.io/network-unavailable
+          operator: Exists
+          effect: NoSchedule
+      priorityClassName: system-node-critical
+      priority: 2000001000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:14:01Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:35Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:35Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-18T15:14:01Z'
+      hostIP: 172.31.40.74
+      podIP: 172.31.40.74
+      podIPs:
+        - ip: 172.31.40.74
+      startTime: '2024-03-18T15:14:01Z'
+      containerStatuses:
+        - name: kube-proxy
+          state:
+            running:
+              startedAt: '2024-03-19T15:31:34Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:46:46Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://1e4f74e1620e01600afa1ce5768276a38acfdf1a1d6092602d81a6c970f5f6b9
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/kube-proxy:v1.28.8
+          imageID: registry.k8s.io/kube-proxy@sha256:9e9dd46799712c58e1a49f973374ffa9ad4e5a6175896e5d805a8738bf5c5865
+          containerID: containerd://64c2fd8e68228ef7daf05e100b970a34585cc7e3f667e5729ab4e132c7280ff8
+          started: true
+      qosClass: BestEffort
+  - metadata:
+      name: kube-scheduler-ip-172-31-40-74
+      namespace: kube-system
+      uid: dae761ee-2328-48e5-9a32-5687690a2d6d
+      resourceVersion: '13470'
+      creationTimestamp: '2024-03-18T15:13:57Z'
+      labels:
+        component: kube-scheduler
+        tier: control-plane
+      annotations:
+        kubernetes.io/config.hash: 302d7c5f2b8531cc1ec2af9c907e0d55
+        kubernetes.io/config.mirror: 302d7c5f2b8531cc1ec2af9c907e0d55
+        kubernetes.io/config.seen: '2024-03-18T15:13:57.289099790Z'
+        kubernetes.io/config.source: file
+      ownerReferences:
+        - apiVersion: v1
+          kind: Node
+          name: ip-172-31-40-74
+          uid: 3d4c9de0-4782-4681-bed9-96924aa6bf30
+          controller: true
+      managedFields:
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-18T15:13:57Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:metadata:
+              f:annotations:
+                ".": {}
+                f:kubernetes.io/config.hash: {}
+                f:kubernetes.io/config.mirror: {}
+                f:kubernetes.io/config.seen: {}
+                f:kubernetes.io/config.source: {}
+              f:labels:
+                ".": {}
+                f:component: {}
+                f:tier: {}
+              f:ownerReferences:
+                ".": {}
+                k:{"uid":"3d4c9de0-4782-4681-bed9-96924aa6bf30"}: {}
+            f:spec:
+              f:containers:
+                k:{"name":"kube-scheduler"}:
+                  ".": {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:resources:
+                    ".": {}
+                    f:requests:
+                      ".": {}
+                      f:cpu: {}
+                  f:startupProbe:
+                    ".": {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      ".": {}
+                      f:host: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    ".": {}
+                    k:{"mountPath":"/etc/kubernetes/scheduler.conf"}:
+                      ".": {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:enableServiceLinks: {}
+              f:hostNetwork: {}
+              f:nodeName: {}
+              f:priority: {}
+              f:priorityClassName: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                ".": {}
+                f:seccompProfile:
+                  ".": {}
+                  f:type: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                ".": {}
+                k:{"name":"kubeconfig"}:
+                  ".": {}
+                  f:hostPath:
+                    ".": {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+        - manager: kubelet
+          operation: Update
+          apiVersion: v1
+          time: '2024-03-19T15:31:41Z'
+          fieldsType: FieldsV1
+          fieldsV1:
+            f:status:
+              f:conditions:
+                ".": {}
+                k:{"type":"ContainersReady"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Initialized"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"PodScheduled"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+                k:{"type":"Ready"}:
+                  ".": {}
+                  f:lastProbeTime: {}
+                  f:lastTransitionTime: {}
+                  f:status: {}
+                  f:type: {}
+              f:containerStatuses: {}
+              f:hostIP: {}
+              f:phase: {}
+              f:podIP: {}
+              f:podIPs:
+                ".": {}
+                k:{"ip":"172.31.40.74"}:
+                  ".": {}
+                  f:ip: {}
+              f:startTime: {}
+          subresource: status
+    spec:
+      volumes:
+        - name: kubeconfig
+          hostPath:
+            path: "/etc/kubernetes/scheduler.conf"
+            type: FileOrCreate
+      containers:
+        - name: kube-scheduler
+          image: registry.k8s.io/kube-scheduler:v1.28.8
+          command:
+            - kube-scheduler
+            - "--authentication-kubeconfig=/etc/kubernetes/scheduler.conf"
+            - "--authorization-kubeconfig=/etc/kubernetes/scheduler.conf"
+            - "--bind-address=127.0.0.1"
+            - "--kubeconfig=/etc/kubernetes/scheduler.conf"
+            - "--leader-elect=true"
+          resources:
+            requests:
+              cpu: 100m
+          volumeMounts:
+            - name: kubeconfig
+              readOnly: true
+              mountPath: "/etc/kubernetes/scheduler.conf"
+          livenessProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10259
+              host: 127.0.0.1
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 8
+          startupProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10259
+              host: 127.0.0.1
+              scheme: HTTPS
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 24
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeName: ip-172-31-40-74
+      hostNetwork: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      schedulerName: default-scheduler
+      tolerations:
+        - operator: Exists
+          effect: NoExecute
+      priorityClassName: system-node-critical
+      priority: 2000001000
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+    status:
+      phase: Running
+      conditions:
+        - type: Initialized
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+        - type: Ready
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:41Z'
+        - type: ContainersReady
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:41Z'
+        - type: PodScheduled
+          status: 'True'
+          lastProbeTime:
+          lastTransitionTime: '2024-03-19T15:31:26Z'
+      hostIP: 172.31.40.74
+      podIP: 172.31.40.74
+      podIPs:
+        - ip: 172.31.40.74
+      startTime: '2024-03-19T15:31:26Z'
+      containerStatuses:
+        - name: kube-scheduler
+          state:
+            running:
+              startedAt: '2024-03-19T15:31:27Z'
+          lastState:
+            terminated:
+              exitCode: 255
+              reason: Unknown
+              startedAt: '2024-03-19T13:46:38Z'
+              finishedAt: '2024-03-19T15:31:15Z'
+              containerID: containerd://fb0dcbb2a6b7ced4a1b32c9f5839a6da62bf2124564a27ed3c49d1b37c2f0a71
+          ready: true
+          restartCount: 4
+          image: registry.k8s.io/kube-scheduler:v1.28.8
+          imageID: registry.k8s.io/kube-scheduler@sha256:4d61604f259d3c91d8b3ec7a6a999f5eae9aff371567151cd5165eaa698c6d7b
+          containerID: containerd://cc6044bb6b37808a9f12cdef215b8672a849831a0971cee371370439cc05d1c5
+          started: true
+      qosClass: Burstable

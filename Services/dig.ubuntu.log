@@ -1,0 +1,61 @@
+root@ubuntu:/# dig
+
+; <<>> DiG 9.18.18-0ubuntu0.22.04.2-Ubuntu <<>>
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 6820
+;; flags: qr rd ra; QUERY: 1, ANSWER: 13, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 075fc96842d87bc6 (echoed)
+;; QUESTION SECTION:
+;.                              IN      NS
+
+;; ANSWER SECTION:
+.                       30      IN      NS      c.root-servers.net.
+.                       30      IN      NS      b.root-servers.net.
+.                       30      IN      NS      j.root-servers.net.
+.                       30      IN      NS      a.root-servers.net.
+.                       30      IN      NS      e.root-servers.net.
+.                       30      IN      NS      d.root-servers.net.
+.                       30      IN      NS      k.root-servers.net.
+.                       30      IN      NS      h.root-servers.net.
+.                       30      IN      NS      f.root-servers.net.
+.                       30      IN      NS      i.root-servers.net.
+.                       30      IN      NS      g.root-servers.net.
+.                       30      IN      NS      l.root-servers.net.
+.                       30      IN      NS      m.root-servers.net.
+
+;; Query time: 4 msec
+;; SERVER: 10.96.0.10#53(10.96.0.10) (UDP)
+;; WHEN: Fri Mar 15 15:03:52 UTC 2024
+;; MSG SIZE  rcvd: 443
+
+root@ubuntu:/# cat /etc/resolv.conf
+search default.svc.cluster.local svc.cluster.local cluster.local
+nameserver 10.96.0.10
+options ndots:5
+root@ubuntu:/# dig @10.96.0.10 -x 10.96.0.10
+
+; <<>> DiG 9.18.18-0ubuntu0.22.04.2-Ubuntu <<>> @10.96.0.10 -x 10.96.0.10
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20909
+;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 7f05ee9baca50bff (echoed)
+;; QUESTION SECTION:
+;10.0.96.10.in-addr.arpa.       IN      PTR
+
+;; ANSWER SECTION:
+10.0.96.10.in-addr.arpa. 30     IN      PTR     kube-dns.kube-system.svc.cluster.local.
+
+;; Query time: 4 msec
+;; SERVER: 10.96.0.10#53(10.96.0.10) (UDP)
+;; WHEN: Fri Mar 15 15:05:24 UTC 2024
+;; MSG SIZE  rcvd: 139

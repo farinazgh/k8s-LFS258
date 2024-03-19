@@ -84,7 +84,7 @@ apt-get install -y kubeadm=1.25.1-00 kubelet=1.25.1-00 kubectl=1.25.1-00
 apt-mark hold kubelet kubeadm kubectl
 
 
-wget https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/calico.yaml
 
 hostname -i
 # 172.31.39.48
