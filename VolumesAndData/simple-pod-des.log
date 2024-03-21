@@ -1,0 +1,54 @@
+Name:             shell-demo
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             ip-172-31-40-74/172.31.40.74
+Start Time:       Thu, 21 Mar 2024 05:58:57 +0000
+Labels:           <none>
+Annotations:      cni.projectcalico.org/containerID: fe60ef98a8a5878573b935333a55e18fecbf9578bc7f19eb0fafbefea16096d9
+                  cni.projectcalico.org/podIP: 192.168.10.31/32
+                  cni.projectcalico.org/podIPs: 192.168.10.31/32
+Status:           Running
+IP:               192.168.10.31
+IPs:
+  IP:  192.168.10.31
+Containers:
+  nginx:
+    Container ID:   containerd://a8e80f52cc9c3bd253a16b67b10bad7efd5b4451041f81f613c06def07a9ac12
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:6db391d1c0cfb30588ba0bf72ea999404f2764febf0f1f196acd5867ac7efa7e
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Thu, 21 Mar 2024 05:58:58 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      iLike:  <set to the key 'favorite' of config map 'colors'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-cqxw8 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-cqxw8:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  66s   default-scheduler  Successfully assigned default/shell-demo to ip-172-31-40-74
+  Normal  Pulling    65s   kubelet            Pulling image "nginx"
+  Normal  Pulled     65s   kubelet            Successfully pulled image "nginx" in 609ms (609ms including waiting)
+  Normal  Created    65s   kubelet            Created container nginx
+  Normal  Started    65s   kubelet            Started container nginx

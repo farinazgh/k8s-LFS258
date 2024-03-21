@@ -10,5 +10,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /opt/sfw
-    server: cp
+    server: ip-172-31-40-74
     readOnly: false

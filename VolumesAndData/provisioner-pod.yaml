@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nfs-subdir-external-provisioner
+  name: nfs-subdir-external-provisioner-86bcbb46d7-5x4p8
+  ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: nfs-subdir-external-provisioner-86bcbb46d7
+      uid: 9acf3a25-66f7-4cd3-aa88-80206d302b07
+spec:
+  containers:
+    - env:
+        - name: PROVISIONER_NAME
+          value: cluster.local/nfs-subdir-external-provisioner
+        - name: NFS_SERVER
+          value: k8scp
+        - name: NFS_PATH
+          value: /opt/sfw/
+      image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+      imagePullPolicy: IfNotPresent
+      name: nfs-subdir-external-provisioner
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /persistentvolumes
+          name: nfs-subdir-external-provisioner-root
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: kube-api-access-jx4jv
+          readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-172-31-40-74
+  preemptionPolicy: PreemptLowerPriority
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  serviceAccountName: nfs-subdir-external-provisioner
+  terminationGracePeriodSeconds: 30
+  volumes:
+    - name: nfs-subdir-external-provisioner-root
+      nfs:
+        path: /opt/sfw/
+        server: k8scp
+    - name: kube-api-access-jx4jv
+      projected:
+        defaultMode: 420
+        sources:
+          - serviceAccountToken:
+              expirationSeconds: 3607
+              path: token
+          - configMap:
+              items:
+                - key: ca.crt
+                  path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+                - fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+                  path: namespace

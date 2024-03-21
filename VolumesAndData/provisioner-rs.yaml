@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: nfs-subdir-external-provisioner
+  name: nfs-subdir-external-provisioner-86bcbb46d7
+  ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: nfs-subdir-external-provisioner
+      uid: e55b5733-a663-42b3-8312-036a0ca3dad0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-subdir-external-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-subdir-external-provisioner
+    spec:
+      containers:
+        - env:
+            - name: PROVISIONER_NAME
+              value: cluster.local/nfs-subdir-external-provisioner
+            - name: NFS_SERVER
+              value: k8scp
+            - name: NFS_PATH
+              value: /opt/sfw/
+          image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+          imagePullPolicy: IfNotPresent
+          name: nfs-subdir-external-provisioner
+          volumeMounts:
+            - mountPath: /persistentvolumes
+              name: nfs-subdir-external-provisioner-root
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccountName: nfs-subdir-external-provisioner
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: nfs-subdir-external-provisioner-root
+          nfs:
+            path: /opt/sfw/
+            server: k8scp

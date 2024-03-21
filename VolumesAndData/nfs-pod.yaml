@@ -6,7 +6,7 @@ metadata:
   generation: 1
   labels:
     run: nginx
-  name: nginx-nfs                  #<-- Edit name
+  name: nginx-nfs
   namespace: default
 spec:
   replicas: 1
@@ -20,7 +20,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         run: nginx
     spec:
