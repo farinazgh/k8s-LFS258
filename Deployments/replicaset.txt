@@ -1,0 +1,7 @@
+In this lab:
+ 1. we will first explore the API objects used to manage groups of containers. The objects available have changed as Kubernetes has matured, so
+the Kubernetes version in use will determine which are available.
+ 2. Our first object will be a ReplicaSet, which does not include newer management features found with Deployments.
+ 3. A Deployment operator manages ReplicaSet operators for you.
+ 4. We will also work with another object and watch loop called a DaemonSet which ensures a container is running on newly added node.
+ 5. Then we will update the software in a container, view the revision history, and roll-back to a previous version.
