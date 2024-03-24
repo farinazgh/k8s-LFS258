@@ -102,7 +102,7 @@ kind: ClusterConfiguration
 kubernetesVersion: 1.25.1 #<-- Use the word stable for newest version
 controlPlaneEndpoint: "k8scp:6443" #<-- Use the alias we put in /etc/hosts not the IP
 networking:
-podSubnet: 192.168.0.0/16 #<-- Match the IP range from the Calico config file
+podSubnet: 192.168.0.0/16 #<-- Match the IP range from the Calico config.yaml file
 
 
 kubeadm init --config=kubeadm-config.yaml --upload-certs | tee kubeadm-init.out #<-- Save kubeadm-init.out for future review

@@ -45,8 +45,8 @@ kubeadm join --token fxdchp.evoo6n2tlzftp3pu k8scp:6443 --discovery-token-ca-cer
 #[preflight] Running pre-flight checks
 #        [WARNING SystemVerification]: missing optional cgroups: blkio
 #[preflight] Reading configuration from the cluster...
-#[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
-#[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+#[preflight] FYI: You can look at this config.yaml file with 'kubectl -n kube-system get cm kubeadm-config.yaml -o yaml'
+#[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml.yaml"
 #[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
 #[kubelet-start] Starting the kubelet
 #[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...

@@ -823,7 +823,7 @@ items:
             - name: CALICO_NETWORKING_BACKEND
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: calico_backend
           resources: {}
           volumeMounts:
@@ -853,7 +853,7 @@ items:
             - name: CNI_NETWORK_CONFIG
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: cni_network_config
             - name: KUBERNETES_NODE_NAME
               valueFrom:
@@ -863,7 +863,7 @@ items:
             - name: CNI_MTU
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: veth_mtu
             - name: SLEEP
               value: 'false'
@@ -926,7 +926,7 @@ items:
             - name: CALICO_NETWORKING_BACKEND
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: calico_backend
             - name: CLUSTER_TYPE
               value: k8s,bgp
@@ -941,17 +941,17 @@ items:
             - name: FELIX_IPINIPMTU
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: veth_mtu
             - name: FELIX_VXLANMTU
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: veth_mtu
             - name: FELIX_WIREGUARDMTU
               valueFrom:
                 configMapKeyRef:
-                  name: calico-config
+                  name: calico-config.yaml
                   key: veth_mtu
             - name: CALICO_DISABLE_FILE_LOGGING
               value: 'true'
@@ -1366,7 +1366,7 @@ items:
           subresource: status
     spec:
       volumes:
-        - name: config-volume
+        - name: config.yaml-volume
           configMap:
             name: coredns
             items:
@@ -1414,7 +1414,7 @@ items:
               cpu: 100m
               memory: 70Mi
           volumeMounts:
-            - name: config-volume
+            - name: config.yaml-volume
               readOnly: true
               mountPath: "/etc/coredns"
             - name: kube-api-access-wtt7x
@@ -1739,7 +1739,7 @@ items:
           subresource: status
     spec:
       volumes:
-        - name: config-volume
+        - name: config.yaml-volume
           configMap:
             name: coredns
             items:
@@ -1787,7 +1787,7 @@ items:
               cpu: 100m
               memory: 70Mi
           volumeMounts:
-            - name: config-volume
+            - name: config.yaml-volume
               readOnly: true
               mountPath: "/etc/coredns"
             - name: kube-api-access-f4k5l
@@ -3159,7 +3159,7 @@ items:
           image: registry.k8s.io/kube-proxy:v1.28.8
           command:
             - "/usr/local/bin/kube-proxy"
-            - "--config=/var/lib/kube-proxy/config.conf"
+            - "--config.yaml=/var/lib/kube-proxy/config.yaml.conf"
             - "--hostname-override=$(NODE_NAME)"
           env:
             - name: NODE_NAME
