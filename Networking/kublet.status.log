@@ -1,0 +1,25 @@
+status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+     Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
+    Drop-In: /usr/lib/systemd/system/kubelet.service.d
+             └─10-kubeadm.conf
+     Active: active (running) since Mon 2024-03-25 15:46:56 UTC; 5min ago
+       Docs: https://kubernetes.io/docs/
+   Main PID: 779 (kubelet)
+      Tasks: 15 (limit: 4666)
+     Memory: 49.4M
+        CPU: 7.024s
+     CGroup: /system.slice/kubelet.service
+             └─779 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=un>
+
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.020597     779 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.020656     779 kuberuntime_manager.go:1080] "killPodWithSyncResult failed" err="failed to \"KillPodSandbox\" for \"6106a082-f375-4ffd-a4a2-dc5969ab9>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.020705     779 pod_workers.go:1300] "Error syncing pod, skipping" err="failed to \"KillPodSandbox\" for \"6106a082-f375-4ffd-a4a2-dc5969ab90eb\" wit>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.078088     779 kuberuntime_manager.go:1080] "killPodWithSyncResult failed" err="failed to \"KillPodSandbox\" for \"c3a2ff03-093f-4609-a85d-05013e610>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.078134     779 pod_workers.go:1300] "Error syncing pod, skipping" err="failed to \"KillPodSandbox\" for \"c3a2ff03-093f-4609-a85d-05013e610baf\" wit>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.185827     779 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = Unknown desc = failed to destroy network f>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.185901     779 kuberuntime_manager.go:1380] "Failed to stop sandbox" podSandboxID={"Type":"containerd","ID":"089403f53f0cd4019b57e99f86c3950b5481a32>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.186403     779 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.186461     779 kuberuntime_manager.go:1080] "killPodWithSyncResult failed" err="failed to \"KillPodSandbox\" for \"1ee48aa8-53e3-485c-b85e-3ae630f9f>
+Mar 25 15:47:37 ip-172-31-40-74 kubelet[779]: E0325 15:47:37.186499     779 pod_workers.go:1300] "Error syncing pod, skipping" err="failed to \"KillPodSandbox\" for \"1ee48aa8-53e3-485c-b85e-3ae630f9f05d\" wit>
+
