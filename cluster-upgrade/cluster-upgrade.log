@@ -1,0 +1,387 @@
+ubuntu@ip-172-31-40-74:~$ kubectl get nodes -o wide
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+ip-172-31-40-74   Ready    control-plane   13d   v1.28.8   172.31.40.74   <none>        Ubuntu 22.04.4 LTS   6.5.0-1015-aws   containerd://1.6.28
+ubuntu@ip-172-31-40-74:~$ cat /etc/*release*
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04.4 LTS"
+PRETTY_NAME="Ubuntu 22.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.4 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+ubuntu@ip-172-31-40-74:~$ sudo -i
+root@ip-172-31-40-74:~# exit
+logout
+ubuntu@ip-172-31-40-74:~$ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
+ubuntu@ip-172-31-40-74:~$ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+File '/etc/apt/keyrings/kubernetes-apt-keyring.gpg' exists. Overwrite? (y/N) y
+ubuntu@ip-172-31-40-74:~$ sudo apt update
+Hit:1 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Hit:3 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Hit:5 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:7 https://baltocdn.com/helm/stable/debian all InRelease
+Get:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  InRelease [1186 B]
+Get:8 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1518 kB]
+Get:9 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [293 kB]
+Get:10 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1644 kB]
+Get:11 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [274 kB]
+Get:12 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1060 kB]
+Get:13 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [241 kB]
+Get:14 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [49.6 kB]
+Get:15 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [12.0 kB]
+Get:16 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1303 kB]
+Get:17 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [233 kB]
+Get:18 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1616 kB]
+Get:19 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [271 kB]
+Get:20 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [852 kB]
+Get:21 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [163 kB]
+Get:22 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  Packages [6511 B]
+Fetched 9765 kB in 2s (4425 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+32 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@ip-172-31-40-74:~$ sudo apt-cache madison kubeadm
+   kubeadm | 1.29.3-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.2-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.0-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+ubuntu@ip-172-31-40-74:~$ sudo apt-mark unhold kubeadm && \
+sudo apt-get update && sudo apt-get install -y kubeadm='1.29.3-1.1' && \
+sudo apt-mark hold kubeadm
+Canceled hold on kubeadm.
+Hit:1 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:7 https://baltocdn.com/helm/stable/debian all InRelease
+Hit:6 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libjq1 libonig5
+Use 'sudo apt autoremove' to remove them.
+The following packages will be upgraded:
+  kubeadm
+1 upgraded, 0 newly installed, 0 to remove and 31 not upgraded.
+Need to get 10.1 MB of archives.
+After this operation, 106 kB of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  kubeadm 1.29.3-1.1 [10.1 MB]
+Fetched 10.1 MB in 0s (30.9 MB/s)
+(Reading database ... 95893 files and directories currently installed.)
+Preparing to unpack .../kubeadm_1.29.3-1.1_amd64.deb ...
+Unpacking kubeadm (1.29.3-1.1) over (1.28.8-1.1) ...
+Setting up kubeadm (1.29.3-1.1) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+kubeadm set on hold.
+ubuntu@ip-172-31-40-74:~$ kubeadm version
+kubeadm version: &version.Info{Major:"1", Minor:"29", GitVersion:"v1.29.3", GitCommit:"6813625b7cd706db5bc7388921be03071e1a492d", GitTreeState:"clean", BuildDate:"2024-03-15T00:06:16Z", GoVersion:"go1.21.8", Compiler:"gc", Platform:"linux/amd64"}
+ubuntu@ip-172-31-40-74:~$
+ubuntu@ip-172-31-40-74:~$ sudo kubeadm upgrade plan
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Running pre-flight checks.
+[upgrade] Running cluster health checks
+[upgrade] Fetching available versions to upgrade to
+[upgrade/versions] Cluster version: v1.28.8
+[upgrade/versions] kubeadm version: v1.29.3
+[upgrade/versions] Target version: v1.29.3
+[upgrade/versions] Latest version in the v1.28 series: v1.28.8
+
+Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
+COMPONENT   CURRENT       TARGET
+kubelet     1 x v1.28.8   v1.29.3
+
+Upgrade to the latest stable version:
+
+COMPONENT                 CURRENT    TARGET
+kube-apiserver            v1.28.8    v1.29.3
+kube-controller-manager   v1.28.8    v1.29.3
+kube-scheduler            v1.28.8    v1.29.3
+kube-proxy                v1.28.8    v1.29.3
+CoreDNS                   v1.10.1    v1.11.1
+etcd                      3.5.12-0   3.5.12-0
+
+You can now apply the upgrade by executing the following command:
+
+        kubeadm upgrade apply v1.29.3
+
+_____________________________________________________________________
+
+
+The table below shows the current state of component configs as understood by this version of kubeadm.
+Configs that have a "yes" mark in the "MANUAL UPGRADE REQUIRED" column require manual config upgrade or
+resetting to kubeadm defaults before a successful upgrade can be performed. The version to manually
+upgrade to is denoted in the "PREFERRED VERSION" column.
+
+API GROUP                 CURRENT VERSION   PREFERRED VERSION   MANUAL UPGRADE REQUIRED
+kubeproxy.config.k8s.io   v1alpha1          v1alpha1            no
+kubelet.config.k8s.io     v1beta1           v1beta1             no
+_____________________________________________________________________
+
+ubuntu@ip-172-31-40-74:~$ sudo kubeadm upgrade apply v1.29.3
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Running pre-flight checks.
+[upgrade] Running cluster health checks
+[upgrade/version] You have chosen to change the cluster version to "v1.29.3"
+[upgrade/versions] Cluster version: v1.28.8
+[upgrade/versions] kubeadm version: v1.29.3
+[upgrade] Are you sure you want to proceed? [y/N]: y
+[upgrade/prepull] Pulling images required for setting up a Kubernetes cluster
+[upgrade/prepull] This might take a minute or two, depending on the speed of your internet connection
+[upgrade/prepull] You can also perform this action in beforehand using 'kubeadm config images pull'
+W0401 11:30:03.272316   16367 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.6" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
+[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.29.3" (timeout: 5m0s)...
+[upgrade/etcd] Upgrading to TLS for etcd
+[upgrade/staticpods] Preparing for "etcd" upgrade
+[upgrade/staticpods] Current and new manifests of etcd are equal, skipping upgrade
+[upgrade/etcd] Waiting for etcd to become available
+[upgrade/staticpods] Writing new Static Pod manifests to "/etc/kubernetes/tmp/kubeadm-upgraded-manifests2485050807"
+[upgrade/staticpods] Preparing for "kube-apiserver" upgrade
+[upgrade/staticpods] Renewing apiserver certificate
+[upgrade/staticpods] Renewing apiserver-kubelet-client certificate
+[upgrade/staticpods] Renewing front-proxy-client certificate
+[upgrade/staticpods] Renewing apiserver-etcd-client certificate
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-apiserver.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-01-11-30-03/kube-apiserver.yaml"
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
+[apiclient] Found 1 Pods for label selector component=kube-apiserver
+[upgrade/staticpods] Component "kube-apiserver" upgraded successfully!
+[upgrade/staticpods] Preparing for "kube-controller-manager" upgrade
+[upgrade/staticpods] Renewing controller-manager.conf certificate
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-controller-manager.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-01-11-30-03/kube-controller-manager.yaml"
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
+[apiclient] Found 1 Pods for label selector component=kube-controller-manager
+[upgrade/staticpods] Component "kube-controller-manager" upgraded successfully!
+[upgrade/staticpods] Preparing for "kube-scheduler" upgrade
+[upgrade/staticpods] Renewing scheduler.conf certificate
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-scheduler.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-01-11-30-03/kube-scheduler.yaml"
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
+[apiclient] Found 1 Pods for label selector component=kube-scheduler
+[upgrade/staticpods] Component "kube-scheduler" upgraded successfully!
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upgrade] Backing up kubelet config file to /etc/kubernetes/tmp/kubeadm-kubelet-config3778688815/config.yaml
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "super-admin.conf" kubeconfig file
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.29.3". Enjoy!
+
+[upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
+ubuntu@ip-172-31-40-74:~$
+buntu@ip-172-31-40-74:~$ kubectl get nodes -o wide
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+ip-172-31-40-74   Ready    control-plane   13d   v1.28.8   172.31.40.74   <none>        Ubuntu 22.04.4 LTS   6.5.0-1015-aws   containerd://1.6.28
+ubuntu@ip-172-31-40-74:~$ kubectl drain ip-172-31-40-74  --ignore-daemonsets
+node/ip-172-31-40-74 cordoned
+error: unable to drain node "ip-172-31-40-74" due to error:[cannot delete Pods declare no controller (use --force to override): default/nginx-1, default/nginx-2, polaris/nginx-3, cannot delete Pods with local storage (use --delete-emptydir-data to override): kubernetes-dashboard/dashboard-metrics-scraper-5657497c4c-6j2p2], continuing command...
+There are pending nodes to be drained:
+ ip-172-31-40-74
+cannot delete Pods declare no controller (use --force to override): default/nginx-1, default/nginx-2, polaris/nginx-3
+cannot delete Pods with local storage (use --delete-emptydir-data to override): kubernetes-dashboard/dashboard-metrics-scraper-5657497c4c-6j2p2
+ubuntu@ip-172-31-40-74:~$ kubectl drain ip-172-31-40-74  --ignore-daemonsets --force
+node/ip-172-31-40-74 already cordoned
+error: unable to drain node "ip-172-31-40-74" due to error:cannot delete Pods with local storage (use --delete-emptydir-data to override): kubernetes-dashboard/dashboard-metrics-scraper-5657497c4c-6j2p2, continuing command...
+There are pending nodes to be drained:
+ ip-172-31-40-74
+cannot delete Pods with local storage (use --delete-emptydir-data to override): kubernetes-dashboard/dashboard-metrics-scraper-5657497c4c-6j2p2
+ubuntu@ip-172-31-40-74:~$ kubectl drain ip-172-31-40-74  --ignore-daemonsets --force  --delete-emptydir-data
+node/ip-172-31-40-74 already cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-system/calico-node-m25dv, kube-system/kube-proxy-4n7jw; deleting Pods that declare no controller: default/nginx-1, default/nginx-2, polaris/nginx-3
+evicting pod default/nginx-1
+evicting pod polaris/nginx-3
+evicting pod default/nginx-2
+evicting pod kube-system/calico-kube-controllers-68cdf756d9-sdj2v
+evicting pod kube-system/coredns-5dd5756b68-mqdtt
+evicting pod kubernetes-dashboard/dashboard-metrics-scraper-5657497c4c-6j2p2
+evicting pod kubernetes-dashboard/kubernetes-dashboard-78f87ddfc-hd8zz
+evicting pod default/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8
+pod/kubernetes-dashboard-78f87ddfc-hd8zz evicted
+pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8 evicted
+pod/nginx-2 evicted
+pod/dashboard-metrics-scraper-5657497c4c-6j2p2 evicted
+pod/nginx-1 evicted
+pod/nginx-3 evicted
+pod/calico-kube-controllers-68cdf756d9-sdj2v evicted
+pod/coredns-5dd5756b68-mqdtt evicted
+node/ip-172-31-40-74 drained
+ubuntu@ip-172-31-40-74:~$ sudo apt-mark unhold kubelet kubectl && \
+sudo apt-get update && sudo apt-get install -y kubelet='1.29.3-1.1' kubectl='1.29.3-1.1' && \
+sudo apt-mark hold kubelet kubectl
+dpkg: error: dpkg frontend lock was locked by another process with pid 23588
+Note: removing the lock file is always wrong, and can end up damaging the
+locked area and the entire system. See <https://wiki.debian.org/Teams/Dpkg/FAQ>.
+E: Sub-process dpkg --set-selections returned an error code (2)
+E: Executing dpkg failed. Are you root?
+ubuntu@ip-172-31-40-74:~$ sudo -i
+root@ip-172-31-40-74:~# sudo apt-mark unhold kubelet kubectl && \
+sudo apt-get update && sudo apt-get install -y kubelet='1.29.3-1.1' kubectl='1.29.3-1.1' && \
+sudo apt-mark hold kubelet kubectl
+dpkg: error: dpkg frontend lock was locked by another process with pid 32519
+Note: removing the lock file is always wrong, and can end up damaging the
+locked area and the entire system. See <https://wiki.debian.org/Teams/Dpkg/FAQ>.
+E: Sub-process dpkg --set-selections returned an error code (2)
+E: Executing dpkg failed. Are you root?
+root@ip-172-31-40-74:~# sudo apt-mark unhold kubelet kubectl
+Canceled hold on kubelet.
+Canceled hold on kubectl.
+root@ip-172-31-40-74:~# sudo apt-get update && sudo apt-get install -y kubelet='1.29.3-1.1' kubectl='1.29.3-1.1'
+Hit:1 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://eu-west-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:4 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:6 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:7 https://baltocdn.com/helm/stable/debian all InRelease
+Hit:5 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libjq1 libonig5
+Use 'sudo apt autoremove' to remove them.
+The following packages will be upgraded:
+  kubectl kubelet
+2 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+Need to get 30.3 MB of archives.
+After this operation, 2540 kB of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  kubectl 1.29.3-1.1 [10.5 MB]
+Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.29/deb  kubelet 1.29.3-1.1 [19.8 MB]
+Fetched 30.3 MB in 1s (56.8 MB/s)
+(Reading database ... 95896 files and directories currently installed.)
+Preparing to unpack .../kubectl_1.29.3-1.1_amd64.deb ...
+Unpacking kubectl (1.29.3-1.1) over (1.28.8-1.1) ...
+Preparing to unpack .../kubelet_1.29.3-1.1_amd64.deb ...
+Unpacking kubelet (1.29.3-1.1) over (1.28.8-1.1) ...
+Setting up kubectl (1.29.3-1.1) ...
+Setting up kubelet (1.29.3-1.1) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Restarting services...
+ /etc/needrestart/restart.d/systemd-manager
+ systemctl restart kubelet.service nfs-mountd.service packagekit.service polkit.service rsyslog.service serial-getty@ttyS0.service systemd-journald.service systemd-networkd.service systemd-resolved.service systemd-udevd.service
+Service restarts being deferred:
+ systemctl restart getty@tty1.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart user@1000.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ip-172-31-40-74:~# sudo apt-mark hold kubelet kubectl
+kubelet set on hold.
+kubectl set on hold.
+root@ip-172-31-40-74:~# sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+root@ip-172-31-40-74:~# kubectl uncordon ip-172-31-40-74
+E0401 11:40:56.692697   34725 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:40:56.693892   34725 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:40:56.694345   34725 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:40:56.695764   34725 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@ip-172-31-40-74:~# sudo kubectl uncordon ip-172-31-40-74
+E0401 11:41:06.441225   34784 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:06.441632   34784 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:06.443212   34784 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:06.443679   34784 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+root@ip-172-31-40-74:~# exit
+logout
+ubuntu@ip-172-31-40-74:~$ sudo kubectl uncordon ip-172-31-40-74
+E0401 11:41:12.162741   34819 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:12.163302   34819 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:12.164872   34819 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:12.165222   34819 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+ubuntu@ip-172-31-40-74:~$ kubectl get nodes
+NAME              STATUS                     ROLES           AGE   VERSION
+ip-172-31-40-74   Ready,SchedulingDisabled   control-plane   13d   v1.29.3
+ubuntu@ip-172-31-40-74:~$ kubectl get pods
+NAME                                               READY   STATUS    RESTARTS   AGE
+nfs-subdir-external-provisioner-86bcbb46d7-qgl7s   0/1     Pending   0          10m
+ubuntu@ip-172-31-40-74:~$ sudo kubectl uncordon ip-172-31-40-74
+E0401 11:41:49.256180   35037 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:49.256590   35037 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:49.258093   35037 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:41:49.258472   35037 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+ubuntu@ip-172-31-40-74:~$ sudo systemctl status kube-apiserver
+Unit kube-apiserver.service could not be found.
+ubuntu@ip-172-31-40-74:~$ sudo systemctl restart kubelet
+ubuntu@ip-172-31-40-74:~$ sudo kubectl uncordon ip-172-31-40-74
+E0401 11:43:16.259717   35571 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:43:16.260032   35571 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:43:16.261529   35571 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+E0401 11:43:16.261836   35571 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+ubuntu@ip-172-31-40-74:~/.kube$ kubectl uncordon ip-172-31-40-74
+node/ip-172-31-40-74 uncordoned
+ubuntu@ip-172-31-40-74:~/.kube$ kubectl get nodes
+NAME              STATUS   ROLES           AGE   VERSION
+ip-172-31-40-74   Ready    control-plane   13d   v1.29.3
+ubuntu@ip-172-31-40-74:~/.kube$ kubectl get nodes -o wide
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+ip-172-31-40-74   Ready    control-plane   13d   v1.29.3   172.31.40.74   <none>        Ubuntu 22.04.4 LTS   6.5.0-1015-aws   containerd://1.6.28
+ubuntu@ip-172-31-40-74:~/.kube$ kubectl get pods
+NAME                                               READY   STATUS    RESTARTS   AGE
+nfs-subdir-external-provisioner-86bcbb46d7-qgl7s   1/1     Running   0          20m
+ubuntu@ip-172-31-40-74:~/.kube$ kubectl get pods --all-namespaces
+NAMESPACE              NAME                                               READY   STATUS    RESTARTS       AGE
+default                nfs-subdir-external-provisioner-86bcbb46d7-qgl7s   1/1     Running   0              21m
+kube-system            calico-kube-controllers-68cdf756d9-zlzmr           1/1     Running   0              17m
+kube-system            calico-node-m25dv                                  1/1     Running   25 (43m ago)   13d
+kube-system            coredns-76f75df574-l9cf8                           1/1     Running   0              21m
+kube-system            coredns-76f75df574-zgpwc                           1/1     Running   0              21m
+kube-system            etcd-ip-172-31-40-74                               1/1     Running   25 (43m ago)   13d
+kube-system            kube-apiserver-ip-172-31-40-74                     1/1     Running   0              21m
+kube-system            kube-controller-manager-ip-172-31-40-74            1/1     Running   0              21m
+kube-system            kube-proxy-4n7jw                                   1/1     Running   0              21m
+kube-system            kube-scheduler-ip-172-31-40-74                     1/1     Running   0              21m
+kubernetes-dashboard   dashboard-metrics-scraper-5657497c4c-kt8cg         1/1     Running   0              17m
+kubernetes-dashboard   kubernetes-dashboard-78f87ddfc-6q6hr               1/1     Running   0              21m
+
