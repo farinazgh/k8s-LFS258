@@ -1,0 +1,111 @@
+ubuntu@ip-172-31-40-74:~$ kubectl get events
+LAST SEEN   TYPE      REASON                    OBJECT                                                    MESSAGE
+4d18h       Normal    LeaderElection            endpoints/cluster.local-nfs-subdir-external-provisioner   nfs-subdir-external-provisioner-86bcbb46d7-5x4p8_e4dfa275-30b5-4e87-90b8-d04b65d1efe3 became leader
+4d3h        Normal    LeaderElection            endpoints/cluster.local-nfs-subdir-external-provisioner   nfs-subdir-external-provisioner-86bcbb46d7-5x4p8_8909d9e0-63bd-40fc-9fab-a3b402433ed8 became leader
+4d1h        Normal    LeaderElection            endpoints/cluster.local-nfs-subdir-external-provisioner   nfs-subdir-external-provisioner-86bcbb46d7-5x4p8_4be28160-0a4e-45cd-be59-40912e02b1d5 became leader
+3d23h       Normal    LeaderElection            endpoints/cluster.local-nfs-subdir-external-provisioner   nfs-subdir-external-provisioner-86bcbb46d7-5x4p8_f84f3048-da73-4e56-907c-dd58c5aafd4d became leader
+41h         Normal    LeaderElection            endpoints/cluster.local-nfs-subdir-external-provisioner   nfs-subdir-external-provisioner-86bcbb46d7-5x4p8_decee398-ccdc-476a-8e68-d94eb6cb4763 became leader
+56m         Normal    LeaderElection            endpoints/cluster.local-nfs-subdir-external-provisioner   nfs-subdir-external-provisioner-86bcbb46d7-5x4p8_9bcd62f7-9c8e-44a6-ae91-793c0c5d79cf became leader
+4d19h       Normal    Starting                  node/ip-172-31-40-74                                      Starting kubelet.
+4d19h       Warning   InvalidDiskCapacity       node/ip-172-31-40-74                                      invalid capacity 0 on image filesystem
+4d19h       Normal    NodeHasSufficientMemory   node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+4d19h       Normal    NodeHasNoDiskPressure     node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+4d19h       Normal    NodeHasSufficientPID      node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+4d19h       Normal    NodeAllocatableEnforced   node/ip-172-31-40-74                                      Updated Node Allocatable limit across pods
+4d19h       Normal    Starting                  node/ip-172-31-40-74
+4d19h       Normal    RegisteredNode            node/ip-172-31-40-74                                      Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+4d3h        Normal    Starting                  node/ip-172-31-40-74                                      Starting kubelet.
+4d3h        Warning   InvalidDiskCapacity       node/ip-172-31-40-74                                      invalid capacity 0 on image filesystem
+4d3h        Normal    NodeHasSufficientMemory   node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+4d3h        Normal    NodeHasNoDiskPressure     node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+4d3h        Normal    NodeHasSufficientPID      node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+4d3h        Normal    NodeAllocatableEnforced   node/ip-172-31-40-74                                      Updated Node Allocatable limit across pods
+4d3h        Normal    Starting                  node/ip-172-31-40-74
+4d3h        Normal    RegisteredNode            node/ip-172-31-40-74                                      Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+4d1h        Normal    Starting                  node/ip-172-31-40-74                                      Starting kubelet.
+4d1h        Warning   InvalidDiskCapacity       node/ip-172-31-40-74                                      invalid capacity 0 on image filesystem
+4d1h        Normal    NodeHasSufficientMemory   node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+4d1h        Normal    NodeHasNoDiskPressure     node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+4d1h        Normal    NodeHasSufficientPID      node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+4d1h        Normal    NodeAllocatableEnforced   node/ip-172-31-40-74                                      Updated Node Allocatable limit across pods
+4d1h        Normal    Starting                  node/ip-172-31-40-74
+4d1h        Normal    RegisteredNode            node/ip-172-31-40-74                                      Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+3d23h       Normal    Starting                  node/ip-172-31-40-74                                      Starting kubelet.
+3d23h       Warning   InvalidDiskCapacity       node/ip-172-31-40-74                                      invalid capacity 0 on image filesystem
+3d23h       Normal    NodeHasSufficientMemory   node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+3d23h       Normal    NodeHasNoDiskPressure     node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+3d23h       Normal    NodeHasSufficientPID      node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+3d23h       Normal    NodeAllocatableEnforced   node/ip-172-31-40-74                                      Updated Node Allocatable limit across pods
+3d23h       Normal    Starting                  node/ip-172-31-40-74
+3d23h       Normal    RegisteredNode            node/ip-172-31-40-74                                      Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+41h         Normal    Starting                  node/ip-172-31-40-74                                      Starting kubelet.
+41h         Warning   InvalidDiskCapacity       node/ip-172-31-40-74                                      invalid capacity 0 on image filesystem
+41h         Normal    NodeHasSufficientMemory   node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+41h         Normal    NodeHasNoDiskPressure     node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+41h         Normal    NodeHasSufficientPID      node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+41h         Normal    NodeAllocatableEnforced   node/ip-172-31-40-74                                      Updated Node Allocatable limit across pods
+41h         Normal    Starting                  node/ip-172-31-40-74
+41h         Normal    RegisteredNode            node/ip-172-31-40-74                                      Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+57m         Normal    Starting                  node/ip-172-31-40-74                                      Starting kubelet.
+57m         Warning   InvalidDiskCapacity       node/ip-172-31-40-74                                      invalid capacity 0 on image filesystem
+57m         Normal    NodeHasSufficientMemory   node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+57m         Normal    NodeHasNoDiskPressure     node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+57m         Normal    NodeHasSufficientPID      node/ip-172-31-40-74                                      Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+57m         Normal    NodeAllocatableEnforced   node/ip-172-31-40-74                                      Updated Node Allocatable limit across pods
+57m         Normal    Starting                  node/ip-172-31-40-74
+57m         Normal    RegisteredNode            node/ip-172-31-40-74                                      Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+4d19h       Normal    SandboxChanged            pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Pod sandbox changed, it will be killed and re-created.
+4d19h       Normal    Pulled                    pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Container image "registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2" already present on machine
+4d19h       Normal    Created                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Created container nfs-subdir-external-provisioner
+4d19h       Normal    Started                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Started container nfs-subdir-external-provisioner
+4d3h        Normal    SandboxChanged            pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Pod sandbox changed, it will be killed and re-created.
+4d3h        Normal    Pulled                    pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Container image "registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2" already present on machine
+4d3h        Normal    Created                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Created container nfs-subdir-external-provisioner
+4d3h        Normal    Started                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Started container nfs-subdir-external-provisioner
+4d1h        Normal    SandboxChanged            pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Pod sandbox changed, it will be killed and re-created.
+4d1h        Normal    Pulled                    pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Container image "registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2" already present on machine
+4d1h        Normal    Created                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Created container nfs-subdir-external-provisioner
+4d1h        Normal    Started                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Started container nfs-subdir-external-provisioner
+3d23h       Normal    SandboxChanged            pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Pod sandbox changed, it will be killed and re-created.
+3d23h       Normal    Pulled                    pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Container image "registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2" already present on machine
+3d23h       Normal    Created                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Created container nfs-subdir-external-provisioner
+3d23h       Normal    Started                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Started container nfs-subdir-external-provisioner
+41h         Normal    SandboxChanged            pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Pod sandbox changed, it will be killed and re-created.
+41h         Normal    Pulled                    pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Container image "registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2" already present on machine
+41h         Normal    Created                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Created container nfs-subdir-external-provisioner
+41h         Normal    Started                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Started container nfs-subdir-external-provisioner
+56m         Normal    SandboxChanged            pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Pod sandbox changed, it will be killed and re-created.
+56m         Normal    Pulled                    pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Container image "registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2" already present on machine
+56m         Normal    Created                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Created container nfs-subdir-external-provisioner
+56m         Normal    Started                   pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8      Started container nfs-subdir-external-provisioner
+3d22h       Normal    Scheduled                 pod/nginx-1                                               Successfully assigned default/nginx-1 to ip-172-31-40-74
+3d22h       Normal    Pulling                   pod/nginx-1                                               Pulling image "nginx"
+3d22h       Normal    Pulled                    pod/nginx-1                                               Successfully pulled image "nginx" in 5.316s (5.316s including waiting)
+3d22h       Normal    Created                   pod/nginx-1                                               Created container nginx-container
+3d22h       Normal    Started                   pod/nginx-1                                               Started container nginx-container
+41h         Normal    SandboxChanged            pod/nginx-1                                               Pod sandbox changed, it will be killed and re-created.
+41h         Normal    Pulling                   pod/nginx-1                                               Pulling image "nginx"
+41h         Normal    Pulled                    pod/nginx-1                                               Successfully pulled image "nginx" in 614ms (1.198s including waiting)
+41h         Normal    Created                   pod/nginx-1                                               Created container nginx-container
+41h         Normal    Started                   pod/nginx-1                                               Started container nginx-container
+56m         Normal    SandboxChanged            pod/nginx-1                                               Pod sandbox changed, it will be killed and re-created.
+56m         Normal    Pulling                   pod/nginx-1                                               Pulling image "nginx"
+56m         Normal    Pulled                    pod/nginx-1                                               Successfully pulled image "nginx" in 597ms (597ms including waiting)
+56m         Normal    Created                   pod/nginx-1                                               Created container nginx-container
+56m         Normal    Started                   pod/nginx-1                                               Started container nginx-container
+3d22h       Normal    Scheduled                 pod/nginx-2                                               Successfully assigned default/nginx-2 to ip-172-31-40-74
+3d22h       Normal    Pulling                   pod/nginx-2                                               Pulling image "nginx"
+3d22h       Normal    Pulled                    pod/nginx-2                                               Successfully pulled image "nginx" in 598ms (598ms including waiting)
+3d22h       Normal    Created                   pod/nginx-2                                               Created container nginx-container
+3d22h       Normal    Started                   pod/nginx-2                                               Started container nginx-container
+41h         Normal    SandboxChanged            pod/nginx-2                                               Pod sandbox changed, it will be killed and re-created.
+41h         Normal    Pulling                   pod/nginx-2                                               Pulling image "nginx"
+41h         Normal    Pulled                    pod/nginx-2                                               Successfully pulled image "nginx" in 599ms (599ms including waiting)
+41h         Normal    Created                   pod/nginx-2                                               Created container nginx-container
+41h         Normal    Started                   pod/nginx-2                                               Started container nginx-container
+56m         Normal    SandboxChanged            pod/nginx-2                                               Pod sandbox changed, it will be killed and re-created.
+56m         Normal    Pulling                   pod/nginx-2                                               Pulling image "nginx"
+56m         Normal    Pulled                    pod/nginx-2                                               Successfully pulled image "nginx" in 599ms (599ms including waiting)
+56m         Normal    Created                   pod/nginx-2                                               Created container nginx-container
+56m         Normal    Started                   pod/nginx-2                                               Started container nginx-container
+ubuntu@ip-172-31-40-74:~$

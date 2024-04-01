@@ -1,0 +1,83 @@
+ubuntu@ip-172-31-40-74:~$ top
+top - 10:45:58 up 55 min,  1 user,  load average: 0.20, 0.23, 0.20
+Tasks: 193 total,   1 running, 192 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.4 us,  0.9 sy,  0.0 ni, 95.9 id,  0.2 wa,  0.0 hi,  0.2 si,  0.5 st
+MiB Mem :   3904.0 total,   1227.8 free,    956.8 used,   1719.5 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   2706.7 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+   1044 root      20   0 1623132 369640  80128 S   5.3   9.2   3:14.54 kube-apiserver
+   1092 root      20   0   10.7g  99600  44672 S   2.0   2.5   1:20.25 etcd
+    778 root      20   0 2299304 105912  66048 S   1.3   2.6   1:06.43 kubelet
+   1103 root      20   0 1344484 122320  69760 S   1.3   3.1   0:47.76 kube-controller
+   1905 root      20   0 2234908  72156  48768 S   1.0   1.8   0:37.20 calico-node
+    435 root      20   0 2415292  71944  38912 S   0.3   1.8   0:25.56 containerd
+   1087 root      20   0 1283192  58136  42240 S   0.3   1.5   0:09.77 kube-scheduler
+   3477 lxd       20   0 1275476  44052  33536 S   0.3   1.1   0:00.86 kube-controller
+      1 root      20   0  101368  12276   8308 S   0.0   0.3   0:10.51 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 slub_flushwq
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-kblockd
+     10 root      20   0       0      0      0 I   0.0   0.0   0:00.30 kworker/u30:0-rpciod
+     11 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq
+     12 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_rude_kthread
+     13 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_trace_kthread
+     14 root      20   0       0      0      0 S   0.0   0.0   0:00.62 ksoftirqd/0
+     15 root      20   0       0      0      0 I   0.0   0.0   0:00.80 rcu_sched
+     16 root      rt   0       0      0      0 S   0.0   0.0   0:00.02 migration/0
+     17 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/0
+     18 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+     19 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1
+     20 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/1
+     21 root      rt   0       0      0      0 S   0.0   0.0   0:00.44 migration/1
+     22 root      20   0       0      0      0 S   0.0   0.0   0:00.61 ksoftirqd/1
+     24 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0H-events_highpri
+     25 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmpfs
+     26 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 inet_frag_wq
+     28 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kauditd
+     29 root      20   0       0      0      0 S   0.0   0.0   0:00.00 khungtaskd
+     30 root      20   0       0      0      0 S   0.0   0.0   0:00.00 oom_reaper
+     32 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 writeback
+     33 root      20   0       0      0      0 S   0.0   0.0   0:00.07 kcompactd0
+     34 root      25   5       0      0      0 S   0.0   0.0   0:00.00 ksmd
+     36 root      39  19       0      0      0 S   0.0   0.0   0:00.01 khugepaged
+     37 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kintegrityd
+     38 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kblockd
+     39 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 blkcg_punt_bio
+     40 root      20   0       0      0      0 S   0.0   0.0   0:00.00 xen-balloon
+     41 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 tpm_dev_wq
+     42 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 ata_sff
+     43 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 md
+     44 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 md_bitmap
+     45 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 edac-poller
+     46 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 devfreq_wq
+     47 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 watchdogd
+     48 root       0 -20       0      0      0 I   0.0   0.0   0:00.06 kworker/1:1H-kblockd
+     49 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kswapd0
+
+ubuntu@ip-172-31-40-74:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.6G  6.2G  1.5G  82% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           781M  3.3M  778M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/xvda15     105M  6.1M   99M   6% /boot/efi
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/18a3ee83dcaa902a8a8a7d181631fb2576f64ddb04e36c6689bf5da3605bcf7e/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/ba5416d4f1aab593d2409896f843585d5ac1920ede061e619dd110b17820bdbd/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/1bbaf685a23b393ab47392307854049f5a553bc33ac3e122f9cc7272579a082b/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/6365426e2aedd2147a8dc2ce14a940d07c2468a805d276d883922c787fe8936d/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/86eaa44f2e10114b4e63ceadee67a01bec4424102e5bb5a0def8d774e2063f2e/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/b04ed3e34c51f838e921e29a5534b5fcad5c4d0f40260fd44e604bcf996f972e/shm
+tmpfs           391M  4.0K  391M   1% /run/user/1000
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/412d9baf55268cb8892e7ca5e9ff772c1fa3fa4eae83118e838a490f665f1c19/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/7275f1ea87f7d55c4a713d77028d64ab2f368237be7b065548b0f39cbed7331b/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/c938de9c4ce2c63cf66e14cc188fd4bc7298b3c12438c123b7d086105dbcd7de/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/8ff13c0bc699b3cc02744f1f7d141f930005bf4f91d9d08195bdf5b02f8cc194/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/96169206a350d3629a62128de37767964c4be9f367e90e20518bac01f2dbcc4c/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/c0be2240396f969b81f62a805885950add3b86d3b022678482abe48bd835cee0/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/1cee38988531286662d76fb3434c32a4110d9a813b85c7e0879a8224a54ba74a/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/94f35458c3d9564967494d04704db98a35e06309c0a3d3f2b0f4018bb217fcbf/shm
+shm              64M     0   64M   0% /run/containerd/io.containerd.grpc.v1.cri/sandboxes/c3730c36844a3b1bcfe4eeaafd7b1a31c3033ed3c87d99cc56d4fb7dadfcbf31/shm

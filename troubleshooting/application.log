@@ -1,0 +1,183 @@
+ubuntu@ip-172-31-40-74:~$ kubectl get service --all-namespaces
+NAMESPACE              NAME                            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+default                kubernetes                      ClusterIP   10.96.0.1       <none>        443/TCP                  11d
+default                nginx-deployment                NodePort    10.99.201.242   <none>        80:30503/TCP             8d
+kube-system            kube-dns                        ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   11d
+kubernetes-dashboard   dashboard-metrics-scraper       ClusterIP   10.111.4.217    <none>        8000/TCP                 7d17h
+kubernetes-dashboard   kubernetes-dashboard            ClusterIP   10.100.215.19   <none>        443/TCP                  7d17h
+kubernetes-dashboard   kubernetes-dashboard-external   NodePort    10.96.170.153   <none>        8443:30334/TCP           7d16h
+ubuntu@ip-172-31-40-74:~$ kubectl describe service kube-dns -n kube-system
+Name:              kube-dns
+Namespace:         kube-system
+Labels:            k8s-app=kube-dns
+                   kubernetes.io/cluster-service=true
+                   kubernetes.io/name=CoreDNS
+Annotations:       prometheus.io/port: 9153
+                   prometheus.io/scrape: true
+Selector:          k8s-app=kube-dns
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.96.0.10
+IPs:               10.96.0.10
+Port:              dns  53/UDP
+TargetPort:        53/UDP
+Endpoints:         192.168.10.3:53,192.168.10.37:53
+Port:              dns-tcp  53/TCP
+TargetPort:        53/TCP
+Endpoints:         192.168.10.3:53,192.168.10.37:53
+Port:              metrics  9153/TCP
+TargetPort:        9153/TCP
+Endpoints:         192.168.10.3:9153,192.168.10.37:9153
+Session Affinity:  None
+Events:            <none>
+ubuntu@ip-172-31-40-74:~$ kubectl describe service kubernetes
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       <none>
+Selector:          <none>
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.96.0.1
+IPs:               10.96.0.1
+Port:              https  443/TCP
+TargetPort:        6443/TCP
+Endpoints:         172.31.40.74:6443
+Session Affinity:  None
+Events:            <none>
+ubuntu@ip-172-31-40-74:~$ kubectl get all --selector=k8s-app=kube-dns --all-namespaces
+NAMESPACE     NAME                           READY   STATUS    RESTARTS        AGE
+kube-system   pod/coredns-5dd5756b68-ftqjl   1/1     Running   24 (7m3s ago)   11d
+kube-system   pod/coredns-5dd5756b68-mqdtt   1/1     Running   24 (7m3s ago)   11d
+
+NAMESPACE     NAME               TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
+kube-system   service/kube-dns   ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   11d
+
+NAMESPACE     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/coredns   2/2     2            2           11d
+
+NAMESPACE     NAME                                 DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/coredns-5dd5756b68   2         2         2       11d
+ubuntu@ip-172-31-40-74:~$ kubectl describe pod coredns-5dd5756b68-ftqjl
+Error from server (NotFound): pods "coredns-5dd5756b68-ftqjl" not found
+ubuntu@ip-172-31-40-74:~$ kubectl describe pod coredns-5dd5756b68-ftqjl -n kube-system
+Name:                 coredns-5dd5756b68-ftqjl
+Namespace:            kube-system
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      coredns
+Node:                 ip-172-31-40-74/172.31.40.74
+Start Time:           Mon, 18 Mar 2024 15:27:24 +0000
+Labels:               k8s-app=kube-dns
+                      pod-template-hash=5dd5756b68
+Annotations:          cni.projectcalico.org/containerID: 96169206a350d3629a62128de37767964c4be9f367e90e20518bac01f2dbcc4c
+                      cni.projectcalico.org/podIP: 192.168.10.3/32
+                      cni.projectcalico.org/podIPs: 192.168.10.3/32
+Status:               Running
+IP:                   192.168.10.3
+IPs:
+  IP:           192.168.10.3
+Controlled By:  ReplicaSet/coredns-5dd5756b68
+Containers:
+  coredns:
+    Container ID:  containerd://28378766e6be475c875f4be355510faea016e269aa4b90b14a87c53cdd8b2f97
+    Image:         registry.k8s.io/coredns/coredns:v1.10.1
+    Image ID:      registry.k8s.io/coredns/coredns@sha256:a0ead06651cf580044aeb0a0feba63591858fb2e43ade8c9dea45a6a89ae7e5e
+    Ports:         53/UDP, 53/TCP, 9153/TCP
+    Host Ports:    0/UDP, 0/TCP, 0/TCP
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Running
+      Started:      Sat, 30 Mar 2024 09:51:12 +0000
+    Last State:     Terminated
+      Reason:       Unknown
+      Exit Code:    255
+      Started:      Thu, 28 Mar 2024 17:06:57 +0000
+      Finished:     Sat, 30 Mar 2024 09:50:18 +0000
+    Ready:          True
+    Restart Count:  24
+    Limits:
+      memory:  170Mi
+    Requests:
+      cpu:        100m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-wtt7x (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      coredns
+    Optional:  false
+  kube-api-access-wtt7x:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 CriticalAddonsOnly op=Exists
+                             node-role.kubernetes.io/control-plane:NoSchedule
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason          Age                    From     Message
+  ----     ------          ----                   ----     -------
+  Normal   SandboxChanged  4d18h (x2 over 4d18h)  kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          4d18h                  kubelet  Container image "registry.k8s.io/coredns/coredns:v1.10.1" already present on machine
+  Normal   Created         4d18h                  kubelet  Created container coredns
+  Normal   Started         4d18h                  kubelet  Started container coredns
+  Warning  Unhealthy       4d18h                  kubelet  Readiness probe failed: Get "http://192.168.10.14:8181/ready": dial tcp 192.168.10.14:8181: connect: connection refused
+  Normal   SandboxChanged  4d2h (x2 over 4d2h)    kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          4d2h                   kubelet  Container image "registry.k8s.io/coredns/coredns:v1.10.1" already present on machine
+  Normal   Created         4d2h                   kubelet  Created container coredns
+  Normal   Started         4d2h                   kubelet  Started container coredns
+  Warning  Unhealthy       4d2h                   kubelet  Readiness probe failed: Get "http://192.168.10.13:8181/ready": dial tcp 192.168.10.13:8181: connect: connection refused
+  Normal   SandboxChanged  4d (x2 over 4d)        kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          4d                     kubelet  Container image "registry.k8s.io/coredns/coredns:v1.10.1" already present on machine
+  Normal   Created         4d                     kubelet  Created container coredns
+  Normal   Started         4d                     kubelet  Started container coredns
+  Warning  Unhealthy       4d                     kubelet  Readiness probe failed: Get "http://192.168.10.34:8181/ready": dial tcp 192.168.10.34:8181: connect: connection refused
+  Normal   SandboxChanged  3d22h (x2 over 3d22h)  kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          3d22h                  kubelet  Container image "registry.k8s.io/coredns/coredns:v1.10.1" already present on machine
+  Normal   Created         3d22h                  kubelet  Created container coredns
+  Normal   Started         3d22h                  kubelet  Started container coredns
+  Warning  Unhealthy       3d22h                  kubelet  Readiness probe failed: HTTP probe failed with statuscode: 503
+  Normal   SandboxChanged  40h (x2 over 40h)      kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          40h                    kubelet  Container image "registry.k8s.io/coredns/coredns:v1.10.1" already present on machine
+  Normal   Created         40h                    kubelet  Created container coredns
+  Normal   Started         40h                    kubelet  Started container coredns
+  Warning  Unhealthy       40h                    kubelet  Readiness probe failed: Get "http://192.168.10.45:8181/ready": dial tcp 192.168.10.45:8181: connect: connection refused
+  Normal   SandboxChanged  7m26s (x2 over 7m57s)  kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulled          7m24s                  kubelet  Container image "registry.k8s.io/coredns/coredns:v1.10.1" already present on machine
+  Normal   Created         7m24s                  kubelet  Created container coredns
+  Normal   Started         7m24s                  kubelet  Started container coredns
+ubuntu@ip-172-31-40-74:~$ kubectl logs coredns-5dd5756b68-ftqjl
+Error from server (NotFound): pods "coredns-5dd5756b68-ftqjl" not found
+ubuntu@ip-172-31-40-74:~$ kubectl logs coredns-5dd5756b68-ftqjl -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 591cf328cccc12bc490481273e738df59329c62c0b729d94e8b61db9961c2fa5f046dd37f1cf888b953814040d180f52594972691cd6ff41be96639138a43908
+CoreDNS-1.10.1
+linux/amd64, go1.20, 055b2c3
+ubuntu@ip-172-31-40-74:~$ kubectl logs coredns-5dd5756b68-ftqjl -f --previous -n kube-system
+.:53
+[INFO] plugin/reload: Running configuration SHA512 = 591cf328cccc12bc490481273e738df59329c62c0b729d94e8b61db9961c2fa5f046dd37f1cf888b953814040d180f52594972691cd6ff41be96639138a43908
+CoreDNS-1.10.1
+linux/amd64, go1.20, 055b2c3
+[INFO] SIGTERM: Shutting down servers then terminating
+[INFO] plugin/health: Going into lameduck mode for 5s
+ubuntu@ip-172-31-40-74:~$

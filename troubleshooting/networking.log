@@ -1,0 +1,71 @@
+ubuntu@ip-172-31-40-74:~$ cat /etc/resolv.conf
+# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search eu-west-1.compute.internal
+ubuntu@ip-172-31-40-74:~$   kubectl -n kube-system get ep kube-dns
+NAME       ENDPOINTS                                                      AGE
+kube-dns   192.168.10.3:53,192.168.10.37:53,192.168.10.3:53 + 3 more...   11d
+ubuntu@ip-172-31-40-74:~$ kubectl get all --all-namespaces
+NAMESPACE              NAME                                                   READY   STATUS    RESTARTS        AGE
+default                pod/nfs-subdir-external-provisioner-86bcbb46d7-5x4p8   1/1     Running   17 (108m ago)   9d
+default                pod/nginx-1                                            1/1     Running   2 (108m ago)    3d23h
+default                pod/nginx-2                                            1/1     Running   2 (108m ago)    3d23h
+kube-system            pod/calico-kube-controllers-68cdf756d9-sdj2v           1/1     Running   24 (108m ago)   11d
+kube-system            pod/calico-node-m25dv                                  1/1     Running   24 (108m ago)   11d
+kube-system            pod/coredns-5dd5756b68-ftqjl                           1/1     Running   24 (108m ago)   11d
+kube-system            pod/coredns-5dd5756b68-mqdtt                           1/1     Running   24 (108m ago)   11d
+kube-system            pod/etcd-ip-172-31-40-74                               1/1     Running   24 (108m ago)   11d
+kube-system            pod/kube-apiserver-ip-172-31-40-74                     1/1     Running   24 (108m ago)   11d
+kube-system            pod/kube-controller-manager-ip-172-31-40-74            1/1     Running   24 (108m ago)   11d
+kube-system            pod/kube-proxy-cjl4p                                   1/1     Running   24 (108m ago)   11d
+kube-system            pod/kube-scheduler-ip-172-31-40-74                     1/1     Running   24 (108m ago)   11d
+kubernetes-dashboard   pod/dashboard-metrics-scraper-5657497c4c-6j2p2         1/1     Running   10 (108m ago)   7d18h
+kubernetes-dashboard   pod/kubernetes-dashboard-78f87ddfc-hd8zz               1/1     Running   10 (108m ago)   7d18h
+polaris                pod/nginx-3                                            1/1     Running   2 (108m ago)    3d23h
+
+NAMESPACE              NAME                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+default                service/kubernetes                      ClusterIP   10.96.0.1       <none>        443/TCP                  11d
+default                service/nginx-deployment                NodePort    10.99.201.242   <none>        80:30503/TCP             8d
+kube-system            service/kube-dns                        ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   11d
+kubernetes-dashboard   service/dashboard-metrics-scraper       ClusterIP   10.111.4.217    <none>        8000/TCP                 7d18h
+kubernetes-dashboard   service/kubernetes-dashboard            ClusterIP   10.100.215.19   <none>        443/TCP                  7d18h
+kubernetes-dashboard   service/kubernetes-dashboard-external   NodePort    10.96.170.153   <none>        8443:30334/TCP           7d18h
+
+NAMESPACE     NAME                         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   daemonset.apps/calico-node   1         1         1       1            1           kubernetes.io/os=linux   11d
+kube-system   daemonset.apps/kube-proxy    1         1         1       1            1           kubernetes.io/os=linux   11d
+
+NAMESPACE              NAME                                              READY   UP-TO-DATE   AVAILABLE   AGE
+default                deployment.apps/nfs-subdir-external-provisioner   1/1     1            1           9d
+kube-system            deployment.apps/calico-kube-controllers           1/1     1            1           11d
+kube-system            deployment.apps/coredns                           2/2     2            2           11d
+kubernetes-dashboard   deployment.apps/dashboard-metrics-scraper         1/1     1            1           7d18h
+kubernetes-dashboard   deployment.apps/kubernetes-dashboard              1/1     1            1           7d18h
+
+NAMESPACE              NAME                                                         DESIRED   CURRENT   READY   AGE
+default                replicaset.apps/nfs-subdir-external-provisioner-86bcbb46d7   1         1         1       9d
+kube-system            replicaset.apps/calico-kube-controllers-68cdf756d9           1         1         1       11d
+kube-system            replicaset.apps/coredns-5dd5756b68                           2         2         2       11d
+kubernetes-dashboard   replicaset.apps/dashboard-metrics-scraper-5657497c4c         1         1         1       7d18h
+kubernetes-dashboard   replicaset.apps/kubernetes-dashboard-78f87ddfc               1         1         1       7d18h
+ubuntu@ip-172-31-40-74:~$

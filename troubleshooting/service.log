@@ -1,0 +1,100 @@
+ubuntu@ip-172-31-40-74:~$ systemctl list-units --type=service --state=running
+  UNIT                                           LOAD   ACTIVE SUB     DESCRIPTION
+  acpid.service                                  loaded active running ACPI event daemon
+  chrony.service                                 loaded active running chrony, an NTP client/server
+  containerd.service                             loaded active running containerd container runtime
+  cron.service                                   loaded active running Regular background program processing daemon
+  dbus.service                                   loaded active running D-Bus System Message Bus
+  getty@tty1.service                             loaded active running Getty on tty1
+  irqbalance.service                             loaded active running irqbalance daemon
+  kubelet.service                                loaded active running kubelet: The Kubernetes Node Agent
+  multipathd.service                             loaded active running Device-Mapper Multipath Device Controller
+  networkd-dispatcher.service                    loaded active running Dispatcher daemon for systemd-networkd
+  nfs-blkmap.service                             loaded active running pNFS block layout mapping daemon
+  nfs-idmapd.service                             loaded active running NFSv4 ID-name mapping service
+  nfs-mountd.service                             loaded active running NFS Mount Daemon
+  nfsdcld.service                                loaded active running NFSv4 Client Tracking Daemon
+  polkit.service                                 loaded active running Authorization Manager
+  rpc-statd.service                              loaded active running NFS status monitor for NFSv2/3 locking.
+  rpcbind.service                                loaded active running RPC bind portmap service
+  rsyslog.service                                loaded active running System Logging Service
+  serial-getty@ttyS0.service                     loaded active running Serial Getty on ttyS0
+  snap.amazon-ssm-agent.amazon-ssm-agent.service loaded active running Service for snap application amazon-ssm-agent.amazon-ssm-agent
+  snapd.service                                  loaded active running Snap Daemon
+  ssh.service                                    loaded active running OpenBSD Secure Shell server
+  systemd-journald.service                       loaded active running Journal Service
+  systemd-logind.service                         loaded active running User Login Management
+  systemd-networkd.service                       loaded active running Network Configuration
+  systemd-resolved.service                       loaded active running Network Name Resolution
+  systemd-udevd.service                          loaded active running Rule-based Manager for Device Events and Files
+  unattended-upgrades.service                    loaded active running Unattended Upgrades Shutdown
+  user@1000.service                              loaded active running User Manager for UID 1000
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+29 loaded units listed.
+ubuntu@ip-172-31-40-74:~$ sudo su
+root@ip-172-31-40-74:/home/ubuntu# systemctl list-units --type=service --state=running
+  UNIT                                           LOAD   ACTIVE SUB     DESCRIPTION
+  acpid.service                                  loaded active running ACPI event daemon
+  chrony.service                                 loaded active running chrony, an NTP client/server
+  containerd.service                             loaded active running containerd container runtime
+  cron.service                                   loaded active running Regular background program processing daemon
+  dbus.service                                   loaded active running D-Bus System Message Bus
+  getty@tty1.service                             loaded active running Getty on tty1
+  irqbalance.service                             loaded active running irqbalance daemon
+  kubelet.service                                loaded active running kubelet: The Kubernetes Node Agent
+  multipathd.service                             loaded active running Device-Mapper Multipath Device Controller
+  networkd-dispatcher.service                    loaded active running Dispatcher daemon for systemd-networkd
+  nfs-blkmap.service                             loaded active running pNFS block layout mapping daemon
+  nfs-idmapd.service                             loaded active running NFSv4 ID-name mapping service
+  nfs-mountd.service                             loaded active running NFS Mount Daemon
+  nfsdcld.service                                loaded active running NFSv4 Client Tracking Daemon
+  polkit.service                                 loaded active running Authorization Manager
+  rpc-statd.service                              loaded active running NFS status monitor for NFSv2/3 locking.
+  rpcbind.service                                loaded active running RPC bind portmap service
+  rsyslog.service                                loaded active running System Logging Service
+  serial-getty@ttyS0.service                     loaded active running Serial Getty on ttyS0
+  snap.amazon-ssm-agent.amazon-ssm-agent.service loaded active running Service for snap application amazon-ssm-agent.amazon-ssm-agent
+  snapd.service                                  loaded active running Snap Daemon
+  ssh.service                                    loaded active running OpenBSD Secure Shell server
+  systemd-journald.service                       loaded active running Journal Service
+  systemd-logind.service                         loaded active running User Login Management
+  systemd-networkd.service                       loaded active running Network Configuration
+  systemd-resolved.service                       loaded active running Network Name Resolution
+  systemd-udevd.service                          loaded active running Rule-based Manager for Device Events and Files
+  unattended-upgrades.service                    loaded active running Unattended Upgrades Shutdown
+  user@1000.service                              loaded active running User Manager for UID 1000
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+29 loaded units listed.
+root@ip-172-31-40-74:/home/ubuntu# service  kubelet.service  status
+Unit kubelet.service.service could not be found.
+root@ip-172-31-40-74:/home/ubuntu# service  kubelet  status
+● kubelet.service - kubelet: The Kubernetes Node Agent
+     Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
+    Drop-In: /usr/lib/systemd/system/kubelet.service.d
+             └─10-kubeadm.conf
+     Active: active (running) since Sat 2024-03-30 09:50:28 UTC; 40min ago
+       Docs: https://kubernetes.io/docs/
+   Main PID: 778 (kubelet)
+      Tasks: 14 (limit: 4666)
+     Memory: 52.5M
+        CPU: 48.638s
+     CGroup: /system.slice/kubelet.service
+             └─778 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=un>
+
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.848981     778 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = Unknown desc = failed to destroy network f>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.849041     778 kuberuntime_manager.go:1380] "Failed to stop sandbox" podSandboxID={"Type":"containerd","ID":"423890970bf46ae2bdb21c42d259bb075bcd254>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.849708     778 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.849795     778 kuberuntime_manager.go:1080] "killPodWithSyncResult failed" err="failed to \"KillPodSandbox\" for \"88d4dee9-607a-4192-a474-c0df8bcc1>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.849831     778 pod_workers.go:1300] "Error syncing pod, skipping" err="failed to \"KillPodSandbox\" for \"88d4dee9-607a-4192-a474-c0df8bcc15da\" wit>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.867190     778 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = Unknown desc = failed to destroy network f>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.867240     778 kuberuntime_manager.go:1380] "Failed to stop sandbox" podSandboxID={"Type":"containerd","ID":"7bb813896f397975b678d687f61e19c5d5a48b0>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.867856     778 remote_runtime.go:222] "StopPodSandbox from runtime service failed" err="rpc error: code = NotFound desc = an error occurred when try>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.867917     778 kuberuntime_manager.go:1080] "killPodWithSyncResult failed" err="failed to \"KillPodSandbox\" for \"1ee48aa8-53e3-485c-b85e-3ae630f9f>
+Mar 30 09:51:09 ip-172-31-40-74 kubelet[778]: E0330 09:51:09.867955     778 pod_workers.go:1300] "Error syncing pod, skipping" err="failed to \"KillPodSandbox\" for \"1ee48aa8-53e3-485c-b85e-3ae630f9f05d\" wit>
+lines 1-23/23 (END)

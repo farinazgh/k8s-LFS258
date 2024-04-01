@@ -1,0 +1,601 @@
+ubuntu@ip-172-31-40-74:~$ kubectl get pods -n kube-system
+NAME                                       READY   STATUS    RESTARTS       AGE
+calico-kube-controllers-68cdf756d9-sdj2v   1/1     Running   24 (50m ago)   11d
+calico-node-m25dv                          1/1     Running   24 (50m ago)   11d
+coredns-5dd5756b68-ftqjl                   1/1     Running   24 (50m ago)   11d
+coredns-5dd5756b68-mqdtt                   1/1     Running   24 (50m ago)   11d
+etcd-ip-172-31-40-74                       1/1     Running   24 (50m ago)   11d
+kube-apiserver-ip-172-31-40-74             1/1     Running   24 (50m ago)   11d
+kube-controller-manager-ip-172-31-40-74    1/1     Running   24 (50m ago)   11d
+kube-proxy-cjl4p                           1/1     Running   24 (50m ago)   11d
+kube-scheduler-ip-172-31-40-74             1/1     Running   24 (50m ago)   11d
+ubuntu@ip-172-31-40-74:~$ describe pod kube-apiserver-ip-172-31-40-74 -n kube-syste,
+describe: command not found
+ubuntu@ip-172-31-40-74:~$ describe pod kube-apiserver-ip-172-31-40-74 -n kube-system
+describe: command not found
+ubuntu@ip-172-31-40-74:~$ kubectl describe pod kube-apiserver-ip-172-31-40-74 -n kube-system
+Name:                 kube-apiserver-ip-172-31-40-74
+Namespace:            kube-system
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Node:                 ip-172-31-40-74/172.31.40.74
+Start Time:           Sat, 30 Mar 2024 09:50:29 +0000
+Labels:               component=kube-apiserver
+                      tier=control-plane
+Annotations:          kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: 172.31.40.74:6443
+                      kubernetes.io/config.hash: 276e6ff10c9935194157dca4fd755525
+                      kubernetes.io/config.mirror: 276e6ff10c9935194157dca4fd755525
+                      kubernetes.io/config.seen: 2024-03-18T15:13:49.633339731Z
+                      kubernetes.io/config.source: file
+Status:               Running
+SeccompProfile:       RuntimeDefault
+IP:                   172.31.40.74
+IPs:
+  IP:           172.31.40.74
+Controlled By:  Node/ip-172-31-40-74
+Containers:
+  kube-apiserver:
+    Container ID:  containerd://367e1962af5f34184128d18d1b22969762835e1ce03435721ec9819cffabbbd0
+    Image:         registry.k8s.io/kube-apiserver:v1.28.8
+    Image ID:      registry.k8s.io/kube-apiserver@sha256:7e7f3c806333528451a1e0bfdf17da0341adaea7d50a703db9c2005c474a97b9
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      kube-apiserver
+      --advertise-address=172.31.40.74
+      --allow-privileged=true
+      --authorization-mode=Node,RBAC
+      --client-ca-file=/etc/kubernetes/pki/ca.crt
+      --enable-admission-plugins=NodeRestriction
+      --enable-bootstrap-token-auth=true
+      --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
+      --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt
+      --etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key
+      --etcd-servers=https://127.0.0.1:2379
+      --kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt
+      --kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key
+      --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
+      --proxy-client-key-file=/etc/kubernetes/pki/front-proxy-client.key
+      --requestheader-allowed-names=front-proxy-client
+      --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
+      --requestheader-extra-headers-prefix=X-Remote-Extra-
+      --requestheader-group-headers=X-Remote-Group
+      --requestheader-username-headers=X-Remote-User
+      --secure-port=6443
+      --service-account-issuer=https://kubernetes.default.svc.cluster.local
+      --service-account-key-file=/etc/kubernetes/pki/sa.pub
+      --service-account-signing-key-file=/etc/kubernetes/pki/sa.key
+      --service-cluster-ip-range=10.96.0.0/12
+      --tls-cert-file=/etc/kubernetes/pki/apiserver.crt
+      --tls-private-key-file=/etc/kubernetes/pki/apiserver.key
+    State:          Running
+      Started:      Sat, 30 Mar 2024 09:50:30 +0000
+    Last State:     Terminated
+      Reason:       Unknown
+      Exit Code:    255
+      Started:      Thu, 28 Mar 2024 17:06:15 +0000
+      Finished:     Sat, 30 Mar 2024 09:50:18 +0000
+    Ready:          True
+    Restart Count:  24
+    Requests:
+      cpu:        250m
+    Liveness:     http-get https://172.31.40.74:6443/livez delay=10s timeout=15s period=10s #success=1 #failure=8
+    Readiness:    http-get https://172.31.40.74:6443/readyz delay=0s timeout=15s period=1s #success=1 #failure=3
+    Startup:      http-get https://172.31.40.74:6443/livez delay=10s timeout=15s period=10s #success=1 #failure=24
+    Environment:  <none>
+    Mounts:
+      /etc/ca-certificates from etc-ca-certificates (ro)
+      /etc/kubernetes/pki from k8s-certs (ro)
+      /etc/ssl/certs from ca-certs (ro)
+      /usr/local/share/ca-certificates from usr-local-share-ca-certificates (ro)
+      /usr/share/ca-certificates from usr-share-ca-certificates (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  ca-certs:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/ssl/certs
+    HostPathType:  DirectoryOrCreate
+  etc-ca-certificates:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/ca-certificates
+    HostPathType:  DirectoryOrCreate
+  k8s-certs:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/kubernetes/pki
+    HostPathType:  DirectoryOrCreate
+  usr-local-share-ca-certificates:
+    Type:          HostPath (bare host directory volume)
+    Path:          /usr/local/share/ca-certificates
+    HostPathType:  DirectoryOrCreate
+  usr-share-ca-certificates:
+    Type:          HostPath (bare host directory volume)
+    Path:          /usr/share/ca-certificates
+    HostPathType:  DirectoryOrCreate
+QoS Class:         Burstable
+Node-Selectors:    <none>
+Tolerations:       :NoExecute op=Exists
+Events:
+  Type    Reason          Age    From     Message
+  ----    ------          ----   ----     -------
+  Normal  SandboxChanged  4d18h  kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal  Pulled          4d18h  kubelet  Container image "registry.k8s.io/kube-apiserver:v1.28.8" already present on machine
+  Normal  Created         4d18h  kubelet  Created container kube-apiserver
+  Normal  Started         4d18h  kubelet  Started container kube-apiserver
+  Normal  SandboxChanged  4d3h   kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal  Pulled          4d3h   kubelet  Container image "registry.k8s.io/kube-apiserver:v1.28.8" already present on machine
+  Normal  Created         4d3h   kubelet  Created container kube-apiserver
+  Normal  Started         4d3h   kubelet  Started container kube-apiserver
+  Normal  SandboxChanged  4d1h   kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal  Pulled          4d1h   kubelet  Container image "registry.k8s.io/kube-apiserver:v1.28.8" already present on machine
+  Normal  Created         4d1h   kubelet  Created container kube-apiserver
+  Normal  Started         4d1h   kubelet  Started container kube-apiserver
+  Normal  SandboxChanged  3d22h  kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal  Pulled          3d22h  kubelet  Container image "registry.k8s.io/kube-apiserver:v1.28.8" already present on machine
+  Normal  Created         3d22h  kubelet  Created container kube-apiserver
+  Normal  Started         3d22h  kubelet  Started container kube-apiserver
+  Normal  SandboxChanged  41h    kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal  Pulled          41h    kubelet  Container image "registry.k8s.io/kube-apiserver:v1.28.8" already present on machine
+  Normal  Created         41h    kubelet  Created container kube-apiserver
+  Normal  Started         41h    kubelet  Started container kube-apiserver
+  Normal  SandboxChanged  50m    kubelet  Pod sandbox changed, it will be killed and re-created.
+  Normal  Pulled          50m    kubelet  Container image "registry.k8s.io/kube-apiserver:v1.28.8" already present on machine
+  Normal  Created         50m    kubelet  Created container kube-apiserver
+  Normal  Started         50m    kubelet  Started container kube-apiserver
+ubuntu@ip-172-31-40-74:~$ kubectl get all --selector=component=kube-apiserver -n kube-system
+NAME                                 READY   STATUS    RESTARTS       AGE
+pod/kube-apiserver-ip-172-31-40-74   1/1     Running   24 (51m ago)   11d
+ubuntu@ip-172-31-40-74:~$ kubectl logs kube-apiserver-ip-172-31-40-74 -n kube-system
+I0330 09:50:34.369679       1 options.go:220] external host was not specified, using 172.31.40.74
+I0330 09:50:34.375370       1 server.go:148] Version: v1.28.8
+I0330 09:50:34.375409       1 server.go:150] "Golang settings" GOGC="" GOMAXPROCS="" GOTRACEBACK=""
+I0330 09:50:35.082558       1 shared_informer.go:311] Waiting for caches to sync for node_authorizer
+I0330 09:50:35.098161       1 plugins.go:158] Loaded 12 mutating admission controller(s) successfully in the following order: NamespaceLifecycle,LimitRanger,ServiceAccount,NodeRestriction,TaintNodesByCondition,Priority,DefaultTolerationSeconds,DefaultStorageClass,StorageObjectInUseProtection,RuntimeClass,DefaultIngressClass,MutatingAdmissionWebhook.
+I0330 09:50:35.098403       1 plugins.go:161] Loaded 13 validating admission controller(s) successfully in the following order: LimitRanger,ServiceAccount,PodSecurity,Priority,PersistentVolumeClaimResize,RuntimeClass,CertificateApproval,CertificateSigning,ClusterTrustBundleAttest,CertificateSubjectRestriction,ValidatingAdmissionPolicy,ValidatingAdmissionWebhook,ResourceQuota.
+I0330 09:50:35.098771       1 instance.go:298] Using reconciler: lease
+I0330 09:50:36.533312       1 handler.go:275] Adding GroupVersion apiextensions.k8s.io v1 to ResourceManager
+W0330 09:50:36.533538       1 genericapiserver.go:744] Skipping API apiextensions.k8s.io/v1beta1 because it has no resources.
+I0330 09:50:36.801320       1 handler.go:275] Adding GroupVersion  v1 to ResourceManager
+I0330 09:50:36.801673       1 instance.go:709] API group "internal.apiserver.k8s.io" is not enabled, skipping.
+I0330 09:50:37.188758       1 instance.go:709] API group "resource.k8s.io" is not enabled, skipping.
+I0330 09:50:37.199118       1 handler.go:275] Adding GroupVersion authentication.k8s.io v1 to ResourceManager
+W0330 09:50:37.199145       1 genericapiserver.go:744] Skipping API authentication.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.199153       1 genericapiserver.go:744] Skipping API authentication.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.199782       1 handler.go:275] Adding GroupVersion authorization.k8s.io v1 to ResourceManager
+W0330 09:50:37.199804       1 genericapiserver.go:744] Skipping API authorization.k8s.io/v1beta1 because it has no resources.
+I0330 09:50:37.200786       1 handler.go:275] Adding GroupVersion autoscaling v2 to ResourceManager
+I0330 09:50:37.201715       1 handler.go:275] Adding GroupVersion autoscaling v1 to ResourceManager
+W0330 09:50:37.201736       1 genericapiserver.go:744] Skipping API autoscaling/v2beta1 because it has no resources.
+W0330 09:50:37.201743       1 genericapiserver.go:744] Skipping API autoscaling/v2beta2 because it has no resources.
+I0330 09:50:37.203671       1 handler.go:275] Adding GroupVersion batch v1 to ResourceManager
+W0330 09:50:37.203708       1 genericapiserver.go:744] Skipping API batch/v1beta1 because it has no resources.
+I0330 09:50:37.204723       1 handler.go:275] Adding GroupVersion certificates.k8s.io v1 to ResourceManager
+W0330 09:50:37.204745       1 genericapiserver.go:744] Skipping API certificates.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.204751       1 genericapiserver.go:744] Skipping API certificates.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.205449       1 handler.go:275] Adding GroupVersion coordination.k8s.io v1 to ResourceManager
+W0330 09:50:37.205471       1 genericapiserver.go:744] Skipping API coordination.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.205597       1 genericapiserver.go:744] Skipping API discovery.k8s.io/v1beta1 because it has no resources.
+I0330 09:50:37.206303       1 handler.go:275] Adding GroupVersion discovery.k8s.io v1 to ResourceManager
+I0330 09:50:37.208765       1 handler.go:275] Adding GroupVersion networking.k8s.io v1 to ResourceManager
+W0330 09:50:37.208788       1 genericapiserver.go:744] Skipping API networking.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.208795       1 genericapiserver.go:744] Skipping API networking.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.209345       1 handler.go:275] Adding GroupVersion node.k8s.io v1 to ResourceManager
+W0330 09:50:37.209365       1 genericapiserver.go:744] Skipping API node.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.209372       1 genericapiserver.go:744] Skipping API node.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.210292       1 handler.go:275] Adding GroupVersion policy v1 to ResourceManager
+W0330 09:50:37.210315       1 genericapiserver.go:744] Skipping API policy/v1beta1 because it has no resources.
+I0330 09:50:37.212364       1 handler.go:275] Adding GroupVersion rbac.authorization.k8s.io v1 to ResourceManager
+W0330 09:50:37.212387       1 genericapiserver.go:744] Skipping API rbac.authorization.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.212394       1 genericapiserver.go:744] Skipping API rbac.authorization.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.212885       1 handler.go:275] Adding GroupVersion scheduling.k8s.io v1 to ResourceManager
+W0330 09:50:37.212905       1 genericapiserver.go:744] Skipping API scheduling.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.212912       1 genericapiserver.go:744] Skipping API scheduling.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.215485       1 handler.go:275] Adding GroupVersion storage.k8s.io v1 to ResourceManager
+W0330 09:50:37.215507       1 genericapiserver.go:744] Skipping API storage.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.215514       1 genericapiserver.go:744] Skipping API storage.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.216858       1 handler.go:275] Adding GroupVersion flowcontrol.apiserver.k8s.io v1beta3 to ResourceManager
+I0330 09:50:37.218235       1 handler.go:275] Adding GroupVersion flowcontrol.apiserver.k8s.io v1beta2 to ResourceManager
+W0330 09:50:37.218256       1 genericapiserver.go:744] Skipping API flowcontrol.apiserver.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.218263       1 genericapiserver.go:744] Skipping API flowcontrol.apiserver.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.222726       1 handler.go:275] Adding GroupVersion apps v1 to ResourceManager
+W0330 09:50:37.222749       1 genericapiserver.go:744] Skipping API apps/v1beta2 because it has no resources.
+W0330 09:50:37.222756       1 genericapiserver.go:744] Skipping API apps/v1beta1 because it has no resources.
+I0330 09:50:37.223813       1 handler.go:275] Adding GroupVersion admissionregistration.k8s.io v1 to ResourceManager
+W0330 09:50:37.223834       1 genericapiserver.go:744] Skipping API admissionregistration.k8s.io/v1beta1 because it has no resources.
+W0330 09:50:37.223841       1 genericapiserver.go:744] Skipping API admissionregistration.k8s.io/v1alpha1 because it has no resources.
+I0330 09:50:37.224483       1 handler.go:275] Adding GroupVersion events.k8s.io v1 to ResourceManager
+W0330 09:50:37.224503       1 genericapiserver.go:744] Skipping API events.k8s.io/v1beta1 because it has no resources.
+I0330 09:50:37.251779       1 handler.go:275] Adding GroupVersion apiregistration.k8s.io v1 to ResourceManager
+W0330 09:50:37.251810       1 genericapiserver.go:744] Skipping API apiregistration.k8s.io/v1beta1 because it has no resources.
+I0330 09:50:37.890683       1 dynamic_cafile_content.go:157] "Starting controller" name="request-header::/etc/kubernetes/pki/front-proxy-ca.crt"
+I0330 09:50:37.890863       1 dynamic_cafile_content.go:157] "Starting controller" name="client-ca-bundle::/etc/kubernetes/pki/ca.crt"
+I0330 09:50:37.891227       1 dynamic_serving_content.go:132] "Starting controller" name="serving-cert::/etc/kubernetes/pki/apiserver.crt::/etc/kubernetes/pki/apiserver.key"
+I0330 09:50:37.891440       1 secure_serving.go:213] Serving securely on [::]:6443
+I0330 09:50:37.891607       1 tlsconfig.go:240] "Starting DynamicServingCertificateController"
+I0330 09:50:37.894448       1 controller.go:78] Starting OpenAPI AggregationController
+I0330 09:50:37.894602       1 aggregator.go:164] waiting for initial CRD sync...
+I0330 09:50:37.895590       1 cluster_authentication_trust_controller.go:440] Starting cluster_authentication_trust_controller controller
+I0330 09:50:37.895742       1 shared_informer.go:311] Waiting for caches to sync for cluster_authentication_trust_controller
+I0330 09:50:37.895855       1 controller.go:80] Starting OpenAPI V3 AggregationController
+I0330 09:50:37.895979       1 dynamic_serving_content.go:132] "Starting controller" name="aggregator-proxy-cert::/etc/kubernetes/pki/front-proxy-client.crt::/etc/kubernetes/pki/front-proxy-client.key"
+I0330 09:50:37.896187       1 apiservice_controller.go:97] Starting APIServiceRegistrationController
+I0330 09:50:37.896277       1 cache.go:32] Waiting for caches to sync for APIServiceRegistrationController controller
+I0330 09:50:37.896387       1 available_controller.go:423] Starting AvailableConditionController
+I0330 09:50:37.896479       1 cache.go:32] Waiting for caches to sync for AvailableConditionController controller
+I0330 09:50:37.896599       1 handler_discovery.go:412] Starting ResourceDiscoveryManager
+I0330 09:50:37.896936       1 customresource_discovery_controller.go:289] Starting DiscoveryController
+I0330 09:50:37.900102       1 gc_controller.go:78] Starting apiserver lease garbage collector
+I0330 09:50:37.901141       1 system_namespaces_controller.go:67] Starting system namespaces controller
+I0330 09:50:37.902394       1 controller.go:116] Starting legacy_token_tracking_controller
+I0330 09:50:37.902408       1 shared_informer.go:311] Waiting for caches to sync for configmaps
+I0330 09:50:37.902784       1 apf_controller.go:374] Starting API Priority and Fairness config controller
+I0330 09:50:37.902947       1 gc_controller.go:78] Starting apiserver lease garbage collector
+I0330 09:50:37.909684       1 crdregistration_controller.go:111] Starting crd-autoregister controller
+I0330 09:50:37.909818       1 shared_informer.go:311] Waiting for caches to sync for crd-autoregister
+I0330 09:50:37.973474       1 dynamic_cafile_content.go:157] "Starting controller" name="client-ca-bundle::/etc/kubernetes/pki/ca.crt"
+I0330 09:50:37.973664       1 dynamic_cafile_content.go:157] "Starting controller" name="request-header::/etc/kubernetes/pki/front-proxy-ca.crt"
+I0330 09:50:37.979074       1 controller.go:134] Starting OpenAPI controller
+I0330 09:50:37.979131       1 controller.go:85] Starting OpenAPI V3 controller
+I0330 09:50:37.979321       1 naming_controller.go:291] Starting NamingConditionController
+I0330 09:50:37.979357       1 establishing_controller.go:76] Starting EstablishingController
+I0330 09:50:37.979478       1 nonstructuralschema_controller.go:192] Starting NonStructuralSchemaConditionController
+I0330 09:50:37.979508       1 apiapproval_controller.go:186] Starting KubernetesAPIApprovalPolicyConformantConditionController
+I0330 09:50:37.979522       1 crd_finalizer.go:266] Starting CRDFinalizer
+I0330 09:50:38.095994       1 shared_informer.go:318] Caches are synced for cluster_authentication_trust_controller
+I0330 09:50:38.096489       1 cache.go:39] Caches are synced for APIServiceRegistrationController controller
+I0330 09:50:38.097131       1 handler.go:275] Adding GroupVersion crd.projectcalico.org v1 to ResourceManager
+I0330 09:50:38.097326       1 handler.go:275] Adding GroupVersion configuration.konghq.com v1alpha1 to ResourceManager
+I0330 09:50:38.097440       1 handler.go:275] Adding GroupVersion configuration.konghq.com v1beta1 to ResourceManager
+I0330 09:50:38.097586       1 handler.go:275] Adding GroupVersion policy.linkerd.io v1alpha1 to ResourceManager
+I0330 09:50:38.097999       1 handler.go:275] Adding GroupVersion linkerd.io v1alpha1 to ResourceManager
+I0330 09:50:38.098100       1 handler.go:275] Adding GroupVersion linkerd.io v1alpha2 to ResourceManager
+I0330 09:50:38.098335       1 handler.go:275] Adding GroupVersion configuration.konghq.com v1 to ResourceManager
+I0330 09:50:38.098576       1 handler.go:275] Adding GroupVersion policy.linkerd.io v1beta1 to ResourceManager
+I0330 09:50:38.098811       1 handler.go:275] Adding GroupVersion policy.linkerd.io v1beta2 to ResourceManager
+I0330 09:50:38.098931       1 handler.go:275] Adding GroupVersion policy.linkerd.io v1beta3 to ResourceManager
+I0330 09:50:38.099276       1 handler.go:275] Adding GroupVersion workload.linkerd.io v1alpha1 to ResourceManager
+I0330 09:50:38.099390       1 handler.go:275] Adding GroupVersion workload.linkerd.io v1beta1 to ResourceManager
+I0330 09:50:38.099935       1 handler.go:275] Adding GroupVersion gateway.networking.k8s.io v1beta1 to ResourceManager
+I0330 09:50:38.100565       1 cache.go:39] Caches are synced for AvailableConditionController controller
+I0330 09:50:38.104331       1 shared_informer.go:318] Caches are synced for configmaps
+I0330 09:50:38.104525       1 apf_controller.go:379] Running API Priority and Fairness config worker
+I0330 09:50:38.104607       1 apf_controller.go:382] Running API Priority and Fairness periodic rebalancing process
+I0330 09:50:38.106940       1 handler.go:275] Adding GroupVersion tap.linkerd.io v1alpha1 to ResourceManager
+W0330 09:50:38.107589       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:50:38.107722       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 09:50:38.107887       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+I0330 09:50:38.110259       1 shared_informer.go:318] Caches are synced for crd-autoregister
+I0330 09:50:38.110740       1 aggregator.go:166] initial CRD sync complete...
+I0330 09:50:38.110811       1 autoregister_controller.go:141] Starting autoregister controller
+I0330 09:50:38.110964       1 cache.go:32] Waiting for caches to sync for autoregister controller
+I0330 09:50:38.111014       1 cache.go:39] Caches are synced for autoregister controller
+I0330 09:50:38.160870       1 controller.go:624] quota admission added evaluator for: leases.coordination.k8s.io
+I0330 09:50:38.188463       1 shared_informer.go:318] Caches are synced for node_authorizer
+E0330 09:50:38.204303       1 controller.go:193] "Failed to update lease" err="Operation cannot be fulfilled on leases.coordination.k8s.io \"apiserver-a6qcmcfoeurupmyoruuyrbv2dy\": StorageError: invalid object, Code: 4, Key: /registry/leases/kube-system/apiserver-a6qcmcfoeurupmyoruuyrbv2dy, ResourceVersion: 0, AdditionalErrorMsg: Precondition failed: UID in precondition: e2a8c8d3-8029-49f4-b99b-8ee7ffde7a8e, UID in object meta: "
+I0330 09:50:38.991430       1 storage_scheduling.go:111] all system priority classes are created successfully or already exist.
+W0330 09:50:39.104324       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:50:39.104546       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 09:50:39.104685       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 09:50:39.104880       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:50:39.105046       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 09:50:39.105697       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 09:50:39.832686       1 lease.go:263] Resetting endpoints for master service "kubernetes" to [172.31.40.74]
+I0330 09:50:39.834666       1 controller.go:624] quota admission added evaluator for: endpoints
+I0330 09:50:39.844876       1 controller.go:624] quota admission added evaluator for: endpointslices.discovery.k8s.io
+E0330 09:51:37.897260       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 09:51:39.105029       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:51:39.105280       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 09:51:39.105423       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 09:51:39.109025       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:51:39.109096       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 09:51:39.109112       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 09:52:37.897328       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 09:53:37.897230       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 09:53:39.105931       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:53:39.106004       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 09:53:39.106020       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 09:53:39.109252       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:53:39.109328       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 09:53:39.109390       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 09:54:37.897071       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 09:55:37.898032       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 09:55:38.078323       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:55:38.078537       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 09:55:38.078673       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 09:55:39.078660       1 handler_proxy.go:93] no RequestInfo found in the context
+W0330 09:55:39.078694       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:55:39.078970       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 09:55:39.079018       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 09:55:39.079118       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 09:55:39.080956       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 09:56:37.896891       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 09:56:39.080115       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:56:39.080320       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 09:56:39.080341       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 09:56:39.081270       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:56:39.081301       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 09:56:39.081373       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 09:57:37.897289       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 09:58:37.897274       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 09:58:39.081467       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:58:39.081629       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 09:58:39.081694       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 09:58:39.081512       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 09:58:39.081802       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 09:58:39.083606       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 09:59:37.897382       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:00:37.897697       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:00:38.082793       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:00:38.083002       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:00:38.083155       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:00:39.083770       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:00:39.083856       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:00:39.083879       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:00:39.084057       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:00:39.084191       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:00:39.085001       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:01:37.897260       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:01:39.084569       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:01:39.084619       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:01:39.084631       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:01:39.085726       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:01:39.085766       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:01:39.085920       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:02:37.896911       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:03:37.897687       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:03:39.085558       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:03:39.085646       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:03:39.085671       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:03:39.086573       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:03:39.086602       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:03:39.087786       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:04:37.897828       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:05:37.897624       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:05:38.088145       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:05:38.088222       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:05:38.088357       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:05:39.089274       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:05:39.089371       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:05:39.089411       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:05:39.089292       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:05:39.089539       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:05:39.090483       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:06:37.897203       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:06:39.090070       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:06:39.090117       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:06:39.090132       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:06:39.091186       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:06:39.091302       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:06:39.091326       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:07:37.897139       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:08:37.897660       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:08:39.090625       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:08:39.090669       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:08:39.090683       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:08:39.091686       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:08:39.091967       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:08:39.092095       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:09:37.897120       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:10:37.897868       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:10:38.100305       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:10:38.100579       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:10:38.100819       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:10:39.101675       1 handler_proxy.go:93] no RequestInfo found in the context
+W0330 10:10:39.101675       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:10:39.101796       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:10:39.101817       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:10:39.101908       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:10:39.102845       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:11:37.897607       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:11:39.102913       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:11:39.103034       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:11:39.103124       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:11:39.102950       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:11:39.103261       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:11:39.105028       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:12:37.897544       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:13:37.897587       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:13:39.104214       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:13:39.104259       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:13:39.104272       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:13:39.105311       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:13:39.105479       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:13:39.105618       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:14:37.897113       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:15:37.897362       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:15:38.106768       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:15:38.107034       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:15:38.107308       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:15:39.107524       1 handler_proxy.go:93] no RequestInfo found in the context
+W0330 10:15:39.107525       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:15:39.107779       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:15:39.107793       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:15:39.107828       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:15:39.110302       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:16:37.897327       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:16:39.108706       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:16:39.108841       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:16:39.108880       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:16:39.110961       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:16:39.111083       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:16:39.111107       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:17:37.896867       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:18:37.897638       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:18:39.110257       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:18:39.110301       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:18:39.110314       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:18:39.111967       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:18:39.112044       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:18:39.112071       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:19:37.897805       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:20:37.897090       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:20:38.113535       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:20:38.113701       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:20:38.113829       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:20:39.114211       1 handler_proxy.go:93] no RequestInfo found in the context
+W0330 10:20:39.114222       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:20:39.114366       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:20:39.114413       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:20:39.114519       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:20:39.115589       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:21:37.897516       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:21:39.118188       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:21:39.118252       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:21:39.118264       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:21:39.118322       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:21:39.118345       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:21:39.119876       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:22:37.897236       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:23:37.897684       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:23:39.118448       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:23:39.118528       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:23:39.118553       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:23:39.120686       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:23:39.120720       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:23:39.120790       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:24:37.896874       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:25:37.897018       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:25:38.118974       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:25:38.119227       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:25:38.119497       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:25:39.120302       1 handler_proxy.go:93] no RequestInfo found in the context
+W0330 10:25:39.120302       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:25:39.120371       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:25:39.120385       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:25:39.120392       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:25:39.121404       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:26:37.896919       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:26:39.120795       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:26:39.120834       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:26:39.120848       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:26:39.122141       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:26:39.122265       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:26:39.122290       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:27:37.897808       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:28:37.897306       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:28:39.121093       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:28:39.121171       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:28:39.121404       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:28:39.123343       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:28:39.123474       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:28:39.123500       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:29:37.897435       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:30:37.897025       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:30:38.129054       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:30:38.129320       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:30:38.129784       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:30:39.130185       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:30:39.130229       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:30:39.130243       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:30:39.130199       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:30:39.130412       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:30:39.131733       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:31:37.897564       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:31:39.131471       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:31:39.131520       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:31:39.131533       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:31:39.132606       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:31:39.132743       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:31:39.132840       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:32:37.897331       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:33:37.896822       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:33:39.132609       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:33:39.132710       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:33:39.132756       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:33:39.133798       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:33:39.133939       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:33:39.134027       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:34:37.897834       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:35:37.897363       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:35:38.135599       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:35:38.135901       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:35:38.136101       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:35:39.136633       1 handler_proxy.go:93] no RequestInfo found in the context
+W0330 10:35:39.136649       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:35:39.136682       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:35:39.136697       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:35:39.136713       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:35:39.137818       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:36:37.897300       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:36:39.136937       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:36:39.136975       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:36:39.136988       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:36:39.138207       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:36:39.138257       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:36:39.138268       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:37:37.897149       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:38:37.897218       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:38:39.137358       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:38:39.137414       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:38:39.137436       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:38:39.138473       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:38:39.138546       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:38:39.138568       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:39:37.897728       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+E0330 10:40:37.897234       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:40:38.142974       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:40:38.143218       1 controller.go:146] Error updating APIService "v1alpha1.tap.linkerd.io" with err: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+E0330 10:40:38.143397       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:40:39.143551       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:40:39.143704       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:40:39.143783       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:40:39.143595       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:40:39.143880       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:40:39.145097       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:41:37.897358       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+W0330 10:41:39.144019       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:41:39.144081       1 controller.go:102] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: failed to download v1alpha1.tap.linkerd.io: failed to retrieve openAPI spec, http error: ResponseCode: 503, Body: service unavailable
+, Header: map[Content-Type:[text/plain; charset=utf-8] X-Content-Type-Options:[nosniff]]
+I0330 10:41:39.144094       1 controller.go:109] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+W0330 10:41:39.146252       1 handler_proxy.go:93] no RequestInfo found in the context
+E0330 10:41:39.146284       1 controller.go:113] loading OpenAPI spec for "v1alpha1.tap.linkerd.io" failed with: Error, could not get list of group versions for APIService
+I0330 10:41:39.146297       1 controller.go:126] OpenAPI AggregationController: action for item v1alpha1.tap.linkerd.io: Rate Limited Requeue.
+E0330 10:42:37.897202       1 handler_proxy.go:137] error resolving linkerd-viz/tap: service "tap" not found
+ubuntu@ip-172-31-40-74:~$

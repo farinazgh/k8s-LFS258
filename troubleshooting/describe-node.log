@@ -1,0 +1,136 @@
+ubuntu@ip-172-31-40-74:~$ kubectl get nodes -o wide
+NAME              STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+ip-172-31-40-74   Ready    control-plane   11d   v1.28.8   172.31.40.74   <none>        Ubuntu 22.04.4 LTS   6.5.0-1015-aws   containerd://1.6.28
+ubuntu@ip-172-31-40-74:~$ kubectl describe node ip-172-31-40-74
+Name:               ip-172-31-40-74
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=ip-172-31-40-74
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    projectcalico.org/IPv4Address: 172.31.40.74/20
+                    projectcalico.org/IPv4IPIPTunnelAddr: 192.168.10.0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 18 Mar 2024 15:13:53 +0000
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  ip-172-31-40-74
+  AcquireTime:     <unset>
+  RenewTime:       Sat, 30 Mar 2024 10:09:19 +0000
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sat, 30 Mar 2024 09:50:45 +0000   Sat, 30 Mar 2024 09:50:45 +0000   CalicoIsUp                   Calico is running on this node
+  MemoryPressure       False   Sat, 30 Mar 2024 10:05:56 +0000   Thu, 21 Mar 2024 09:14:23 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sat, 30 Mar 2024 10:05:56 +0000   Fri, 22 Mar 2024 16:29:24 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sat, 30 Mar 2024 10:05:56 +0000   Thu, 21 Mar 2024 09:14:23 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sat, 30 Mar 2024 10:05:56 +0000   Thu, 21 Mar 2024 09:14:23 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  172.31.40.74
+  Hostname:    ip-172-31-40-74
+Capacity:
+  cpu:                2
+  ephemeral-storage:  7941576Ki
+  hugepages-2Mi:      0
+  memory:             3997728Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  7318956430
+  hugepages-2Mi:      0
+  memory:             3895328Ki
+  pods:               110
+System Info:
+  Machine ID:                 48df6604b13945d28141b23fba039574
+  System UUID:                ec249e6d-25cf-8185-e4ef-123b66954576
+  Boot ID:                    0c151f6e-3cf7-4817-9607-b8e6837e01c1
+  Kernel Version:             6.5.0-1015-aws
+  OS Image:                   Ubuntu 22.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.28
+  Kubelet Version:            v1.28.8
+  Kube-Proxy Version:         v1.28.8
+Non-terminated Pods:          (15 in total)
+  Namespace                   Name                                                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                                ------------  ----------  ---------------  -------------  ---
+  default                     nfs-subdir-external-provisioner-86bcbb46d7-5x4p8    0 (0%)        0 (0%)      0 (0%)           0 (0%)         9d
+  default                     nginx-1                                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         3d22h
+  default                     nginx-2                                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         3d22h
+  kube-system                 calico-kube-controllers-68cdf756d9-sdj2v            0 (0%)        0 (0%)      0 (0%)           0 (0%)         11d
+  kube-system                 calico-node-m25dv                                   250m (12%)    0 (0%)      0 (0%)           0 (0%)         11d
+  kube-system                 coredns-5dd5756b68-ftqjl                            100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     11d
+  kube-system                 coredns-5dd5756b68-mqdtt                            100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     11d
+  kube-system                 etcd-ip-172-31-40-74                                100m (5%)     0 (0%)      100Mi (2%)       0 (0%)         11d
+  kube-system                 kube-apiserver-ip-172-31-40-74                      250m (12%)    0 (0%)      0 (0%)           0 (0%)         11d
+  kube-system                 kube-controller-manager-ip-172-31-40-74             200m (10%)    0 (0%)      0 (0%)           0 (0%)         11d
+  kube-system                 kube-proxy-cjl4p                                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         11d
+  kube-system                 kube-scheduler-ip-172-31-40-74                      100m (5%)     0 (0%)      0 (0%)           0 (0%)         11d
+  kubernetes-dashboard        dashboard-metrics-scraper-5657497c4c-6j2p2          0 (0%)        0 (0%)      0 (0%)           0 (0%)         7d17h
+  kubernetes-dashboard        kubernetes-dashboard-78f87ddfc-hd8zz                0 (0%)        0 (0%)      0 (0%)           0 (0%)         7d17h
+  polaris                     nginx-3                                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         3d22h
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests     Limits
+  --------           --------     ------
+  cpu                1100m (55%)  0 (0%)
+  memory             240Mi (6%)   340Mi (8%)
+  ephemeral-storage  0 (0%)       0 (0%)
+  hugepages-2Mi      0 (0%)       0 (0%)
+Events:
+  Type     Reason                   Age                    From             Message
+  ----     ------                   ----                   ----             -------
+  Normal   Starting                 4d18h                  kube-proxy
+  Normal   Starting                 4d2h                   kube-proxy
+  Normal   Starting                 18m                    kube-proxy
+  Normal   Starting                 41h                    kube-proxy
+  Normal   Starting                 3d22h                  kube-proxy
+  Normal   Starting                 4d                     kube-proxy
+  Normal   NodeHasSufficientPID     4d18h (x7 over 4d18h)  kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+  Warning  InvalidDiskCapacity      4d18h                  kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  4d18h (x8 over 4d18h)  kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    4d18h (x7 over 4d18h)  kubelet          Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+  Normal   NodeAllocatableEnforced  4d18h                  kubelet          Updated Node Allocatable limit across pods
+  Normal   Starting                 4d18h                  kubelet          Starting kubelet.
+  Normal   RegisteredNode           4d18h                  node-controller  Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+  Normal   Starting                 4d2h                   kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      4d2h                   kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  4d2h (x8 over 4d2h)    kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    4d2h (x7 over 4d2h)    kubelet          Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     4d2h (x7 over 4d2h)    kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  4d2h                   kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           4d2h                   node-controller  Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+  Normal   NodeHasSufficientPID     4d (x7 over 4d)        kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+  Warning  InvalidDiskCapacity      4d                     kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  4d (x8 over 4d)        kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    4d (x7 over 4d)        kubelet          Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+  Normal   Starting                 4d                     kubelet          Starting kubelet.
+  Normal   NodeAllocatableEnforced  4d                     kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           4d                     node-controller  Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+  Normal   Starting                 3d22h                  kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      3d22h                  kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  3d22h (x8 over 3d22h)  kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    3d22h (x7 over 3d22h)  kubelet          Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     3d22h (x7 over 3d22h)  kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  3d22h                  kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           3d22h                  node-controller  Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+  Normal   NodeAllocatableEnforced  41h                    kubelet          Updated Node Allocatable limit across pods
+  Warning  InvalidDiskCapacity      41h                    kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  41h (x8 over 41h)      kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    41h (x7 over 41h)      kubelet          Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     41h (x7 over 41h)      kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+  Normal   Starting                 41h                    kubelet          Starting kubelet.
+  Normal   RegisteredNode           41h                    node-controller  Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
+  Normal   Starting                 18m                    kubelet          Starting kubelet.
+  Warning  InvalidDiskCapacity      18m                    kubelet          invalid capacity 0 on image filesystem
+  Normal   NodeHasSufficientMemory  18m (x8 over 18m)      kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientMemory
+  Normal   NodeHasNoDiskPressure    18m (x7 over 18m)      kubelet          Node ip-172-31-40-74 status is now: NodeHasNoDiskPressure
+  Normal   NodeHasSufficientPID     18m (x7 over 18m)      kubelet          Node ip-172-31-40-74 status is now: NodeHasSufficientPID
+  Normal   NodeAllocatableEnforced  18m                    kubelet          Updated Node Allocatable limit across pods
+  Normal   RegisteredNode           18m                    node-controller  Node ip-172-31-40-74 event: Registered Node ip-172-31-40-74 in Controller
