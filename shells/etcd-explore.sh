@@ -10,12 +10,13 @@ etcdctl --endpoints=https://127.0.0.1:2379 member list -w table"
   #  | 85b662448f547898 | started | ip-172-31-40-74 | https://172.31.40.74:2380 | https://172.31.40.74:2379 |      false |
   #  +------------------+---------+-----------------+---------------------------+---------------------------+------------+
   #   
- kubectl -n kube-system exec -it etcd-ip-172-31-40-74 -- sh \
+kubectl -n kube-system exec -it etcd-ip-172-31-40-74 -- sh \
 -c "ETCDCTL_API=3 \
 ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
 ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt \
 ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key \
 etcdctl --endpoints=https://127.0.0.1:2379 snapshot save /var/lib/etcd/snapshot.db "
+
   #  {"level":"info","ts":"2024-03-19T12:18:46.609987Z","caller":"snapshot/v3_snapshot.go:65","msg":"created temporary db file","path":"/var/lib/etcd/snapshot.db.part"}
   #  {"level":"info","ts":"2024-03-19T12:18:46.62181Z","logger":"client","caller":"v3@v3.5.12/maintenance.go:212","msg":"opened snapshot stream; downloading"}
   #  {"level":"info","ts":"2024-03-19T12:18:46.622689Z","caller":"snapshot/v3_snapshot.go:73","msg":"fetching snapshot","endpoint":"https://127.0.0.1:2379"}
@@ -29,6 +30,12 @@ ls -lrt  /var/lib/etcd/snapshot.db
 sudo ls -lrt  /var/lib/etcd/snapshot.db
   #  -rw------- 1 root root 3678240 Mar 19 12:18 /var/lib/etcd/snapshot.db
 
+kubectl -n kube-system exec -it etcd-ip-172-31-40-74 -- sh \
+-c "ETCDCTL_API=3 \
+ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt \
+ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key \
+etcdctl --endpoints=https://127.0.0.1:2379 snapshot restore /var/lib/etcd/snapshot.db --data-dir /var/lib/etcd-from-backup"
 
 ##I deployed an nginx deployment and the following keys were added to etcd-ip-172-31-40-74/registry/pods/default/nginx-7854ff8877-cxd7b
   #  /registry/replicasets/default/nginx-7854ff8877
