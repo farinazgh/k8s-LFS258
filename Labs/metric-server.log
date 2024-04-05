@@ -1,0 +1,107 @@
+kubectl get pods --all-namespaces
+NAMESPACE      NAME                                   READY   STATUS    RESTARTS   AGE
+default        elephant                               1/1     Running   0          72s
+default        lion                                   1/1     Running   0          72s
+default        rabbit                                 1/1     Running   0          72s
+kube-flannel   kube-flannel-ds-4ddzg                  1/1     Running   0          9m16s
+kube-flannel   kube-flannel-ds-xcrrg                  1/1     Running   0          9m42s
+kube-system    coredns-69f9c977-2bnl4                 1/1     Running   0          9m41s
+kube-system    coredns-69f9c977-wmlws                 1/1     Running   0          9m41s
+kube-system    etcd-controlplane                      1/1     Running   0          9m57s
+kube-system    kube-apiserver-controlplane            1/1     Running   0          9m53s
+kube-system    kube-controller-manager-controlplane   1/1     Running   0          9m56s
+kube-system    kube-proxy-2lrxf                       1/1     Running   0          9m42s
+kube-system    kube-proxy-jjbxg                       1/1     Running   0          9m16s
+kube-system    kube-scheduler-controlplane            1/1     Running   0          9m53s
+
+controlplane ~ ➜  pwd
+/root
+
+controlplane ~ ➜  git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+Cloning into 'kubernetes-metrics-server'...
+remote: Enumerating objects: 31, done.
+remote: Counting objects: 100% (19/19), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 31 (delta 8), reused 0 (delta 0), pack-reused 12
+Receiving objects: 100% (31/31), 8.08 KiB | 8.08 MiB/s, done.
+Resolving deltas: 100% (10/10), done.
+
+controlplane ~ ➜  ls
+kubernetes-metrics-server  sample.yaml
+
+controlplane ~ ➜  cd kubernetes-metrics-server/
+
+controlplane kubernetes-metrics-server on  master ➜  ls
+aggregated-metrics-reader.yaml  metrics-apiservice.yaml         README.md
+auth-delegator.yaml             metrics-server-deployment.yaml  resource-reader.yaml
+auth-reader.yaml                metrics-server-service.yaml
+
+controlplane kubernetes-metrics-server on  master ➜  kubectl apply -f .
+clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
+clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
+rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
+apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
+serviceaccount/metrics-server created
+deployment.apps/metrics-server created
+service/metrics-server created
+clusterrole.rbac.authorization.k8s.io/system:metrics-server created
+clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
+
+controlplane kubernetes-metrics-server on  master ➜  kubectl get all --all-namespaces
+NAMESPACE      NAME                                       READY   STATUS    RESTARTS   AGE
+default        pod/elephant                               1/1     Running   0          6m7s
+default        pod/lion                                   1/1     Running   0          6m7s
+default        pod/rabbit                                 1/1     Running   0          6m7s
+kube-flannel   pod/kube-flannel-ds-4ddzg                  1/1     Running   0          14m
+kube-flannel   pod/kube-flannel-ds-xcrrg                  1/1     Running   0          14m
+kube-system    pod/coredns-69f9c977-2bnl4                 1/1     Running   0          14m
+kube-system    pod/coredns-69f9c977-wmlws                 1/1     Running   0          14m
+kube-system    pod/etcd-controlplane                      1/1     Running   0          14m
+kube-system    pod/kube-apiserver-controlplane            1/1     Running   0          14m
+kube-system    pod/kube-controller-manager-controlplane   1/1     Running   0          14m
+kube-system    pod/kube-proxy-2lrxf                       1/1     Running   0          14m
+kube-system    pod/kube-proxy-jjbxg                       1/1     Running   0          14m
+kube-system    pod/kube-scheduler-controlplane            1/1     Running   0          14m
+kube-system    pod/metrics-server-59d58ccd57-jkbsp        1/1     Running   0          26s
+
+NAMESPACE     NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                  AGE
+default       service/kubernetes       ClusterIP   10.96.0.1      <none>        443/TCP                  14m
+kube-system   service/kube-dns         ClusterIP   10.96.0.10     <none>        53/UDP,53/TCP,9153/TCP   14m
+kube-system   service/metrics-server   ClusterIP   10.100.70.14   <none>        443/TCP                  26s
+
+NAMESPACE      NAME                             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-flannel   daemonset.apps/kube-flannel-ds   2         2         2       2            2           <none>                   14m
+kube-system    daemonset.apps/kube-proxy        2         2         2       2            2           kubernetes.io/os=linux   14m
+
+NAMESPACE     NAME                             READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/coredns          2/2     2            2           14m
+kube-system   deployment.apps/metrics-server   1/1     1            1           26s
+
+NAMESPACE     NAME                                        DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/coredns-69f9c977            2         2         2       14m
+kube-system   replicaset.apps/metrics-server-59d58ccd57   1         1         1       26s
+
+controlplane kubernetes-metrics-server on  master ➜  kubectl top nodes
+NAME           CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+controlplane   267m         0%     1104Mi          0%
+node01         25m          0%     279Mi           0%
+
+controlplane kubernetes-metrics-server on  master ➜  kubectl top pod
+NAME       CPU(cores)   MEMORY(bytes)
+elephant   17m          32Mi
+lion       1m           18Mi
+rabbit     117m         252Mi
+
+controlplane kubernetes-metrics-server on  master ➜  kubectl top pod  -n kube-system
+NAME                                   CPU(cores)   MEMORY(bytes)
+coredns-69f9c977-2bnl4                 2m           19Mi
+coredns-69f9c977-wmlws                 2m           18Mi
+etcd-controlplane                      25m          43Mi
+kube-apiserver-controlplane            52m          206Mi
+kube-controller-manager-controlplane   20m          49Mi
+kube-proxy-2lrxf                       1m           29Mi
+kube-proxy-jjbxg                       1m           28Mi
+kube-scheduler-controlplane            5m           23Mi
+metrics-server-59d58ccd57-jkbsp        2m           18Mi
+
+controlplane kubernetes-metrics-server on  master ➜
