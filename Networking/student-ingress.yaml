@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: students-ingress
+spec:
+  rules:
+    - host: www.students.com
+      http:
+        paths:
+          - path: /teachers
+            pathType: Prefix
+            backend:
+              service:
+                name: teachers-service
+                port:
+                  number: 80
+          - path: /courses
+            pathType: Prefix
+            backend:
+              service:
+                name: courses-service
+                port:
+                  number: 80
