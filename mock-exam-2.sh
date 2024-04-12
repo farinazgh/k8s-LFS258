@@ -18,7 +18,25 @@ etcdctl --endpoints=127.0.0.1:2379 snapshot save /opt/etcd-backup.db
 vi temp.yaml
 kubectl apply -f temp.yaml
 kubectl run super-user-pod --image=busybox:1.28 --dry-run=client -o yaml --command -- sleep 4800 > systtime-pod.yaml
+
+#  add: ["SYS_TIME"]
 vi systtime-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+  namespace: default
+spec:
+  containers:
+    - command:
+        - sleep
+        - "4800"
+      image: ubuntu
+      name: ubuntu-sleeper
+      securityContext:
+        capabilities:
+          add: ["SYS_TIME"]
+
 kubectl apply -f systtime-pod.yaml
 cat CKA/use-pv.yaml
 kubectl get pv
