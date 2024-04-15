@@ -2,65 +2,47 @@ kubectl get pods | wc
 
 kubectl get pod ubuntu-sleeper -o yaml
 
-#apiVersion: v1
-#kind: Pod
-#metadata:
-#  name: ubuntu-sleeper
-#spec:
-#  containers:
-#  - command:
-#    - sleep
-#    - "4800"
-#    image: ubuntu
-#    imagePullPolicy: Always
-#    name: ubuntu
-#    volumeMounts:
-#    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-#      name: kube-api-access-7w6qp
-#      readOnly: true
-#  nodeName: controlplane
-#  volumes:
-#  - name: kube-api-access-7w6qp
-#    projected:
-#      defaultMode: 420
-#      sources:
-#      - serviceAccountToken:
-#          expirationSeconds: 3607
-#          path: token
-#      - configMap:
-#          items:
-#          - key: ca.crt
-#            path: ca.crt
-#          name: kube-root-ca.crt
-#      - downwardAPI:
-#          items:
-#          - fieldRef:
-#              apiVersion: v1
-#              fieldPath: metadata.namespace
-#            path: namespace
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleeper
+spec:
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    image: ubuntu
+    name: ubuntu
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-7w6qp
+      readOnly: true
+  nodeName: controlplane
+  volumes:
+  - name: kube-api-access-7w6qp
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
 
 
 vi  ubuntu-sleeper-2.yaml
 
 kubectl run --image=nginx --dry-run=client -o yaml --command -- sleep 5000 >test.yaml
 
-cat test.yaml
-#apiVersion: v1
-#kind: Pod
-#metadata:
-#  creationTimestamp: null
-#  labels:
-#    run: sleep
-#  name: sleep
-#spec:
-#  containers:
-#  - command:
-#    - "5000"
-#    image: nginx
-#    name: sleep
-#    resources: {}
-#  dnsPolicy: ClusterFirst
-#  restartPolicy: Always
 
 
 
@@ -85,6 +67,7 @@ kubectl apply -f ubuntu-sleeper-2.yaml
 pod/ubuntu-sleeper-2 created
 
 cat ubuntu-sleeper-2.yaml
+
 apiVersion: v1
 kind: Pod
 metadata:

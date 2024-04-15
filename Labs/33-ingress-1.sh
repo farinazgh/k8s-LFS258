@@ -1,105 +1,101 @@
 kubectl get ingress --all-namespaces
-NAMESPACE   NAME                 CLASS    HOSTS   ADDRESS         PORTS   AGE
-app-space   ingress-wear-watch   <none>   *       10.110.34.207   80      3m29s
+#NAMESPACE   NAME                 CLASS    HOSTS   ADDRESS         PORTS   AGE
+#app-space   ingress-wear-watch   <none>   *       10.110.34.207   80      3m29s
 
 kubectl get all --all-namespaces | grep -i ingress
-ingress-nginx   pod/ingress-nginx-admission-create-xdhxb        0/1     Completed   0          4m26s
-ingress-nginx   pod/ingress-nginx-admission-patch-zqsw8         0/1     Completed   0          4m26s
-ingress-nginx   pod/ingress-nginx-controller-7689699d9b-jk99z   1/1     Running     0          4m26s
-ingress-nginx   service/ingress-nginx-controller             NodePort    10.110.34.207    <none>        80:30080/TCP,443:32103/TCP   4m27s
-ingress-nginx   service/ingress-nginx-controller-admission   ClusterIP   10.98.59.3       <none>        443/TCP                      4m26s
-ingress-nginx   deployment.apps/ingress-nginx-controller   1/1     1            1           4m26s
-ingress-nginx   replicaset.apps/ingress-nginx-controller-7689699d9b   1         1         1       4m26s
-ingress-nginx   job.batch/ingress-nginx-admission-create   1/1           12s        4m26s
-ingress-nginx   job.batch/ingress-nginx-admission-patch    1/1           12s        4m26s
+#ingress-nginx   pod/ingress-nginx-admission-create-xdhxb        0/1     Completed   0          4m26s
+#ingress-nginx   pod/ingress-nginx-admission-patch-zqsw8         0/1     Completed   0          4m26s
+#ingress-nginx   pod/ingress-nginx-controller-7689699d9b-jk99z   1/1     Running     0          4m26s
+#ingress-nginx   service/ingress-nginx-controller             NodePort    10.110.34.207    <none>        80:30080/TCP,443:32103/TCP   4m27s
+#ingress-nginx   service/ingress-nginx-controller-admission   ClusterIP   10.98.59.3       <none>        443/TCP                      4m26s
+#ingress-nginx   deployment.apps/ingress-nginx-controller   1/1     1            1           4m26s
+#ingress-nginx   replicaset.apps/ingress-nginx-controller-7689699d9b   1         1         1       4m26s
+#ingress-nginx   job.batch/ingress-nginx-admission-create   1/1           12s        4m26s
+#ingress-nginx   job.batch/ingress-nginx-admission-patch    1/1           12s        4m26s
 
 
 kubectl get ingress ingress-wear-watch -o yaml -n app-space> temp.yaml
 
 cat temp.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  name: ingress-wear-watch
-  namespace: app-space
-spec:
-  rules:
-  - http:
-      paths:
-      - backend:
-          service:
-            name: wear-service
-            port:
-              number: 8080
-        path: /wear
-        pathType: Prefix
-      - backend:
-          service:
-            name: video-service
-            port:
-              number: 8080
-        path: /watch
-        pathType: Prefix
-
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: ingress-wear-watch
+#  namespace: app-space
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - backend:
+#          service:
+#            name: wear-service
+#            port:
+#              number: 8080
+#        path: /wear
+#        pathType: Prefix
+#      - backend:
+#          service:
+#            name: video-service
+#            port:
+#              number: 8080
+#        path: /watch
+#        pathType: Prefix
+#
 
 kubectl describe  ingress ingress-wear-watch  -n app-space
-Name:             ingress-wear-watch
-Labels:           <none>
-Namespace:        app-space
-Address:          10.110.34.207
-Ingress Class:    <none>
-Default backend:  <default>
-Rules:
-  Host        Path  Backends
-  ----        ----  --------
-  *
-              /wear    wear-service:8080 (10.244.0.4:8080)
-              /watch   video-service:8080 (10.244.0.5:8080)
-Annotations:  nginx.ingress.kubernetes.io/rewrite-target: /
-              nginx.ingress.kubernetes.io/ssl-redirect: false
-Events:
-  Type    Reason  Age                    From                      Message
-  ----    ------  ----                   ----                      -------
-  Normal  Sync    8m22s (x2 over 8m23s)  nginx-ingress-controller  Scheduled for sync
-
-
-kubectl describe  ingress ingress-wear-watch  -n app-space | grep -i default
-Default backend:  <default>
-
-
-
+#Name:             ingress-wear-watch
+#Labels:           <none>
+#Namespace:        app-space
+#Address:          10.110.34.207
+#Ingress Class:    <none>
+#Default backend:  <default>
+#Rules:
+#  Host        Path  Backends
+#  ----        ----  --------
+#  *
+#              /wear    wear-service:8080 (10.244.0.4:8080)
+#              /watch   video-service:8080 (10.244.0.5:8080)
+#Annotations:  nginx.ingress.kubernetes.io/rewrite-target: /
+#              nginx.ingress.kubernetes.io/ssl-redirect: false
+#Events:
+#  Type    Reason  Age                    From                      Message
+#  ----    ------  ----                   ----                      -------
+#  Normal  Sync    8m22s (x2 over 8m23s)  nginx-ingress-controller  Scheduled for sync
+#
+#
+#kubectl describe  ingress ingress-wear-watch  -n app-space | grep -i default
+#Default backend:  <default>
+#
+#
+#
 kubectl get ns
-NAME              STATUS   AGE
-app-space         Active   22m
-critical-space    Active   14s
-default           Active   23m
-ingress-nginx     Active   22m
-kube-flannel      Active   23m
-kube-node-lease   Active   23m
-kube-public       Active   23m
-kube-system       Active   23m
+#NAME              STATUS   AGE
+#app-space         Active   22m
+#critical-space    Active   14s
+#default           Active   23m
+#ingress-nginx     Active   22m
+#kube-flannel      Active   23m
+#kube-node-lease   Active   23m
+#kube-public       Active   23m
+#kube-system       Active   23m
 
 kubectl get all -n critical-space
-NAME                              READY   STATUS    RESTARTS   AGE
-pod/webapp-pay-657d677c99-gmxjc   1/1     Running   0          39s
+#NAME                              READY   STATUS    RESTARTS   AGE
+#pod/webapp-pay-657d677c99-gmxjc   1/1     Running   0          39s
+#
+#NAME                  TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+#service/pay-service   ClusterIP   10.96.249.7   <none>        8282/TCP   39s
+#
+#NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+#deployment.apps/webapp-pay   1/1     1            1           39s
+#
+#NAME                                    DESIRED   CURRENT   READY   AGE
+#replicaset.apps/webapp-pay-657d677c99   1         1         1       39s
+#
+#
 
-NAME                  TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
-service/pay-service   ClusterIP   10.96.249.7   <none>        8282/TCP   39s
-
-NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/webapp-pay   1/1     1            1           39s
-
-NAME                                    DESIRED   CURRENT   READY   AGE
-replicaset.apps/webapp-pay-657d677c99   1         1         1       39s
 
 
-
-
-kubectl create ingress -h
-Create an ingress with the specified name.
 
 
   kubectl create ingress simple --rule="foo.com/bar=svc1:8080,tls=my-cert"
@@ -135,25 +131,24 @@ vi my-ingress.yaml
 
 
 get svc -n critical-space
-NAME          TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
-pay-service   ClusterIP   10.96.249.7   <none>        8282/TCP   6m35s
-
+#NAME          TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+#pay-service   ClusterIP   10.96.249.7   <none>        8282/TCP   6m35s
+#
 kubectl create ingress payment  --rule=pay-service/path=pay:8080 -n critical-space --dry-run=client -o yaml > this-is-my-ingress.yaml
 
-this-is-my-ingress.yaml
-
-kubectl get services -n critical-space
-NAME          TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
-pay-service   ClusterIP   10.96.249.7   <none>        8282/TCP   10m
-
+#this-is-my-ingress.yaml
+#
+#kubectl get services -n critical-space
+#NAME          TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+#pay-service   ClusterIP   10.96.249.7   <none>        8282/TCP   10m
+#
 kubectl apply -f this-is-my-ingress.yaml
-ingress.networking.k8s.io/payment created
+#ingress.networking.k8s.io/payment created
 
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  creationTimestamp: null
   name: payment
 spec:
   rules:
@@ -171,15 +166,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-  creationTimestamp: "2024-04-09T16:04:03Z"
   generation: 1
   name: ingress-wear-watch
   namespace: app-space
-  resourceVersion: "725"
-  uid: 8eda3a63-2fca-4d75-9f46-c806439152e2
 spec:
   rules:
   - http:
@@ -198,10 +187,6 @@ spec:
               number: 8080
         path: /watch
         pathType: Prefix
-status:
-  loadBalancer:
-    ingress:
-    - ip: 10.110.34.207
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -225,14 +210,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/instance: ingress-nginx
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.1.2
-    helm.sh/chart: ingress-nginx-4.0.18
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:

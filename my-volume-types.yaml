@@ -1,0 +1,28 @@
+#1
+volumes:
+  - name: config-volume
+    configMap:
+      name: my-configmap
+---
+#2
+volumes:
+  - name: temp-volume
+    emptyDir: {}
+---
+#3
+volumes:
+  - name: host-volume
+    hostPath:
+      path: /path/on/host
+---
+#4
+volumes:
+  - name: pv-volume
+    persistentVolumeClaim:
+      claimName: my-persistent-volume-claim
+---
+#5
+volumes:
+  - name: secret-volume
+    secret:
+      secretName: my-secret
