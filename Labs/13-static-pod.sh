@@ -70,11 +70,4 @@ cat /var/lib/kubelet/config.yaml
 # syncFrequency: 0s
 # volumeStatsAggPeriod: 0s
 # 
-cd /etc/just-to-mess-with-you
 
-node01 /etc/just-to-mess-with-you ➜  ls
-greenbox.yaml
-
-rm -rf greenbox.yaml
-
-rm -rf greenbox.yaml

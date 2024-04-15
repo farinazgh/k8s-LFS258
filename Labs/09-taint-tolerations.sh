@@ -1,8 +1,10 @@
 kubectl get nodes -o wide
 kubectl describe node controlplane | grep -i taint
 kubectl describe node node01 | grep -i taint
+
 #  taint a node key=value:effect
 kubectl taint node node01 spray=mortein:NoSchedule
+kubectl taint node node01 env=prod:NoSchedule
 
 kubectl run mosquito --image=nginx
 
