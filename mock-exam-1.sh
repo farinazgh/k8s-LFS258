@@ -1,7 +1,6 @@
 kubectl run nginx-pod --image=nginx:alpine
 kubectl run messaging  --image=redis:alpine
 kubectl label pod messaging tier=msg
-kubectl create apx-x9984574
 kubectl create ns apx-x9984574
 kubectl get nodes -o json > /opt/outputs/nodes-z3444kd9.json
 kubectl get pods
