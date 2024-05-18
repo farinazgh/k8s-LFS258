@@ -1,27 +1,20 @@
-## k8s-LFS258
+Melinda Mae
 
-Why do we need to disable swap?
+![image](https://github.com/farinazgh/k8s-LFS258/assets/97882522/dba30bd0-3050-4c05-885e-b1a8bb172c84)
+
+Have you heard of tiny Melinda Mae,
+Who ate a monstrous whale?
+She thought she could,
+She said she would,
+So she started in right at the tail.
+
+And everyone said, "You're much too small,"
+But that didn't bother Melinda at all.
+She took little bites and she chewed very slow,
+Just like a good girl should...
 
 
+![image](https://github.com/farinazgh/k8s-LFS258/assets/97882522/1cf7526c-0038-4c24-9ce8-adb4c350e1a0)
 
-* curl 
-* apt-transport-https 
-* vim 
-* git 
-* wget 
-* gnupg2 
-* software-properties-common 
-* lsb-release 
-* ca-certificates 
-* uidmap
-
-Deciding which pod network to use for Container Networking Interface (CNI) should take into account the expected
-demands on the cluster. There can be only one pod network per cluster, although the CNI-Genie project is trying to
-change this.
-The network must allow container-to-container, pod-to-pod, pod-to-service, and external-to-service communications.
-We will use Calico as a network plugin which will allow us to use Network Policies later in the course. Currently
-Calico does not deploy using CNI by default. Newer versions of Calico have included RBAC in the main file. Once
-downloaded look for the expected IPV4 range for containers to use in the configuration file.
-The Cilium network plugin is becoming popular, and has lots of options including eBPF and more. At the moment
-the exam still references Calico. Should you want to try the labs a second time there is an appendix to install
-Cilium instead.
+...And in eighty-nine years she ate that whale
+Because she said she would!
