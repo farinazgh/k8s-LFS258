@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nova
+  name: nova
+spec:
+  containers:
+    - env:
+        - name: APP_ENV
+          value: production
+      image: nginx
+      name: nova
+      ports:
+        - containerPort: 8080

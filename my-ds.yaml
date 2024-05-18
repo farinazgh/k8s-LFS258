@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+  name: ds-important
+  namespace: project-tiger
+spec:
+  selector:
+    matchLabels:
+      app: ds-important
+  template:
+    metadata:
+      labels:
+        app: ds-important
+    spec:
+      containers:
+        - image: httpd:2.4-alpine
+          imagePullPolicy: IfNotPresent
+          name: httpd
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""

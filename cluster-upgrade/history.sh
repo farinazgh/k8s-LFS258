@@ -1,8 +1,7 @@
-# vi /etc/apt/sources.list.d/kubernetes.list can be found here
+#this part kubernetes.list and key ring should be taken from installation not upgrade
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-# this is not necessary if you remember/do  the above
-#curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
+#search for Upgrading kubeadm clusters
 sudo apt update
 sudo apt-cache madison kubeadm
 
@@ -28,10 +27,9 @@ sudo -i
 # IMPORTANT this part should be done for all nodes in the cluster as all nodes have kubelet and kubectl
 sudo apt-mark unhold kubelet kubectl
 sudo apt-get update && sudo apt-get install -y kubelet='1.29.3-1.1' kubectl='1.29.3-1.1'
-sudo apt-mark hold kubelet kubectl
+sudo apt-mark hold kubelentt kubectl
 
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
-export KUBECONFIG=/home/ubuntu/.kube/config
-
+# note do not use sudo here it will not work
 kubectl uncordon ip-172-31-40-74

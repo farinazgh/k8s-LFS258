@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-example-linux
+spec:
+  containers:
+    - name: example-container
+      image: busybox
+      command: ["sh", "-c", "echo hello container! > /data/foo/my-log.log"]
+      volumeMounts:
+        - mountPath: /data/foo
+          name: example-volume
+  volumes:
+    - name: example-volume
+      hostPath:
+        path: /data/foo
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-example-linux
+spec:
+  containers:
+    - command:
+        - sh
+        - -c
+        - echo hello container! > /data/foo/my-log.log
+      image: busybox
+      volumeMounts:
+        - mountPath: /data/foo
+          name: example-volume
+  volumes:
+    - hostPath:
+        path: /data/foo
+        type: ""
+      name: example-volume
+---
+
+# the intention is share data between two containers, not persisting data, so emptyDir: {} suffice
+apiVersion: v1
+kind: Pod
+metadata:
+  name: two-containers
+spec:
+
+  restartPolicy: Never
+
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+
+  containers:
+    - name: busybox1
+      image: busybox
+      command: ["sh", "-c", "while true; do echo success >> /output/output.txt; sleep 5; done"]
+      volumeMounts:
+        - name: shared-data
+          mountPath: /output
+
+    - name: busybox2
+      image: busybox
+      command: ["sh", "-c", "while true; do cat /input/output.txt; sleep 5; done"]
+      volumeMounts:
+        - name: shared-data
+          mountPath: /input
+

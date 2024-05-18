@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: my-np
+  namespace: users-backend
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              project: users-backend
+      ports:
+        - protocol: TCP
+          port: 80
+
+# label namespace
+# podSelector{} is required
+---
+########
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: logging-sidecar
+  name: logging-sidecar
+  namespace: baz
+spec:
+  containers:
+    - image: busybox
+      name: busybox
+      command: ['sh', '-c', 'while true; do echo Logging data > /output/output.log; sleep 5; done']
+      volumeMounts:
+        - name: shared-data
+          mountPath: /output
+
+
+    - image: busybox
+      name: sidecar
+      command: ['sh', '-c', 'tail -n+1 -f  /output/output.log']
+      volumeMounts:
+        - name: shared-data
+          mountPath: /output
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+
+  restartPolicy: Always
+status: {}
+
+#  the folder in the command part is not important,
+#  the only important value is the mountpath that should be the same as the one in the command
+#  kubectl -n baz logs logging-sidecar -c sidecar

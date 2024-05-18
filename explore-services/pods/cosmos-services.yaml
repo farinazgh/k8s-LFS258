@@ -1,0 +1,199 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: luna
+  name: luna-service
+  namespace: default
+spec:
+  clusterIP: 10.98.33.145
+  clusterIPs:
+    - 10.98.33.145
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: luna
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: luna
+  name: luna-service-np
+  namespace: default
+spec:
+  clusterIP: 10.109.48.6
+  clusterIPs:
+    - 10.109.48.6
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 31144
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: luna
+  sessionAffinity: None
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: lyra
+  name: lyra-service
+  namespace: default
+spec:
+  clusterIP: 10.109.16.9
+  clusterIPs:
+    - 10.109.16.9
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: lyra
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: lyra
+  name: lyra-service-np
+  namespace: default
+spec:
+  clusterIP: 10.106.17.132
+  clusterIPs:
+    - 10.106.17.132
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 31210
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: lyra
+  sessionAffinity: None
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: nova
+  name: nova-service
+  namespace: default
+spec:
+  clusterIP: 10.100.175.54
+  clusterIPs:
+    - 10.100.175.54
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: nova
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: nova
+  name: nova-service-np
+  namespace: default
+spec:
+  clusterIP: 10.105.242.29
+  clusterIPs:
+    - 10.105.242.29
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 30322
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: nova
+  sessionAffinity: None
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: vega
+  name: vega-service
+  namespace: default
+spec:
+  clusterIP: 10.97.45.66
+  clusterIPs:
+    - 10.97.45.66
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: vega
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: vega
+  name: vega-service-np
+  namespace: default
+spec:
+  clusterIP: 10.108.234.55
+  clusterIPs:
+    - 10.108.234.55
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 30693
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: vega
+  sessionAffinity: None
+  type: NodePort

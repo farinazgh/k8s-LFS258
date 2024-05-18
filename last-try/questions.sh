@@ -1,9 +1,12 @@
 #   1
-#   You have access to multiple clusters from your main terminal through kubectl contexts. Write all those context names into /opt/course/1/contexts.
+#   You have access to multiple clusters from your main terminal through kubectl contexts.
+#   Write all those context names into /opt/course/1/contexts.
 #   
-#   Next write a command to display the current context into /opt/course/1/context_default_kubectl.sh, the command should use kubectl.
+#   Next write a command to display the current context into /opt/course/1/context_default_kubectl.sh,
+#   the command should use kubectl.
 #   
-#   Finally write a second command doing the same thing into /opt/course/1/context_default_no_kubectl.sh, but without the use of kubectl.
+#   Finally write a second command doing the same thing into /opt/course/1/context_default_no_kubectl.sh,
+#   but without the use of kubectl.
 
 kubectl config get-contexts --no-headers | awk '{print $1}' > /opt/course/1/contexts
 kubectl config current-context > /opt/course/1/context_default_kubectl.sh
@@ -13,7 +16,9 @@ kubectl config view | grep "current-context" | awk '{print $2}' > /opt/course/1/
 #   2
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Create a single Pod of image httpd:2.4.41-alpine in Namespace default. The Pod should be named pod1 and the container should be named pod1-container. This Pod should only be scheduled on controlplane nodes. Do not add new labels to any nodes.
+#   Create a single Pod of image httpd:2.4.41-alpine in Namespace default.
+#   The Pod should be named pod1 and the container should be named pod1-container.
+#   This Pod should only be scheduled on controlplane nodes. Do not add new labels to any nodes.
 #   
 #   apiVersion: v1
 #   kind: Pod
@@ -30,14 +35,21 @@ kubectl config view | grep "current-context" | awk '{print $2}' > /opt/course/1/
 #   3
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   There are two Pods named o3db-* in Namespace project-c13. C13 management asked you to scale the Pods down to one replica to save resources.
+#   There are two Pods named o3db-* in Namespace project-c13.
+#   C13 management asked you to scale the Pods down to one replica to save resources.
 #   
 #   4
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Do the following in Namespace default. Create a single Pod named ready-if-service-ready of image nginx:1.16.1-alpine. Configure a LivenessProbe which simply executes command true. Also configure a ReadinessProbe which does check if the url http://service-am-i-ready:80 is reachable, you can use wget -T2 -O- http://service-am-i-ready:80 for this. Start the Pod and confirm it isn't ready because of the ReadinessProbe.
+#   Do the following in Namespace default.
+#   Create a single Pod named ready-if-service-ready of image nginx:1.16.1-alpine.
+#   Configure a LivenessProbe which simply executes command true.
+#   Also configure a ReadinessProbe which does check if the url http://service-am-i-ready:80 is reachable,
+#   you can use wget -T2 -O- http://service-am-i-ready:80 for this.
+#   Start the Pod and confirm it isn't ready because of the ReadinessProbe.
 #   
-#   Create a second Pod named am-i-ready of image nginx:1.16.1-alpine with label id: cross-server-ready. The already existing Service service-am-i-ready should now have that second Pod as endpoint.
+#   Create a second Pod named am-i-ready of image nginx:1.16.1-alpine with label id: cross-server-ready.
+#   The already existing Service service-am-i-ready should now have that second Pod as endpoint.
 #   
 #   Now the first Pod should be in ready state, confirm that.
 #   
@@ -82,9 +94,11 @@ kubectl patch svc service-am-i-ready -p '{"spec":{"selector":{"id":"cross-server
 #   
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   There are various Pods in all namespaces. Write a command into /opt/course/5/find_pods.sh which lists all Pods sorted by their AGE (metadata.creationTimestamp).
+#   There are various Pods in all namespaces.
+#   Write a command into /opt/course/5/find_pods.sh which lists all Pods sorted by their AGE (metadata.creationTimestamp).
 #   
-#   Write a second command into /opt/course/5/find_pods_uid.sh which lists all Pods sorted by field metadata.uid. Use kubectl sorting for both commands.
+#   Write a second command into /opt/course/5/find_pods_uid.sh which lists all Pods sorted by field metadata.uid.
+#   Use kubectl sorting for both commands.
 #   
 #   
 #   
@@ -99,12 +113,22 @@ echo "kubectl get pods --all-namespaces --sort-by=.metadata.uid" > /opt/course/5
 #   ------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Create a new PersistentVolume named safari-pv. It should have a capacity of 2Gi, accessMode ReadWriteOnce, hostPath /Volumes/Data and no storageClassName defined.
+#   Create a new PersistentVolume named safari-pv.
+#   It should have a capacity of 2Gi, accessMode ReadWriteOnce,
+#   hostPath /Volumes/Data and no storageClassName defined.
 #   
-#   Next create a new PersistentVolumeClaim in Namespace project-tiger named safari-pvc . It should request 2Gi storage, accessMode ReadWriteOnce and should not define a storageClassName. The PVC should bound to the PV correctly.
+#   Next create a new PersistentVolumeClaim in Namespace project-tiger named safari-pvc .
+#   It should request 2Gi storage, accessMode ReadWriteOnce and should not define a storageClassName.
+#   The PVC should bound to the PV correctly.
 #   
-#   Finally create a new Deployment safari in Namespace project-tiger which mounts that volume at /tmp/safari-data. The Pods of that Deployment should be of image httpd:2.4.41-alpine.
-#   
+#   Finally create a new Deployment safari in Namespace project-tiger which mounts that volume at /tmp/safari-data.
+#   The Pods of that Deployment should be of image httpd:2.4.41-alpine.
+#
+# 1. create pv from docs
+#  2. create pvc from docs be careful about the namespace
+#  3. for deployment DO NOT go to docs use this:
+#  kubectl create deployment safari --image=httpd:2.4.41-alpine -n project-tiger -o yaml > my-dafari.yaml
+#  this way you will not lose time for matching labels
 #   ------
 #   7
 #   ------
@@ -125,7 +149,10 @@ kubectl top pods --all-namespaces
 #   ------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Ssh into the controlplane node with ssh cluster1-controlplane1. Check how the controlplane components kubelet, kube-apiserver, kube-scheduler, kube-controller-manager and etcd are started/installed on the controlplane node. Also find out the name of the DNS application and how it's started/installed on the controlplane node.
+#   Ssh into the controlplane node with ssh cluster1-controlplane1.
+#   Check how the controlplane components kubelet, kube-apiserver, kube-scheduler, kube-controller-manager and etcd
+#   are started/installed on the controlplane node.
+#   Also find out the name of the DNS application and how it's started/installed on the controlplane node.
 #   
 #   Write your findings into file /opt/course/8/controlplane-components.txt. The file should be structured like:
 #   
@@ -151,7 +178,8 @@ EOF
 #   ------
 #   Use context: kubectl config use-context k8s-c2-AC
 #   
-#   Ssh into the controlplane node with ssh cluster2-controlplane1. Temporarily stop the kube-scheduler, this means in a way that you can start it again afterwards.
+#   Ssh into the controlplane node with ssh cluster2-controlplane1.
+#   Temporarily stop the kube-scheduler, this means in a way that you can start it again afterwards.
 #   
 #   Create a single Pod named manual-schedule of image httpd:2.4-alpine, confirm it's created but not scheduled on any node.
 #   
@@ -160,13 +188,15 @@ EOF
 #   Start the kube-scheduler again and confirm it's running correctly by creating a second Pod named manual-schedule2 of image httpd:2.4-alpine and check if it's running on cluster2-node1.
 #   
 ssh cluster2-controlplane1
-sudo systemctl stop kube-scheduler
+#sudo systemctl stop kube-scheduler
+kubectl cordon kube-scheduler
 kubectl run manual-schedule --image=httpd:2.4-alpine --restart=Never --dry-run=client -o yaml > manual-schedule.yaml
 kubectl apply -f manual-schedule.yaml
 kubectl patch pod manual-schedule -p '{"spec":{"nodeName":"cluster2-controlplane1"}}'
 kubectl get pod manual-schedule -o wide
-sudo systemctl start kube-scheduler
-sudo systemctl status kube-scheduler
+#sudo systemctl start kube-scheduler
+kubectl uncordon kube-scheduler
+# kubeadm
 kubectl run manual-schedule2 --image=httpd:2.4-alpine --restart=Never --dry-run=client -o yaml > manual-schedule2.yaml
 kubectl apply -f manual-schedule2.yaml
 kubectl get pod manual-schedule2 -o wide
@@ -176,18 +206,26 @@ kubectl get pod manual-schedule2 -o wide
 #   ------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Create a new ServiceAccount processor in Namespace project-hamster. Create a Role and RoleBinding, both named processor as well. These should allow the new SA to only create Secrets and ConfigMaps in that Namespace.
-#   
+#   Create a new ServiceAccount processor in Namespace project-hamster.
+#   Create a Role and RoleBinding, both named processor as well.
+#   These should allow the new SA to only create Secrets and ConfigMaps in that Namespace.
+#
+
+kubectl create namespace project-hamster
 kubectl create serviceaccount processor -n project-hamster
-kubectl create role processor --verb=create --resource=secrets,configmaps -n project-hamster
-kubectl create rolebinding processor --role=processor --serviceaccount=project-hamster:processor -n project-hamster
+kubectl create role processor  --verb=create  --resource=secrets,configmaps -n project-hamster
+kubectl create rolebinding  processor --role=processor --serviceaccount=project-hamster:processor -n project-hamster
 
 #   ------
 #   10
 #   ------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Use Namespace project-tiger for the following. Create a DaemonSet named ds-important with image httpd:2.4-alpine and labels id=ds-important and uuid=18426a0b-5f59-4e10-923f-c0e078e82462. The Pods it creates should request 10 millicore cpu and 10 mebibyte memory. The Pods of that DaemonSet should run on all nodes, also controlplanes.
+#   Use Namespace project-tiger for the following.
+#   Create a DaemonSet named ds-important with image httpd:2.4-alpine and
+#   labels id=ds-important and uuid=18426a0b-5f59-4e10-923f-c0e078e82462.
+#   The Pods it creates should request 10 millicore cpu and 10 mebibyte memory.
+#   The Pods of that DaemonSet should run on all nodes, also controlplanes.
 #   
 #   apiVersion: apps/v1
 #   kind: DaemonSet
@@ -221,7 +259,12 @@ kubectl create rolebinding processor --role=processor --serviceaccount=project-h
 #   ------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Use Namespace project-tiger for the following. Create a Deployment named deploy-important with label id=very-important (the Pods should also have this label) and 3 replicas. It should contain two containers, the first named container1 with image nginx:1.17.6-alpine and the second one named container2 with image google/pause.
+#   Use Namespace project-tiger for the following.
+#   Create a Deployment named deploy-important
+#   with label id=very-important (the Pods should also have this label) and 3 replicas.
+#   It should contain two containers, the first named container1
+#   with image nginx:1.17.6-alpine and
+#   the second one named container2 with image google/pause.
 #   
 #   apiVersion: apps/v1
 #   kind: Deployment
@@ -247,7 +290,11 @@ kubectl create rolebinding processor --role=processor --serviceaccount=project-h
 #   ------
 #   12
 #   ------
-#   There should be only ever one Pod of that Deployment running on one worker node. We have two worker nodes: cluster1-node1 and cluster1-node2. Because the Deployment has three replicas the result should be that on both nodes one Pod is running. The third Pod won't be scheduled, unless a new worker node will be added. Use topologyKey: kubernetes.io/hostname for this.
+#   There should be only ever one Pod of that Deployment running on one worker node.
+#   We have two worker nodes:
+#   cluster1-node1 and cluster1-node2.
+#   Because the Deployment has three replicas the result should be that on both nodes one Pod is running.
+#   The third Pod won't be scheduled, unless a new worker node will be added. Use topologyKey: kubernetes.io/hostname for this.
 #   
 #   In a way we kind of simulate the behaviour of a DaemonSet here, but using a Deployment and a fixed number of replicas.
 #   apiVersion: apps/v1
@@ -281,13 +328,18 @@ kubectl create rolebinding processor --role=processor --serviceaccount=project-h
 #   ------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   Create a Pod named multi-container-playground in Namespace default with three containers, named c1, c2 and c3. There should be a volume attached to that Pod and mounted into every container, but the volume shouldn't be persisted or shared with other Pods.
+#   Create a Pod named multi-container-playground in Namespace default with three containers, named c1, c2 and c3.
+#   There should be a volume attached to that Pod and mounted into every container,
+#   but the volume shouldn't be persisted or shared with other Pods.
 #   
 #   Container c1 should be of image nginx:1.17.6-alpine and have the name of the node where its Pod is running available as environment variable MY_NODE_NAME.
 #   
-#   Container c2 should be of image busybox:1.31.1 and write the output of the date command every second in the shared volume into file date.log. You can use while true; do date >> /your/vol/path/date.log; sleep 1; done for this.
+#   Container c2 should be of image busybox:1.31.1 and write the output of the date command every second in the shared volume into file date.log.
+#   You can use while true; do date >> /your/vol/path/date.log; sleep 1; done for this.
 #   
-#   Container c3 should be of image busybox:1.31.1 and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.
+#   Container c3 should be of image busybox:1.31.1
+#   and constantly send the content of file date.log from the shared volume to stdout.
+#   You can use tail -f /your/vol/path/date.log for this.
 #   
 #   Check the logs of container c3 to confirm correct setup.
 #   
@@ -357,7 +409,7 @@ service_cidr=$(kubectl get configmap -n kube-system kube-proxy -o=jsonpath='{.da
 #    Get the Networking (CNI Plugin) and its config file location
 cni_plugin=$(kubectl get pod -n kube-system -l k8s-app=kube-proxy -o=jsonpath='{.items[0].spec.containers[0].args[2]}' | cut -d= -f2)
 cni_config=$(kubectl get configmap -n kube-system $cni_plugin -o=jsonpath='{.data.\.conf}')
-
+# /etc/cni/net.d/
 #    Get the suffix for static pods on cluster1-node1
 static_pod_suffix=$(kubectl get node cluster1-node1 -o=jsonpath='{.metadata.annotations.\.static-pod-hostname-suffix}')
 
@@ -375,7 +427,8 @@ EOF
 #   ---------------------
 #   Use context: kubectl config use-context k8s-c2-AC
 
-#   Write a command into /opt/course/15/cluster_events.sh which shows the latest events in the whole cluster, ordered by time (metadata.creationTimestamp). Use kubectl for it.
+#   Write a command into /opt/course/15/cluster_events.sh which shows the latest events in the whole cluster,
+#   ordered by time (metadata.creationTimestamp). Use kubectl for it.
 #   
 #   Now delete the kube-proxy Pod running on node cluster2-node1 and write the events this caused into /opt/course/15/pod_kill.log.
 #   
@@ -415,7 +468,10 @@ echo $crowded_namespace > /opt/course/16/crowded-namespace.txt
 #   ---------------------
 #   Use context: kubectl config use-context k8s-c1-H
 #   
-#   In Namespace project-tiger create a Pod named tigers-reunite of image httpd:2.4.41-alpine with labels pod=container and container=pod. Find out on which node the Pod is scheduled. Ssh into that node and find the containerd container belonging to that Pod.
+#   In Namespace project-tiger create a Pod named tigers-reunite of image httpd:2.4.41-alpine with labels pod=container
+#   and container=pod.
+#
+#   Find out on which node the Pod is scheduled. Ssh into that node and find the containerd container belonging to that Pod.
 #   
 #   Using command crictl:
 #   
@@ -452,7 +508,8 @@ echo $crowded_namespace > /opt/course/16/crowded-namespace.txt
 #   ---------------------
 #   Use context: kubectl config use-context k8s-c3-CCC
 
-#   There seems to be an issue with the kubelet not running on cluster3-node1. Fix it and confirm that cluster has node cluster3-node1 available in Ready state afterwards. You should be able to schedule a Pod on cluster3-node1 afterwards.
+#   There seems to be an issue with the kubelet not running on cluster3-node1.
+#   Fix it and confirm that cluster has node cluster3-node1 available in Ready state afterwards. You should be able to schedule a Pod on cluster3-node1 afterwards.
 #   
 #   Write the reason of the issue into /opt/course/18/reason.txt.
 #   
@@ -475,11 +532,14 @@ kubectl get nodes
 #   ---------------------
 #   Use context: kubectl config use-context k8s-c3-CCC
 
-#   Do the following in a new Namespace secret. Create a Pod named secret-pod of image busybox:1.31.1 which should keep running for some time.
+#   Do the following in a new Namespace secret.
+#   Create a Pod named secret-pod of image busybox:1.31.1 which should keep running for some time.
 #   
-#   There is an existing Secret located at /opt/course/19/secret1.yaml, create it in the Namespace secret and mount it readonly into the Pod at /tmp/secret1.
+#   There is an existing Secret located at /opt/course/19/secret1.yaml,
+#   create it in the Namespace secret and mount it readonly into the Pod at /tmp/secret1.
 #   
-#   Create a new Secret in Namespace secret called secret2 which should contain user=user1 and pass=1234. These entries should be available inside the Pod's container as environment variables APP_USER and APP_PASS.
+#   Create a new Secret in Namespace secret called secret2 which should contain user=user1 and pass=1234.
+#   These entries should be available inside the Pod's container as environment variables APP_USER and APP_PASS.
 #   
 #   Confirm everything is working.
 
@@ -525,7 +585,8 @@ kubectl describe pod secret-pod -n secret
 #   ---------------------
 #   Use context: kubectl config use-context k8s-c3-CCC
 #   
-#   Your coworker said node cluster3-node2 is running an older Kubernetes version and is not even part of the cluster. Update Kubernetes on that node to the exact version that's running on cluster3-controlplane1. Then add this node to the cluster. Use kubeadm for this.
+#   Your coworker said node cluster3-node2 is running an older Kubernetes version and is not even part of the cluster.
+#   Update Kubernetes on that node to the exact version that's running on cluster3-controlplane1. Then add this node to the cluster. Use kubeadm for this.
 #   ---------------
 #   20
 #   ---------------------
@@ -571,7 +632,8 @@ curl <internal-IP>:$(kubectl get svc static-pod-service -n default -o=jsonpath='
 #   ---------------------
 #   Use context: kubectl config use-context k8s-c2-AC
 #   
-#   Check how long the kube-apiserver server certificate is valid on cluster2-controlplane1. Do this with openssl or cfssl. Write the exipiration date into /opt/course/22/expiration.
+#   Check how long the kube-apiserver server certificate is valid on cluster2-controlplane1. Do this with openssl or cfssl.
+#   Write the exipiration date into /opt/course/22/expiration.
 #   /
 #   Also run the correct kubeadm command to list the expiration dates and confirm both methods show the same date.
 #   

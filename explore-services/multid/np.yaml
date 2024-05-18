@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: multi
+  name: multi-container-pod-service-np
+spec:
+  clusterIP: 10.43.187.102
+  clusterIPs:
+    - 10.43.187.102
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 31203
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+  selector:
+    app: multi
+  sessionAffinity: None
+  type: NodePort

@@ -8,7 +8,6 @@ kubectl create clusterrole pvviewer-role --verb=list --resource=persistentvolume
 ####### create cluster role binding
 #############################
 kubectl create clusterrolebinding -h
-kubectl create clusterrolebinding pvviewer-role-binding  --clusterrole=pvviewer-role --serviceaccount=pvviewer
 kubectl create clusterrolebinding -h | grep -i serviceaccount
 kubectl create clusterrolebinding pvviewer-role-binding  --clusterrole=pvviewer-role  --serviceaccount=default:pvviewer
 kubectl run pvviewer  --image=redis --dry-run=client -o yaml > pvviewer.yaml
@@ -32,7 +31,6 @@ kubectl get pod np-test-1 -o yaml
 vi my-ingress.yaml
 kubectl apply -f my-ingress.yaml
 ##################
-
 kubectl taint nodes node01 env_type=production:NoSchedule
 kubectl run dev-redis  --image=redis:alpine
 kubectl run prod-redis --image=redis:alpine --dry-run=client -o yaml > prod-redis.yaml

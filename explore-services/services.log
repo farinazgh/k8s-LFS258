@@ -1,0 +1,6 @@
+NAME                      TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+andromeda-cluster-ip      ClusterIP      10.106.99.246   <none>        80/TCP         8m50s   run=andromeda
+andromeda-load-balancer   LoadBalancer   10.98.78.195    <pending>     80:32064/TCP   3m11s   run=andromeda
+andromeda-node-port       NodePort       10.96.162.69    <none>        80:31241/TCP   6m45s   run=andromeda
+kubernetes                ClusterIP      10.96.0.1       <none>        443/TCP        30d     <none>
+nginx-deployment          NodePort       10.99.201.242   <none>        80:30503/TCP   27d     app=nginx-deployment

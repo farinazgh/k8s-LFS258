@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: multi
+  name: multi-container-pod
+spec:
+  containers:
+    - image: nginx:latest
+      imagePullPolicy: Always
+      name: main-app
+      ports:
+        - containerPort: 80
+          protocol: TCP
+    - command:
+        - sleep
+        - "3600"
+      image: busybox:latest
+      imagePullPolicy: Always
+      name: sidecar
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+  nodeName: controlplane
+# at first i created the pod with a yaml that had no labels so it complained:
+# error: couldn't retrieve selectors via --selector flag or introspection: the pod has no labels and cannot be exposed
+# so i used kubectl label to label it
+
+# note: regardless of the pod's - containerPort: 8080 and 80 the service used only one port for both container. the one we passed to expose command.

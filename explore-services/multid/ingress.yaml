@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: luna-ingress
+  namespace: default
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: luna-service
+                port:
+                  number: 80
+            path: /luna
+            pathType: Exact

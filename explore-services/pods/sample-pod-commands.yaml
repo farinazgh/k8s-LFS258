@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-container
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+  initContainers:
+    - name: wget-init-container
+      image: alpine
+      command: ["wget", "<URL>", "-O", "/path/to/save/file"]
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-command-pod
+spec:
+  containers:
+    - name: simple-command-container
+      image: alpine
+      command: ["echo", "Hello, World!"]
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-with-options-pod
+spec:
+  containers:
+    - name: options-command-container
+      image: nginx
+      command: ["nginx", "-g", "daemon off;"]
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: script-file-pod
+spec:
+  containers:
+    - name: script-file-container
+      image: alpine
+      command: ["sh", "-c", "/path/to/script.sh"]
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multiple-commands-pod
+spec:
+  containers:
+    - name: multiple-commands-container
+      image: alpine
+      command: ["sh", "-c", "echo 'First command'; echo 'Second command'"]
+---

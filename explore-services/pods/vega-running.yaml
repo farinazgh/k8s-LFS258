@@ -1,28 +1,38 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"run":"vega"},"name":"vega","namespace":"default"},"spec":{"containers":[{"command":["/bin/sh","-c","echo \"Custom script executed\"; sleep 3600"],"env":[{"name":"ENV","value":"PROD"}],"image":"nginx","name":"vega","ports":[{"containerPort":8080}],"resources":{}}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always"},"status":{}}
   labels:
-    name: app
-  name: app
-  namespace: elastic-stack
-  uid: e66dec13-007e-4515-9df9-c32afb71ec75
+    run: vega
+  name: vega
+  namespace: default
 spec:
   containers:
-    - image: kodekloud/event-simulator
+    - command:
+        - /bin/sh
+        - -c
+        - echo "Custom script executed"; sleep 3600
+      env:
+        - name: ENV
+          value: PROD
+      image: nginx
       imagePullPolicy: Always
-      name: app
+      name: vega
+      ports:
+        - containerPort: 8080
+          protocol: TCP
       resources: {}
       terminationMessagePath: /dev/termination-log
       terminationMessagePolicy: File
       volumeMounts:
-        - mountPath: /log
-          name: log-volume
         - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-          name: kube-api-access-wk9zj
+          name: kube-api-access-qq7fw
           readOnly: true
   dnsPolicy: ClusterFirst
   enableServiceLinks: true
-  nodeName: controlplane
+  nodeName: node01
   preemptionPolicy: PreemptLowerPriority
   priority: 0
   restartPolicy: Always
@@ -41,11 +51,7 @@ spec:
       operator: Exists
       tolerationSeconds: 300
   volumes:
-    - hostPath:
-        path: /var/log/webapp
-        type: DirectoryOrCreate
-      name: log-volume
-    - name: kube-api-access-wk9zj
+    - name: kube-api-access-qq7fw
       projected:
         defaultMode: 420
         sources:
@@ -66,43 +72,37 @@ spec:
 status:
   conditions:
     - lastProbeTime: null
-      lastTransitionTime: "2024-03-27T13:50:18Z"
-      status: "True"
-      type: PodReadyToStartContainers
-    - lastProbeTime: null
-      lastTransitionTime: "2024-03-27T13:50:12Z"
+      lastTransitionTime: "2024-04-18T08:54:49Z"
       status: "True"
       type: Initialized
     - lastProbeTime: null
-      lastTransitionTime: "2024-03-27T13:50:18Z"
+      lastTransitionTime: "2024-04-18T08:54:51Z"
       status: "True"
       type: Ready
     - lastProbeTime: null
-      lastTransitionTime: "2024-03-27T13:50:18Z"
+      lastTransitionTime: "2024-04-18T08:54:51Z"
       status: "True"
       type: ContainersReady
     - lastProbeTime: null
-      lastTransitionTime: "2024-03-27T13:50:12Z"
+      lastTransitionTime: "2024-04-18T08:54:49Z"
       status: "True"
       type: PodScheduled
   containerStatuses:
-    - containerID: containerd://b02176861137049e6720c7287a8177fec60296f1e485746659df89e2df8377fb
-      image: docker.io/kodekloud/event-simulator:latest
-      imageID: docker.io/kodekloud/event-simulator@sha256:1e3e9c72136bbc76c96dd98f29c04f298c3ae241c7d44e2bf70bcc209b030bf9
+    - containerID: containerd://46d7ce1389156cee8cd6aba570ec779b316d7f968194ebf88b59577a1d2a8933
+      image: docker.io/library/nginx:latest
+      imageID: docker.io/library/nginx@sha256:d2cb0992f098fb075674730da5e1c6cccdd4890516e448a1db96e0245c1b7fca
       lastState: {}
-      name: app
+      name: vega
       ready: true
       restartCount: 0
       started: true
       state:
         running:
-          startedAt: "2024-03-27T13:50:18Z"
-  hostIP: 192.30.183.3
-  hostIPs:
-    - ip: 192.30.183.3
+          startedAt: "2024-04-18T08:54:50Z"
+  hostIP: 192.15.12.8
   phase: Running
-  podIP: 10.244.0.4
+  podIP: 10.244.1.7
   podIPs:
-    - ip: 10.244.0.4
+    - ip: 10.244.1.7
   qosClass: BestEffort
-  startTime: "2024-03-27T13:50:12Z"
+  startTime: "2024-04-18T08:54:49Z"

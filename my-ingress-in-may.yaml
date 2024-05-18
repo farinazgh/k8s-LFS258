@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-frontend-ingress
+  namespace: web
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: web-frontend-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+
+## TODO
+# find whichport to use to expose internal/external
+# which PathType
+#whic port of the service, port targetPort or Nodeport
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web-frontend
+  name: web-frontend-svc
+  namespace: web
+spec:
+  clusterIP: 10.43.64.101
+  clusterIPs:
+    - 10.43.64.101
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 30080
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: web-frontend
+  sessionAffinity: None
+  type: NodePort
